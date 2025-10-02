@@ -20,7 +20,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/lib/common": ["./src/lib/common"],
+      "@excalidraw/common": ["./src/lib/common"],
+      "@excalidraw/common/*": ["./src/lib/common/*"],
+      "@/common": ["./src/lib/common"],
       "@/lib/common/*": ["./src/lib/common/*"],
       "@/lib/element": ["./src/lib/element"],
       "@/lib/element/*": ["./src/lib/element/*"],
