@@ -920,7 +920,7 @@ export const updateElbowArrowPoints = (
     return { points: updates.points ?? arrow.points };
   }
 
-  if (!import.meta.env.PROD) {
+  if (!process.env.PROD) {
     invariant(
       !updates.points || updates.points.length >= 2,
       "Updated point array length must match the arrow point length, contain " +
