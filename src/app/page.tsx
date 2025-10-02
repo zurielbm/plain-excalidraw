@@ -26,6 +26,12 @@ export default function Home() {
         >
           Go to Test Elemment Page
         </Link>
+        <Link
+          href="/test-interactive"
+          className="text-xl text-blue-500 hover:underline"
+        >
+          Go to Test Interactive Page
+        </Link>
         
         </div>
       </div>
