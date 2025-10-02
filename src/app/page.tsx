@@ -15,7 +15,7 @@ export default function Home() {
           Go to Test Math Page
         </Link>
         <Link
-          href="/est-common"
+          href="/test-common"
           className="text-xl text-blue-500 hover:underline"
         >
           Go to Test Common Page
