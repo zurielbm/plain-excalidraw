@@ -20,6 +20,13 @@ export default function Home() {
         >
           Go to Test Common Page
         </Link>
+        <Link
+          href="/test-element"
+          className="text-xl text-blue-500 hover:underline"
+        >
+          Go to Test Elemment Page
+        </Link>
+        
         </div>
       </div>
     </main>

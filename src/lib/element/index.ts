@@ -76,7 +76,7 @@ export const clearElementsForLocalStorage = (
   elements: readonly ExcalidrawElement[],
 ) => _clearElements(elements);
 
-export * from "./align";
+// export * from "./align";
 export * from "./binding";
 export * from "./bounds";
 export * from "./collision";

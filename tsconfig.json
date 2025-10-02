@@ -26,6 +26,8 @@
       "@excalidraw/math/*": ["./src/lib/math/*"],
       "@excalidraw/element": ["./src/lib/element"],
       "@excalidraw/element/*": ["./src/lib/element/*"],
+      "@excalidraw/utils": ["./src/lib/utils"],
+      "@excalidraw/utils/*": ["./src/lib/utils/*"],
       "@excalidraw/excalidraw": ["./src/lib"],
       "@excalidraw/excalidraw/*": ["./src/lib/*"],
       "@/common": ["./src/lib/common"],
