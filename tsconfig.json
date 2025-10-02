@@ -19,7 +19,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/lib/common": ["./src/lib/common"],
+      "@/lib/common/*": ["./src/lib/common/*"],
+      "@/lib/element": ["./src/lib/element"],
+      "@/lib/element/*": ["./src/lib/element/*"],
+      "@/lib/math": ["./src/lib/math"],
+      "@/lib/math/*": ["./src/lib/math/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
