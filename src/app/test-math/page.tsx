@@ -1,3 +1,5 @@
+"use client";
+
 import { pointDistance, vectorAdd } from "@/lib/math";
 
 export default function TestMathPage() {

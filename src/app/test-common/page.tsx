@@ -1,3 +1,4 @@
+"use client";
 import { COLOR_PALETTE, FONT_FAMILY, debounce } from "@/lib/common";
 
 export default function TestCommonPage() {
