@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import type {
   ExcalidrawElement,
   FontFamilyValues,
@@ -31,6 +32,53 @@ export const isMobile =
     navigator.userAgent,
   ) ||
   /android|ios|ipod|blackberry|windows phone/i.test(navigator.platform);
+=======
+import type { ExcalidrawElement, FontFamilyValues } from "../element/types";
+import type { AppProps, AppState } from "../types";
+
+import { COLOR_PALETTE } from "./colors";
+
+export const isDarwin =
+  typeof navigator !== "undefined" &&
+  /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+export const isWindows =
+  typeof navigator !== "undefined" && /^Win/.test(navigator.platform);
+export const isAndroid =
+  typeof navigator !== "undefined" &&
+  /\b(android)\b/i.test(navigator.userAgent);
+export const isFirefox =
+  typeof window !== "undefined" &&
+  typeof navigator !== "undefined" &&
+  "netscape" in window &&
+  navigator.userAgent.indexOf("rv:") > 1 &&
+  navigator.userAgent.indexOf("Gecko") > 1;
+export const isChrome =
+  typeof navigator !== "undefined" &&
+  navigator.userAgent.indexOf("Chrome") !== -1;
+export const isSafari =
+  typeof navigator !== "undefined" &&
+  !isChrome &&
+  navigator.userAgent.indexOf("Safari") !== -1;
+export const isIOS =
+  typeof navigator !== "undefined" &&
+  (/iPad|iPhone/i.test(navigator.platform) ||
+    // iPadOS 13+
+    (navigator.userAgent.includes("Mac") &&
+      typeof document !== "undefined" &&
+      "ontouchend" in document));
+// keeping function so it can be mocked in test
+export const isBrave = () =>
+  typeof navigator !== "undefined" &&
+  (navigator as any).brave?.isBrave?.name === "isBrave";
+
+export const isMobile =
+  typeof navigator !== "undefined" &&
+  (isIOS ||
+    /android|webos|ipod|blackberry|iemobile|opera mini/i.test(
+      navigator.userAgent
+    ) ||
+    /android|ios|ipod|blackberry|windows phone/i.test(navigator.platform));
+>>>>>>> origin/ai/debug
 
 export const supportsResizeObserver =
   typeof window !== "undefined" && "ResizeObserver" in window;
@@ -174,7 +222,11 @@ export const FONT_FAMILY_FALLBACKS = {
 };
 
 export function getGenericFontFamilyFallback(
+<<<<<<< HEAD
   fontFamily: number,
+=======
+  fontFamily: number
+>>>>>>> origin/ai/debug
 ): keyof typeof FONT_FAMILY_GENERIC_FALLBACKS {
   switch (fontFamily) {
     case FONT_FAMILY.Cascadia:
@@ -187,7 +239,11 @@ export function getGenericFontFamilyFallback(
 }
 
 export const getFontFamilyFallbacks = (
+<<<<<<< HEAD
   fontFamily: number,
+=======
+  fontFamily: number
+>>>>>>> origin/ai/debug
 ): Array<keyof typeof FONT_FAMILY_FALLBACKS> => {
   const genericFallbackFont = getGenericFontFamilyFallback(fontFamily);
 

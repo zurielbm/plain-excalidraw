@@ -26,14 +26,32 @@
       "@excalidraw/math/*": ["./src/lib/math/*"],
       "@excalidraw/element": ["./src/lib/element"],
       "@excalidraw/element/*": ["./src/lib/element/*"],
+<<<<<<< HEAD
+=======
+      "@excalidraw/utils": ["./src/lib/utils"],
+      "@excalidraw/utils/*": ["./src/lib/utils/*"],
+      "@excalidraw/excalidraw": ["./src/lib"],
+      "@excalidraw/excalidraw/*": ["./src/lib/*"],
+>>>>>>> origin/ai/debug
       "@/common": ["./src/lib/common"],
       "@/lib/common/*": ["./src/lib/common/*"],
       "@/lib/element": ["./src/lib/element"],
       "@/lib/element/*": ["./src/lib/element/*"],
       "@/lib/math": ["./src/lib/math"],
-      "@/lib/math/*": ["./src/lib/math/*"]
-    }
+      "@/lib/math/*": ["./src/lib/math/*"],
+      "@components/": ["./src/components"],
+      "@components/*": ["./src/components*"],
+      "@lib/": ["./src/lib"],
+      "@lib/*": ["./src/lib*"]
+    },
+    "types": ["jest", "vitest/globals"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "types/**/*.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

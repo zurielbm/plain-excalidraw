@@ -20,6 +20,37 @@ export default function Home() {
         >
           Go to Test Common Page
         </Link>
+        <Link
+          href="/test-element"
+          className="text-xl text-blue-500 hover:underline"
+        >
+          Go to Test Elemment Page
+        </Link>
+        <Link
+          href="/test-interactive"
+          className="text-xl text-blue-500 hover:underline"
+        >
+          Go to Test Interactive Page
+        </Link>
+        <Link
+          href="/test-canvas"
+          className="text-xl text-blue-500 hover:underline"
+        >
+          Go to Test Canvas Page
+        </Link>
+        <Link
+          href="/excalidraw"
+          className="text-xl text-blue-500 hover:underline"
+        >
+          Go to Excalidraw Page
+        </Link>
+        <Link
+          href="/test-excalidraw"
+          className="text-xl text-blue-500 hover:underline"
+        >
+          Go to Test Excalidraw Page
+        </Link>
+        
         </div>
       </div>
     </main>
