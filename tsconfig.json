@@ -26,13 +26,10 @@
       "@excalidraw/math/*": ["./src/lib/math/*"],
       "@excalidraw/element": ["./src/lib/element"],
       "@excalidraw/element/*": ["./src/lib/element/*"],
-<<<<<<< HEAD
-=======
       "@excalidraw/utils": ["./src/lib/utils"],
       "@excalidraw/utils/*": ["./src/lib/utils/*"],
       "@excalidraw/excalidraw": ["./src/lib"],
       "@excalidraw/excalidraw/*": ["./src/lib/*"],
->>>>>>> origin/ai/debug
       "@/common": ["./src/lib/common"],
       "@/lib/common/*": ["./src/lib/common/*"],
       "@/lib/element": ["./src/lib/element"],
