@@ -1,4 +1,4 @@
-import type { ExcalidrawElementSkeleton } from "../data/transform";
+import type { ExcalidrawElementSkeleton } from "../../lib/data/transform";
 import type { BinaryFiles } from "../types";
 import { isMaybeMermaidDefinition } from "../mermaid";
 
