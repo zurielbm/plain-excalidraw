@@ -1,8 +1,8 @@
 import React from "react";
 
-import { actionSaveFileToDisk } from "../../actions";
-import { actionChangeExportEmbedScene } from "../../actions/actionExport";
-import { useI18n } from "../../i18n";
+import { actionSaveFileToDisk } from "../../lib/actions";
+import { actionChangeExportEmbedScene } from "../../lib/actions/actionExport";
+import { useI18n } from "../../lib/i18n";
 import { useExcalidrawActionManager, useExcalidrawSetAppState } from "../App";
 import { FilledButton } from "../FilledButton";
 
@@ -80,7 +80,7 @@ const Actions = Object.assign(
   {
     ExportToImage,
     SaveToDisk,
-  },
+  }
 );
 
 export { Actions };

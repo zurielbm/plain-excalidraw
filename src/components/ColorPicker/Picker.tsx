@@ -13,7 +13,7 @@ import type { ExcalidrawElement } from "@excalidraw/element/types";
 import type { ColorPaletteCustom } from "@excalidraw/common";
 
 import { useAtom } from "../../editor-jotai";
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 
 import { CustomColorList } from "./CustomColorList";
 import PickerColorList from "./PickerColorList";
@@ -54,7 +54,7 @@ export const Picker = React.forwardRef(
       onEyeDropperToggle,
       onEscape,
     }: PickerProps,
-    ref,
+    ref
   ) => {
     const [customColors] = React.useState(() => {
       if (type === "canvasBackground") {
@@ -64,7 +64,7 @@ export const Picker = React.forwardRef(
     });
 
     const [activeColorPickerSection, setActiveColorPickerSection] = useAtom(
-      activeColorPickerSectionAtom,
+      activeColorPickerSectionAtom
     );
 
     const colorObj = getColorNameAndShadeFromColor({
@@ -84,7 +84,7 @@ export const Picker = React.forwardRef(
             ? "custom"
             : colorObj?.shade != null
             ? "shades"
-            : "baseColors",
+            : "baseColors"
         );
       }
     }, [
@@ -100,7 +100,7 @@ export const Picker = React.forwardRef(
       colorObj?.shade ??
         (type === "elementBackground"
           ? DEFAULT_ELEMENT_BACKGROUND_COLOR_INDEX
-          : DEFAULT_ELEMENT_STROKE_COLOR_INDEX),
+          : DEFAULT_ELEMENT_STROKE_COLOR_INDEX)
     );
 
     useEffect(() => {
@@ -186,5 +186,5 @@ export const Picker = React.forwardRef(
         </div>
       </div>
     );
-  },
+  }
 );

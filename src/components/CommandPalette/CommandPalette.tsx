@@ -19,17 +19,17 @@ import {
   actionClearCanvas,
   actionLink,
   actionToggleSearchMenu,
-} from "../../actions";
+} from "../../lib/actions";
 import {
   actionCopyElementLink,
   actionLinkToElement,
-} from "../../actions/actionElementLink";
-import { getShortcutFromShortcutName } from "../../actions/shortcuts";
-import { trackEvent } from "../../analytics";
-import { useUIAppState } from "../../context/ui-appState";
-import { deburr } from "../../deburr";
-import { atom, useAtom, editorJotaiStore } from "../../editor-jotai";
-import { t } from "../../i18n";
+} from "../../lib/actions/actionElementLink";
+import { getShortcutFromShortcutName } from "../../lib/actions/shortcuts";
+import { trackEvent } from "../../lib/analytics";
+import { useUIAppState } from "../../lib/context/ui-appState";
+import { deburr } from "../../lib/deburr";
+import { atom, useAtom, editorJotaiStore } from "../../lib/editor-jotai";
+import { t } from "../../lib/i18n";
 import {
   useApp,
   useAppProps,
@@ -76,9 +76,9 @@ import "./CommandPalette.scss";
 
 import type { CommandPaletteItem } from "./types";
 import type { AppProps, AppState, LibraryItem, UIAppState } from "../../types";
-import type { ShortcutName } from "../../actions/shortcuts";
-import type { TranslationKeys } from "../../i18n";
-import type { Action } from "../../actions/types";
+import type { ShortcutName } from "../../lib/actions/shortcuts";
+import type { TranslationKeys } from "../../lib/i18n";
+import type { Action } from "../../lib/actions/types";
 
 const lastUsedPaletteItem = atom<CommandPaletteItem | null>(null);
 
@@ -192,7 +192,7 @@ export const CommandPalette = Object.assign(
   },
   {
     defaultItems,
-  },
+  }
 );
 
 function CommandPaletteInner({
@@ -223,7 +223,7 @@ function CommandPaletteInner({
       libraryItemsData.libraryItems
         ?.filter(
           (libraryItem): libraryItem is MarkRequired<LibraryItem, "name"> =>
-            !!libraryItem.name,
+            !!libraryItem.name
         )
         .map((libraryItem) => ({
           label: libraryItem.name,
@@ -238,7 +238,7 @@ function CommandPaletteInner({
           haystack: deburr(libraryItem.name),
           perform: () => {
             app.onInsertElements(
-              distributeLibraryItemsOnSquareGrid([libraryItem]),
+              distributeLibraryItemsOnSquareGrid([libraryItem])
             );
           },
         })) || []
@@ -261,8 +261,8 @@ function CommandPaletteInner({
             action.label(
               app.scene.getNonDeletedElements(),
               uiAppState as AppState,
-              app,
-            ) as unknown as TranslationKeys,
+              app
+            ) as unknown as TranslationKeys
           );
         } else {
           label = t(action.label as unknown as TranslationKeys);
@@ -285,8 +285,8 @@ function CommandPaletteInner({
       category: string,
       transformer?: (
         command: CommandPaletteItem,
-        action: Action,
-      ) => CommandPaletteItem,
+        action: Action
+      ) => CommandPaletteItem
     ): CommandPaletteItem => {
       const command: CommandPaletteItem = {
         label: getActionLabel(action),
@@ -348,12 +348,12 @@ function CommandPaletteInner({
               : (elements, appState, appProps, app) => {
                   const selectedElements = getSelectedElements(
                     elements,
-                    appState,
+                    appState
                   );
                   return selectedElements.length > 0;
                 },
-          }),
-        ),
+          })
+        )
       );
       const toolCommands: CommandPaletteItem[] = [
         actionManager.actions.toggleHandTool,
@@ -393,7 +393,7 @@ function CommandPaletteInner({
           label: getActionLabel(actionClearCanvas),
           icon: getActionIcon(actionClearCanvas),
           shortcut: getShortcutFromShortcutName(
-            actionClearCanvas.name as ShortcutName,
+            actionClearCanvas.name as ShortcutName
           ),
           category: DEFAULT_CATEGORIES.editor,
           keywords: ["delete", "destroy"],
@@ -627,8 +627,8 @@ function CommandPaletteInner({
       setAllCommands(allCommands);
       setLastUsed(
         [...allCommands, ...libraryCommands].find(
-          (command) => command.label === lastUsed?.label,
-        ) ?? null,
+          (command) => command.label === lastUsed?.label
+        ) ?? null
       );
     }
   }, [
@@ -654,14 +654,14 @@ function CommandPaletteInner({
       {
         openDialog: null,
       },
-      cb,
+      cb
     );
     setCommandSearch("");
   };
 
   const executeCommand = (
     command: CommandPaletteItem,
-    event: React.MouseEvent | React.KeyboardEvent | KeyboardEvent,
+    event: React.MouseEvent | React.KeyboardEvent | KeyboardEvent
   ) => {
     if (uiAppState.openDialog?.name === "commandPalette") {
       event.stopPropagation();
@@ -689,10 +689,10 @@ function CommandPaletteInner({
             app.scene.getNonDeletedElements(),
             uiAppState as AppState,
             appProps,
-            app,
+            app
           )
         : command.predicate === undefined || command.predicate;
-    },
+    }
   );
 
   const handleKeyDown = useStableCallback((event: KeyboardEvent) => {
@@ -717,7 +717,7 @@ function CommandPaletteInner({
     if (event.key === KEYS.ARROW_UP) {
       event.preventDefault();
       const index = matchingCommands.findIndex(
-        (item) => item.label === currentCommand?.label,
+        (item) => item.label === currentCommand?.label
       );
 
       if (shouldConsiderLastUsed) {
@@ -757,7 +757,7 @@ function CommandPaletteInner({
     if (event.key === KEYS.ARROW_DOWN) {
       event.preventDefault();
       const index = matchingCommands.findIndex(
-        (item) => item.label === currentCommand?.label,
+        (item) => item.label === currentCommand?.label
       );
 
       if (shouldConsiderLastUsed) {
@@ -851,17 +851,17 @@ function CommandPaletteInner({
         getNextCommandsByCategory(
           showLastUsed
             ? matchingCommands.filter(
-                (command) => command.label !== lastUsed?.label,
+                (command) => command.label !== lastUsed?.label
               )
-            : matchingCommands,
-        ),
+            : matchingCommands
+        )
       );
       setCurrentCommand(showLastUsed ? lastUsed : matchingCommands[0] || null);
       return;
     }
 
     const _query = deburr(
-      commandSearch.toLocaleLowerCase().replace(/[<>_| -]/g, ""),
+      commandSearch.toLocaleLowerCase().replace(/[<>_| -]/g, "")
     );
     matchingCommands = fuzzy
       .filter(_query, matchingCommands, {

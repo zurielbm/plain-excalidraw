@@ -17,8 +17,8 @@ import {
   updateObject,
 } from "@excalidraw/common";
 
-import { useUIAppState } from "../../context/ui-appState";
-import { atom, useSetAtom } from "../../editor-jotai";
+import { useUIAppState } from "../../lib/context/ui-appState";
+import { atom, useSetAtom } from "../../lib/editor-jotai";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { useDevice, useExcalidrawSetAppState } from "../App";
 import { Island } from "../Island";
@@ -55,11 +55,11 @@ export const SidebarInner = forwardRef(
       className,
       ...rest
     }: SidebarProps & Omit<React.RefAttributes<HTMLDivElement>, "onSelect">,
-    ref: React.ForwardedRef<HTMLDivElement>,
+    ref: React.ForwardedRef<HTMLDivElement>
   ) => {
     if (isDevEnv() && onDock && docked == null) {
       console.warn(
-        "Sidebar: `docked` must be set when `onDock` is supplied for the sidebar to be user-dockable. To hide this message, either pass `docked` or remove `onDock`",
+        "Sidebar: `docked` must be set when `onDock` is supplied for the sidebar to be user-dockable. To hide this message, either pass `docked` or remove `onDock`"
       );
     }
 
@@ -75,7 +75,7 @@ export const SidebarInner = forwardRef(
     }, [setIsSidebarDockedAtom, docked]);
 
     const headerPropsRef = useRef<SidebarPropsContextValue>(
-      {} as SidebarPropsContextValue,
+      {} as SidebarPropsContextValue
     );
     headerPropsRef.current.onCloseRequest = () => {
       setAppState({ openSidebar: null });
@@ -121,8 +121,8 @@ export const SidebarInner = forwardRef(
             closeLibrary();
           }
         },
-        [closeLibrary, docked, device.editor.canFitSidebar],
-      ),
+        [closeLibrary, docked, device.editor.canFitSidebar]
+      )
     );
 
     useEffect(() => {
@@ -146,7 +146,7 @@ export const SidebarInner = forwardRef(
         className={clsx(
           CLASSES.SIDEBAR,
           { "sidebar--docked": docked },
-          className,
+          className
         )}
         ref={islandRef}
       >
@@ -155,7 +155,7 @@ export const SidebarInner = forwardRef(
         </SidebarPropsContext.Provider>
       </Island>
     );
-  },
+  }
 );
 SidebarInner.displayName = "SidebarInner";
 
@@ -181,7 +181,7 @@ export const Sidebar = Object.assign(
         onStateChange?.(
           appState.openSidebar?.name !== props.name
             ? null
-            : appState.openSidebar,
+            : appState.openSidebar
         );
       }
       refPrevOpenSidebar.current = appState.openSidebar;
@@ -220,6 +220,6 @@ export const Sidebar = Object.assign(
     Tabs: SidebarTabs,
     Tab: SidebarTab,
     Trigger: SidebarTrigger,
-  },
+  }
 );
 Sidebar.displayName = "Sidebar";

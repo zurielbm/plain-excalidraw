@@ -2,10 +2,10 @@ import clsx from "clsx";
 
 import { isMobileOrTablet, MQ_MIN_WIDTH_DESKTOP } from "@excalidraw/common";
 
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 import { Button } from "../Button";
 import { share } from "../icons";
-import { useUIAppState } from "../../context/ui-appState";
+import { useUIAppState } from "../../lib/context/ui-appState";
 
 import "./LiveCollaborationTrigger.scss";
 

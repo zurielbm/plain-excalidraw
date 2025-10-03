@@ -2,9 +2,9 @@ import React from "react";
 
 import { composeEventHandlers } from "@excalidraw/common";
 
-import { useTunnels } from "../../context/tunnels";
-import { useUIAppState } from "../../context/ui-appState";
-import { t } from "../../i18n";
+import { useTunnels } from "../../lib/context/tunnels";
+import { useUIAppState } from "../../lib/context/ui-appState";
+import { t } from "../../lib/i18n";
 import { useDevice, useExcalidrawSetAppState } from "../App";
 import { UserList } from "../UserList";
 import DropdownMenu from "../dropdownMenu/DropdownMenu";
@@ -69,7 +69,7 @@ const MainMenu = Object.assign(
           </DropdownMenu>
         </MainMenuTunnel.In>
       );
-    },
+    }
   ),
   {
     Trigger: DropdownMenu.Trigger,
@@ -79,7 +79,7 @@ const MainMenu = Object.assign(
     Group: DropdownMenu.Group,
     Separator: DropdownMenu.Separator,
     DefaultItems,
-  },
+  }
 );
 
 export default MainMenu;

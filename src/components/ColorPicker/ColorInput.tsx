@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { KEYS, getShortcutKey } from "@excalidraw/common";
 
 import { useAtom } from "../../editor-jotai";
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 import { useDevice } from "../App";
 import { activeEyeDropperAtom } from "../EyeDropper";
 import { eyeDropperIcon } from "../icons";
@@ -32,7 +32,7 @@ export const ColorInput = ({
   const device = useDevice();
   const [innerValue, setInnerValue] = useState(color);
   const [activeSection, setActiveColorPickerSection] = useAtom(
-    activeColorPickerSectionAtom,
+    activeColorPickerSectionAtom
   );
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export const ColorInput = ({
       }
       setInnerValue(value);
     },
-    [onChange],
+    [onChange]
   );
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -120,11 +120,11 @@ export const ColorInput = ({
                       keepOpenOnAlt: false,
                       onSelect: (color) => onChange(color),
                       colorPickerType,
-                    },
+                    }
               )
             }
             title={`${t(
-              "labels.eyeDropper",
+              "labels.eyeDropper"
             )} — ${KEYS.I.toLocaleUpperCase()} or ${getShortcutKey("Alt")} `}
           >
             {eyeDropperIcon}

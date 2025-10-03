@@ -7,7 +7,7 @@ import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 import { useApp } from "../App";
 import { ArrowRightIcon } from "../icons";
 import { EditorLocalStorage } from "../../data/EditorLocalStorage";
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 import Trans from "../Trans";
 
 import { TTDDialogInput } from "./TTDDialogInput";
@@ -39,7 +39,7 @@ const MermaidToExcalidraw = ({
   const [text, setText] = useState(
     () =>
       EditorLocalStorage.get<string>(EDITOR_LS_KEYS.MERMAID_TO_EXCALIDRAW) ||
-      MERMAID_EXAMPLE,
+      MERMAID_EXAMPLE
   );
   const deferredText = useDeferredValue(text.trim());
   const [error, setError] = useState<Error | null>(null);
@@ -72,7 +72,7 @@ const MermaidToExcalidraw = ({
     () => () => {
       debouncedSaveMermaidDefinition.flush();
     },
-    [],
+    []
   );
 
   const onInsertToEditor = () => {

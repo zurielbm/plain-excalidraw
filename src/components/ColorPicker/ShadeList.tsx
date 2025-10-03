@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import type { ColorPaletteCustom } from "@excalidraw/common";
 
 import { useAtom } from "../../editor-jotai";
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 
 import HotkeyLabel from "./HotkeyLabel";
 import {
@@ -25,7 +25,7 @@ export const ShadeList = ({ color, onChange, palette }: ShadeListProps) => {
   });
 
   const [activeColorPickerSection, setActiveColorPickerSection] = useAtom(
-    activeColorPickerSectionAtom,
+    activeColorPickerSectionAtom
   );
 
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -56,7 +56,7 @@ export const ShadeList = ({ color, onChange, palette }: ShadeListProps) => {
               type="button"
               className={clsx(
                 "color-picker__button color-picker__button--large has-outline",
-                { active: i === shade },
+                { active: i === shade }
               )}
               aria-label="Shade"
               title={`${colorName} - ${i + 1}`}

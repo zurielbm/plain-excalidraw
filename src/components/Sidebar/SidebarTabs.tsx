@@ -1,6 +1,6 @@
 import * as RadixTabs from "@radix-ui/react-tabs";
 
-import { useUIAppState } from "../../context/ui-appState";
+import { useUIAppState } from "../../lib/context/ui-appState";
 import { useExcalidrawSetAppState } from "../App";
 
 export const SidebarTabs = ({

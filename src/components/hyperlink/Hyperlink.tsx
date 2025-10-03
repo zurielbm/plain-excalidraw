@@ -36,10 +36,10 @@ import type {
   NonDeletedExcalidrawElement,
 } from "@excalidraw/element/types";
 
-import { trackEvent } from "../../analytics";
+import { trackEvent } from "../../lib/analytics";
 import { getTooltipDiv, updateTooltipPosition } from "../../components/Tooltip";
 
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 
 import { useAppProps, useDevice, useExcalidrawAppState } from "../App";
 import { ToolButton } from "../ToolButton";
@@ -78,11 +78,11 @@ export const Hyperlink = ({
   setAppState: React.Component<any, AppState>["setState"];
   onLinkOpen: ExcalidrawProps["onLinkOpen"];
   setToast: (
-    toast: { message: string; closable?: boolean; duration?: number } | null,
+    toast: { message: string; closable?: boolean; duration?: number } | null
   ) => void;
   updateEmbedValidationStatus: (
     element: ExcalidrawEmbeddableElement,
-    status: boolean,
+    status: boolean
   ) => void;
 }) => {
   const elementsMap = scene.getNonDeletedElementsMap();
@@ -209,7 +209,7 @@ export const Hyperlink = ({
         element,
         elementsMap,
         appState,
-        pointFrom(event.clientX, event.clientY),
+        pointFrom(event.clientX, event.clientY)
       ) as boolean;
       if (shouldHide) {
         timeoutId = window.setTimeout(() => {
@@ -287,14 +287,14 @@ export const Hyperlink = ({
             if (element.link && onLinkOpen) {
               const customEvent = wrapEvent(
                 EVENT.EXCALIDRAW_LINK,
-                event.nativeEvent,
+                event.nativeEvent
               );
               onLinkOpen(
                 {
                   ...element,
                   link: normalizeLink(element.link),
                 },
-                customEvent,
+                customEvent
               );
               if (customEvent.defaultPrevented) {
                 event.preventDefault();
@@ -356,12 +356,12 @@ export const Hyperlink = ({
 const getCoordsForPopover = (
   element: NonDeletedExcalidrawElement,
   appState: AppState,
-  elementsMap: ElementsMap,
+  elementsMap: ElementsMap
 ) => {
   const [x1, y1] = getElementAbsoluteCoords(element, elementsMap);
   const { x: viewportX, y: viewportY } = sceneCoordsToViewportCoords(
     { sceneX: x1 + element.width / 2, sceneY: y1 },
-    appState,
+    appState
   );
   const x = viewportX - appState.offsetLeft - POPUP_WIDTH / 2;
   const y = viewportY - appState.offsetTop - SPACE_BOTTOM;
@@ -370,7 +370,7 @@ const getCoordsForPopover = (
 
 export const getContextMenuLabel = (
   elements: readonly NonDeletedExcalidrawElement[],
-  appState: UIAppState,
+  appState: UIAppState
 ) => {
   const selectedElements = getSelectedElements(elements, appState);
   const label = isEmbeddableElement(selectedElements[0])
@@ -385,21 +385,21 @@ let HYPERLINK_TOOLTIP_TIMEOUT_ID: number | null = null;
 export const showHyperlinkTooltip = (
   element: NonDeletedExcalidrawElement,
   appState: AppState,
-  elementsMap: ElementsMap,
+  elementsMap: ElementsMap
 ) => {
   if (HYPERLINK_TOOLTIP_TIMEOUT_ID) {
     clearTimeout(HYPERLINK_TOOLTIP_TIMEOUT_ID);
   }
   HYPERLINK_TOOLTIP_TIMEOUT_ID = window.setTimeout(
     () => renderTooltip(element, appState, elementsMap),
-    HYPERLINK_TOOLTIP_DELAY,
+    HYPERLINK_TOOLTIP_DELAY
   );
 };
 
 const renderTooltip = (
   element: NonDeletedExcalidrawElement,
   appState: AppState,
-  elementsMap: ElementsMap,
+  elementsMap: ElementsMap
 ) => {
   if (!element.link) {
     return;
@@ -418,12 +418,12 @@ const renderTooltip = (
   const [linkX, linkY, linkWidth, linkHeight] = getLinkHandleFromCoords(
     [x1, y1, x2, y2],
     element.angle,
-    appState,
+    appState
   );
 
   const linkViewportCoords = sceneCoordsToViewportCoords(
     { sceneX: linkX, sceneY: linkY },
-    appState,
+    appState
   );
 
   updateTooltipPosition(
@@ -434,7 +434,7 @@ const renderTooltip = (
       width: linkWidth,
       height: linkHeight,
     },
-    "top",
+    "top"
   );
   trackEvent("hyperlink", "tooltip", "link-icon");
 
@@ -454,11 +454,11 @@ const shouldHideLinkPopup = (
   element: NonDeletedExcalidrawElement,
   elementsMap: ElementsMap,
   appState: AppState,
-  [clientX, clientY]: GlobalPoint,
+  [clientX, clientY]: GlobalPoint
 ): Boolean => {
   const { x: sceneX, y: sceneY } = viewportCoordsToSceneCoords(
     { clientX, clientY },
-    appState,
+    appState
   );
 
   const threshold = 15 / appState.zoom.value;
@@ -480,7 +480,7 @@ const shouldHideLinkPopup = (
   const { x: popoverX, y: popoverY } = getCoordsForPopover(
     element,
     appState,
-    elementsMap,
+    elementsMap
   );
 
   if (

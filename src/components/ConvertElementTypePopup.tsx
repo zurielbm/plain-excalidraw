@@ -76,7 +76,7 @@ import {
   mutateElement,
   ROUNDNESS,
   sceneCoordsToViewportCoords,
-} from "..";
+} from "../lib";
 import { trackEvent } from "../analytics";
 import { atom } from "../editor-jotai";
 
@@ -116,20 +116,20 @@ const LINEAR_TYPES = [
 ] as const;
 
 const CONVERTIBLE_GENERIC_TYPES: ReadonlySet<ConvertibleGenericTypes> = new Set(
-  GENERIC_TYPES,
+  GENERIC_TYPES
 );
 
 const CONVERTIBLE_LINEAR_TYPES: ReadonlySet<ConvertibleLinearTypes> = new Set(
-  LINEAR_TYPES,
+  LINEAR_TYPES
 );
 
 const isConvertibleGenericType = (
-  elementType: string,
+  elementType: string
 ): elementType is ConvertibleGenericTypes =>
   CONVERTIBLE_GENERIC_TYPES.has(elementType as ConvertibleGenericTypes);
 
 const isConvertibleLinearType = (
-  elementType: string,
+  elementType: string
 ): elementType is ConvertibleLinearTypes =>
   elementType === "arrow" ||
   CONVERTIBLE_LINEAR_TYPES.has(elementType as ConvertibleLinearTypes);
@@ -210,13 +210,13 @@ const Panel = ({
   const sameType =
     conversionType === "generic"
       ? genericElements.every(
-          (element) => element.type === genericElements[0].type,
+          (element) => element.type === genericElements[0].type
         )
       : conversionType === "linear"
       ? linearElements.every(
           (element) =>
             getLinearElementSubType(element) ===
-            getLinearElementSubType(linearElements[0]),
+            getLinearElementSubType(linearElements[0])
         )
       : false;
 
@@ -226,7 +226,7 @@ const Panel = ({
 
   useEffect(() => {
     const elements = [...genericElements, ...linearElements].sort((a, b) =>
-      a.id.localeCompare(b.id),
+      a.id.localeCompare(b.id)
     );
     const newPositionRef = `
       ${app.state.scrollX}${app.state.scrollY}${app.state.offsetTop}${
@@ -244,12 +244,12 @@ const Panel = ({
     if (elements.length === 1) {
       const [x1, , , y2, cx, cy] = getElementAbsoluteCoords(
         elements[0],
-        app.scene.getNonDeletedElementsMap(),
+        app.scene.getNonDeletedElementsMap()
       );
       bottomLeft = pointRotateRads(
         pointFrom(x1, y2),
         pointFrom(cx, cy),
-        elements[0].angle,
+        elements[0].angle
       );
     } else {
       const { minX, maxY } = getCommonBoundingBox(elements);
@@ -258,7 +258,7 @@ const Panel = ({
 
     const { x, y } = sceneCoordsToViewportCoords(
       { sceneX: bottomLeft[0], sceneY: bottomLeft[1] },
-      app.state,
+      app.state
     );
 
     setPanelPosition({ x, y });
@@ -268,7 +268,7 @@ const Panel = ({
     for (const linearElement of linearElements) {
       const cacheKey = toCacheKey(
         linearElement.id,
-        getConvertibleType(linearElement),
+        getConvertibleType(linearElement)
       );
       if (!LINEAR_ELEMENT_CONVERSION_CACHE.has(cacheKey)) {
         LINEAR_ELEMENT_CONVERSION_CACHE.set(cacheKey, linearElement);
@@ -281,7 +281,7 @@ const Panel = ({
       if (!FONT_SIZE_CONVERSION_CACHE.has(element.id)) {
         const boundText = getBoundTextElement(
           element,
-          app.scene.getNonDeletedElementsMap(),
+          app.scene.getNonDeletedElementsMap()
         );
         if (boundText) {
           FONT_SIZE_CONVERSION_CACHE.set(element.id, {
@@ -365,7 +365,7 @@ const Panel = ({
 export const adjustBoundTextSize = (
   container: ExcalidrawTextContainer,
   boundText: ExcalidrawTextElementWithContainer,
-  scene: Scene,
+  scene: Scene
 ) => {
   const maxWidth = getBoundTextMaxWidth(container, boundText);
   const maxHeight = getBoundTextMaxHeight(container, boundText);
@@ -373,13 +373,13 @@ export const adjustBoundTextSize = (
   const wrappedText = wrapText(
     boundText.text,
     getFontString(boundText),
-    maxWidth,
+    maxWidth
   );
 
   let metrics = measureText(
     wrappedText,
     getFontString(boundText),
-    boundText.lineHeight,
+    boundText.lineHeight
   );
 
   let nextFontSize = boundText.fontSize;
@@ -395,7 +395,7 @@ export const adjustBoundTextSize = (
     metrics = measureText(
       boundText.text,
       getFontString(_updatedTextElement),
-      boundText.lineHeight,
+      boundText.lineHeight
     );
   }
 
@@ -420,7 +420,7 @@ export const convertElementTypes = (
     conversionType: ConversionType;
     nextType?: ConvertibleTypes;
     direction?: "left" | "right";
-  },
+  }
 ): boolean => {
   if (!conversionType) {
     return false;
@@ -430,7 +430,7 @@ export const convertElementTypes = (
 
   const selectedElementIds = selectedElements.reduce(
     (acc, element) => ({ ...acc, [element.id]: true }),
-    {},
+    {}
   );
 
   const advancement = direction === "right" ? 1 : -1;
@@ -440,7 +440,7 @@ export const convertElementTypes = (
       filterGenericConvetibleElements(selectedElements);
 
     const sameType = convertibleGenericElements.every(
-      (element) => element.type === convertibleGenericElements[0].type,
+      (element) => element.type === convertibleGenericElements[0].type
     );
 
     const index = sameType
@@ -476,7 +476,7 @@ export const convertElementTypes = (
       for (const element of Object.values(convertedElements)) {
         const boundText = getBoundTextElement(
           element,
-          app.scene.getNonDeletedElementsMap(),
+          app.scene.getNonDeletedElementsMap()
         );
         if (boundText) {
           if (FONT_SIZE_CONVERSION_CACHE.get(element.id)) {
@@ -490,7 +490,7 @@ export const convertElementTypes = (
           adjustBoundTextSize(
             element as ExcalidrawTextContainer,
             boundText,
-            app.scene,
+            app.scene
           );
         }
       }
@@ -508,13 +508,13 @@ export const convertElementTypes = (
 
   if (conversionType === "linear") {
     const convertibleLinearElements = filterLinearConvertibleElements(
-      selectedElements,
+      selectedElements
     ) as ExcalidrawLinearElement[];
 
     if (!nextType) {
       const commonSubType = reduceToCommonValue(
         convertibleLinearElements,
-        getLinearElementSubType,
+        getLinearElementSubType
       );
 
       const index = commonSubType ? LINEAR_TYPES.indexOf(commonSubType) : -1;
@@ -532,7 +532,7 @@ export const convertElementTypes = (
 
       for (const element of convertibleLinearElements) {
         const cachedElement = LINEAR_ELEMENT_CONVERSION_CACHE.get(
-          toCacheKey(element.id, nextType),
+          toCacheKey(element.id, nextType)
         );
 
         // if switching to the original subType or a subType we've already
@@ -577,7 +577,7 @@ export const convertElementTypes = (
               {
                 points: nextPoints,
                 fixedSegments,
-              },
+              }
             );
             mutateElement(element, app.scene.getNonDeletedElementsMap(), {
               ...updates,
@@ -592,8 +592,8 @@ export const convertElementTypes = (
               ["line", "sharpArrow", "curvedArrow"] as const,
               (type) =>
                 LINEAR_ELEMENT_CONVERSION_CACHE.get(
-                  toCacheKey(element.id, type),
-                ),
+                  toCacheKey(element.id, type)
+                )
             );
 
             if (similarCachedLinearElement) {
@@ -608,7 +608,7 @@ export const convertElementTypes = (
     }
 
     const convertedSelectedLinearElements = filterLinearConvertibleElements(
-      app.scene.getSelectedElements(app.state),
+      app.scene.getSelectedElements(app.state)
     );
 
     app.setState((prevState) => ({
@@ -617,7 +617,7 @@ export const convertElementTypes = (
         convertedSelectedLinearElements.length === 1
           ? new LinearElementEditor(
               convertedSelectedLinearElements[0],
-              app.scene.getNonDeletedElementsMap(),
+              app.scene.getNonDeletedElementsMap()
             )
           : null,
       activeTool: updateActiveTool(prevState, {
@@ -630,7 +630,7 @@ export const convertElementTypes = (
 };
 
 export const getConversionTypeFromElements = (
-  elements: ExcalidrawElement[],
+  elements: ExcalidrawElement[]
 ): ConversionType => {
   if (elements.length === 0) {
     return null;
@@ -664,7 +664,7 @@ const isEligibleLinearElement = (element: ExcalidrawElement) => {
 
 const toCacheKey = (
   elementId: ExcalidrawElement["id"],
-  convertitleType: ConvertibleTypes,
+  convertitleType: ConvertibleTypes
 ) => {
   return `${elementId}:${convertitleType}` as CacheKey;
 };
@@ -678,7 +678,7 @@ const filterGenericConvetibleElements = (elements: ExcalidrawElement[]) =>
 
 const filterLinearConvertibleElements = (elements: ExcalidrawElement[]) =>
   elements.filter((element) =>
-    isEligibleLinearElement(element),
+    isEligibleLinearElement(element)
   ) as ExcalidrawLinearElement[];
 
 const THRESHOLD = 20;
@@ -809,11 +809,11 @@ const sanitizePoints = (points: readonly LocalPoint[]): LocalPoint[] => {
  *   e.g. elbow arrow -> line
  */
 const convertElementType = <
-  TElement extends Exclude<ExcalidrawElement, ExcalidrawSelectionElement>,
+  TElement extends Exclude<ExcalidrawElement, ExcalidrawSelectionElement>
 >(
   element: TElement,
   targetType: ConvertibleTypes,
-  app: AppClassProperties,
+  app: AppClassProperties
 ): ExcalidrawElement => {
   if (!isValidConversion(element.type, targetType)) {
     if (!isProdEnv()) {
@@ -841,7 +841,7 @@ const convertElementType = <
                   : ROUNDNESS.PROPORTIONAL_RADIUS,
               }
             : element.roundness,
-      }),
+      })
     ) as typeof element;
 
     updateBindings(nextElement, app.scene);
@@ -856,7 +856,7 @@ const convertElementType = <
           newLinearElement({
             ...element,
             type: "line",
-          }),
+          })
         );
       }
       case "sharpArrow": {
@@ -868,7 +868,7 @@ const convertElementType = <
             roundness: null,
             startArrowhead: app.state.currentItemStartArrowhead,
             endArrowhead: app.state.currentItemEndArrowhead,
-          }),
+          })
         );
       }
       case "curvedArrow": {
@@ -882,7 +882,7 @@ const convertElementType = <
             },
             startArrowhead: app.state.currentItemStartArrowhead,
             endArrowhead: app.state.currentItemEndArrowhead,
-          }),
+          })
         );
       }
       case "elbowArrow": {
@@ -893,7 +893,7 @@ const convertElementType = <
             elbowed: true,
             fixedSegments: null,
             roundness: null,
-          }),
+          })
         );
       }
     }
@@ -906,7 +906,7 @@ const convertElementType = <
 
 const isValidConversion = (
   startType: string,
-  targetType: ConvertibleTypes,
+  targetType: ConvertibleTypes
 ): startType is ConvertibleTypes => {
   if (
     isConvertibleGenericType(startType) &&
@@ -928,7 +928,7 @@ const isValidConversion = (
 };
 
 const getConvertibleType = (
-  element: ExcalidrawConvertibleElement,
+  element: ExcalidrawConvertibleElement
 ): ConvertibleTypes => {
   if (isLinearElement(element)) {
     return getLinearElementSubType(element);

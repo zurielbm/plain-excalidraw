@@ -6,7 +6,7 @@ import { FONT_FAMILY } from "@excalidraw/common";
 
 import type { FontFamilyValues } from "@excalidraw/element/types";
 
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 import { RadioSelection } from "../RadioSelection";
 import { ButtonSeparator } from "../ButtonSeparator";
 import {
@@ -80,7 +80,7 @@ export const FontPicker = React.memo(
           onSelect(value);
         }
       },
-      [onSelect],
+      [onSelect]
     );
 
     return (
@@ -125,5 +125,5 @@ export const FontPicker = React.memo(
   (prev, next) =>
     prev.isOpened === next.isOpened &&
     prev.selectedFontFamily === next.selectedFontFamily &&
-    prev.hoveredFontFamily === next.hoveredFontFamily,
+    prev.hoveredFontFamily === next.hoveredFontFamily
 );

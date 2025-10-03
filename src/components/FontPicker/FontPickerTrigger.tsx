@@ -2,7 +2,7 @@ import * as Popover from "@radix-ui/react-popover";
 
 import type { FontFamilyValues } from "@excalidraw/element/types";
 
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 import { ButtonIcon } from "../ButtonIcon";
 import { TextIcon } from "../icons";
 

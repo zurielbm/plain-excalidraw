@@ -1,7 +1,7 @@
 import React from "react";
 
-import { useTunnels } from "../../context/tunnels";
-import { useAtom } from "../../editor-jotai";
+import { useTunnels } from "../../lib/context/tunnels";
+import { useAtom } from "../../lib/editor-jotai";
 import { Dialog } from "../Dialog";
 import { FilledButton } from "../FilledButton";
 import { withInternalFallback } from "../hoc/withInternalFallback";
@@ -22,7 +22,7 @@ const OverwriteConfirmDialog = Object.assign(
     ({ children }: OverwriteConfirmDialogProps) => {
       const { OverwriteConfirmDialogTunnel } = useTunnels();
       const [overwriteConfirmState, setState] = useAtom(
-        overwriteConfirmStateAtom,
+        overwriteConfirmStateAtom
       );
 
       if (!overwriteConfirmState.active) {
@@ -64,12 +64,12 @@ const OverwriteConfirmDialog = Object.assign(
           </Dialog>
         </OverwriteConfirmDialogTunnel.In>
       );
-    },
+    }
   ),
   {
     Actions,
     Action,
-  },
+  }
 );
 
 export { OverwriteConfirmDialog };

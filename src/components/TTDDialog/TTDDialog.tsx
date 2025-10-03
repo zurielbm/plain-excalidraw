@@ -4,10 +4,10 @@ import { isFiniteNumber } from "@excalidraw/math";
 
 import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 
-import { trackEvent } from "../../analytics";
-import { useUIAppState } from "../../context/ui-appState";
-import { atom, useAtom } from "../../editor-jotai";
-import { t } from "../../i18n";
+import { trackEvent } from "../../lib/analytics";
+import { useUIAppState } from "../../lib/context/ui-appState";
+import { atom, useAtom } from "../../lib/editor-jotai";
+import { t } from "../../lib/i18n";
 import { useApp, useExcalidrawSetAppState } from "../App";
 import { Dialog } from "../Dialog";
 import { InlineIcon } from "../InlineIcon";
@@ -67,7 +67,7 @@ export const TTDDialog = (
     | {
         onTextSubmit(value: string): Promise<OnTestSubmitRetValue>;
       }
-    | { __fallback: true },
+    | { __fallback: true }
 ) => {
   const appState = useUIAppState();
 
@@ -106,7 +106,7 @@ export const TTDDialogBase = withInternalFallback(
     const prompt = text.trim();
 
     const handleTextChange: ChangeEventHandler<HTMLTextAreaElement> = (
-      event,
+      event
     ) => {
       setText(event.target.value);
       setTtdGeneration((s) => ({
@@ -130,15 +130,15 @@ export const TTDDialogBase = withInternalFallback(
         if (prompt.length < MIN_PROMPT_LENGTH) {
           setError(
             new Error(
-              `Prompt is too short (min ${MIN_PROMPT_LENGTH} characters)`,
-            ),
+              `Prompt is too short (min ${MIN_PROMPT_LENGTH} characters)`
+            )
           );
         }
         if (prompt.length > MAX_PROMPT_LENGTH) {
           setError(
             new Error(
-              `Prompt is too long (max ${MAX_PROMPT_LENGTH} characters)`,
-            ),
+              `Prompt is too long (max ${MAX_PROMPT_LENGTH} characters)`
+            )
           );
         }
 
@@ -185,17 +185,17 @@ export const TTDDialogBase = withInternalFallback(
         } catch (error: any) {
           console.info(
             `%cTTD mermaid render errror: ${error.message}`,
-            "color: red",
+            "color: red"
           );
           console.info(
             `>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\nTTD mermaid definition render errror: ${error.message}`,
-            "color: yellow",
+            "color: yellow"
           );
           trackEvent("ai", "mermaid parse failed", "ttd");
           setError(
             new Error(
-              "Generated an invalid diagram :(. You may also try a different prompt.",
-            ),
+              "Generated an invalid diagram :(. You may also try a different prompt."
+            )
           );
         }
       } catch (error: any) {
@@ -332,7 +332,7 @@ export const TTDDialogBase = withInternalFallback(
                               "string"
                             ) {
                               saveMermaidDataToStorage(
-                                ttdGeneration.generatedResponse,
+                                ttdGeneration.generatedResponse
                               );
                               setAppState({
                                 openDialog: { name: "ttd", tab: "mermaid" },
@@ -397,5 +397,5 @@ export const TTDDialogBase = withInternalFallback(
         </TTDDialogTabs>
       </Dialog>
     );
-  },
+  }
 );

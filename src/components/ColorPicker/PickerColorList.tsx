@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import type { ColorPaletteCustom } from "@excalidraw/common";
 
 import { useAtom } from "../../editor-jotai";
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 
 import HotkeyLabel from "./HotkeyLabel";
 import {
@@ -13,7 +13,7 @@ import {
   getColorNameAndShadeFromColor,
 } from "./colorPickerUtils";
 
-import type { TranslationKeys } from "../../i18n";
+import type { TranslationKeys } from "../../lib/i18n";
 
 interface PickerColorListProps {
   palette: ColorPaletteCustom;
@@ -33,7 +33,7 @@ const PickerColorList = ({
     palette,
   });
   const [activeColorPickerSection, setActiveColorPickerSection] = useAtom(
-    activeColorPickerSectionAtom,
+    activeColorPickerSectionAtom
   );
 
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -54,7 +54,7 @@ const PickerColorList = ({
         const label = t(
           `colors.${key.replace(/\d+/, "")}` as unknown as TranslationKeys,
           null,
-          "",
+          ""
         );
 
         return (
@@ -67,7 +67,7 @@ const PickerColorList = ({
               {
                 active: colorObj?.colorName === key,
                 "is-transparent": color === "transparent" || !color,
-              },
+              }
             )}
             onClick={() => {
               onChange(color);

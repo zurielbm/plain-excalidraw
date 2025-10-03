@@ -1,5 +1,5 @@
-import { useTunnels } from "../../context/tunnels";
-import { t } from "../../i18n";
+import { useTunnels } from "../../lib/context/tunnels";
+import { t } from "../../lib/i18n";
 import {
   WelcomeScreenHelpArrow,
   WelcomeScreenMenuArrow,

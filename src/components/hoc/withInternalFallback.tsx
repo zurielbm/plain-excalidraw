@@ -1,11 +1,11 @@
 import React, { useLayoutEffect, useRef } from "react";
 
-import { useTunnels } from "../../context/tunnels";
-import { atom } from "../../editor-jotai";
+import { useTunnels } from "../../lib/context/tunnels";
+import { atom } from "../../lib/editor-jotai";
 
 export const withInternalFallback = <P,>(
   componentName: string,
-  Component: React.FC<P>,
+  Component: React.FC<P>
 ) => {
   const renderAtom = atom(0);
 

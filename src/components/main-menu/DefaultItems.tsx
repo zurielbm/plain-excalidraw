@@ -11,12 +11,12 @@ import {
   actionShortcuts,
   actionToggleSearchMenu,
   actionToggleTheme,
-} from "../../actions";
-import { getShortcutFromShortcutName } from "../../actions/shortcuts";
-import { trackEvent } from "../../analytics";
-import { useUIAppState } from "../../context/ui-appState";
-import { useSetAtom } from "../../editor-jotai";
-import { useI18n } from "../../i18n";
+} from "../../lib/actions";
+import { getShortcutFromShortcutName } from "../../lib/actions/shortcuts";
+import { trackEvent } from "../../lib/analytics";
+import { useUIAppState } from "../../lib/context/ui-appState";
+import { useSetAtom } from "../../lib/editor-jotai";
+import { useI18n } from "../../lib/i18n";
 import { activeConfirmDialogAtom } from "../ActiveConfirmDialog";
 import {
   useExcalidrawSetAppState,
@@ -222,7 +222,7 @@ export const ToggleTheme = (
     | {
         allowSystemTheme?: false;
         onSelect?: (theme: Theme) => void;
-      },
+      }
 ) => {
   const { t } = useI18n();
   const appState = useUIAppState();
@@ -270,7 +270,7 @@ export const ToggleTheme = (
 
         if (props?.onSelect) {
           props.onSelect(
-            appState.theme === THEME.DARK ? THEME.LIGHT : THEME.DARK,
+            appState.theme === THEME.DARK ? THEME.LIGHT : THEME.DARK
           );
         } else {
           return actionManager.executeAction(actionToggleTheme);

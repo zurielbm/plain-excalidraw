@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
-import { useTunnels } from "../../context/tunnels";
-import { useUIAppState } from "../../context/ui-appState";
+import { useTunnels } from "../../lib/context/tunnels";
+import { useUIAppState } from "../../lib/context/ui-appState";
 
 import "./FooterCenter.scss";
 

@@ -14,7 +14,7 @@ import type { ColorTuple, ColorPaletteCustom } from "@excalidraw/common";
 import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import { useAtom } from "../../editor-jotai";
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 import { useExcalidrawContainer } from "../App";
 import { ButtonSeparator } from "../ButtonSeparator";
 import { activeEyeDropperAtom } from "../EyeDropper";
@@ -157,7 +157,7 @@ const ColorPickerPopupContent = ({
         if (appState.editingTextElement) {
           setTimeout(() => {
             const textEditor = document.querySelector(
-              ".excalidraw-wysiwyg",
+              ".excalidraw-wysiwyg"
             ) as HTMLTextAreaElement;
             if (textEditor) {
               textEditor.focus();

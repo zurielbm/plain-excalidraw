@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from "next/dynamic";
 
 import "../common.scss";
@@ -8,7 +10,7 @@ const Excalidraw = dynamic(
   async () => (await import("../excalidrawWrapper")).default,
   {
     ssr: false,
-  },
+  }
 );
 
 export default function Page() {

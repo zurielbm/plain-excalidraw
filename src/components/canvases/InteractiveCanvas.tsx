@@ -11,7 +11,7 @@ import type {
   NonDeletedSceneElementsMap,
 } from "@excalidraw/element/types";
 
-import { t } from "../../i18n";
+import { t } from "../../lib/i18n";
 import { isRenderThrottlingEnabled } from "../../reactUtils";
 import { renderInteractiveScene } from "../../renderer/interactiveScene";
 
@@ -37,7 +37,7 @@ type InteractiveCanvasProps = {
   renderScrollbars: boolean;
   device: Device;
   renderInteractiveSceneCallback: (
-    data: RenderInteractiveSceneCallback,
+    data: RenderInteractiveSceneCallback
   ) => void;
   handleCanvasRef: (canvas: HTMLCanvasElement | null) => void;
   onContextMenu: Exclude<
@@ -115,8 +115,8 @@ const InteractiveCanvas = (props: InteractiveCanvasProps) => {
             sceneX: user.pointer.x,
             sceneY: user.pointer.y,
           },
-          props.appState,
-        ),
+          props.appState
+        )
       );
       remotePointerButton.set(socketId, user.button);
     });
@@ -124,7 +124,7 @@ const InteractiveCanvas = (props: InteractiveCanvasProps) => {
     const selectionColor =
       (props.containerRef?.current &&
         getComputedStyle(props.containerRef.current).getPropertyValue(
-          "--color-selection",
+          "--color-selection"
         )) ||
       "#6965db";
 
@@ -149,7 +149,7 @@ const InteractiveCanvas = (props: InteractiveCanvasProps) => {
         device: props.device,
         callback: props.renderInteractiveSceneCallback,
       },
-      isRenderThrottlingEnabled(),
+      isRenderThrottlingEnabled()
     );
   });
 
@@ -182,7 +182,7 @@ const InteractiveCanvas = (props: InteractiveCanvasProps) => {
 };
 
 const getRelevantAppStateProps = (
-  appState: AppState,
+  appState: AppState
 ): InteractiveCanvasAppState => ({
   zoom: appState.zoom,
   scrollX: appState.scrollX,
@@ -218,7 +218,7 @@ const getRelevantAppStateProps = (
 
 const areEqual = (
   prevProps: InteractiveCanvasProps,
-  nextProps: InteractiveCanvasProps,
+  nextProps: InteractiveCanvasProps
 ) => {
   // This could be further optimised if needed, as we don't have to render interactive canvas on each scene mutation
   if (
@@ -241,7 +241,7 @@ const areEqual = (
     // asserting AppState because we're being passed the whole AppState
     // but resolve to only the InteractiveCanvas-relevant props
     getRelevantAppStateProps(prevProps.appState as AppState),
-    getRelevantAppStateProps(nextProps.appState as AppState),
+    getRelevantAppStateProps(nextProps.appState as AppState)
   );
 };
 

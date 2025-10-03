@@ -3,8 +3,8 @@ import { isDevEnv } from "@excalidraw/common";
 import type { NestedKeyOf } from "@excalidraw/common/utility-types";
 
 import { useAtomValue, editorJotaiStore, atom } from "./editor-jotai";
-import fallbackLangData from "./locales/en.json";
-import percentages from "./locales/percentages.json";
+import fallbackLangData from "../locales/en.json";
+import percentages from "../locales/percentages.json";
 
 const COMPLETION_THRESHOLD = 85;
 
@@ -69,7 +69,7 @@ export const languages: Language[] = [
     .filter(
       (lang) =>
         (percentages as Record<string, number>)[lang.code] >=
-        COMPLETION_THRESHOLD,
+        COMPLETION_THRESHOLD
     )
     .sort((left, right) => (left.label > right.label ? 1 : -1)),
 ];
@@ -82,7 +82,7 @@ if (isDevEnv()) {
       code: `${TEST_LANG_CODE}.rtl`,
       label: "\u{202a}test language (rtl)\u{202c}",
       rtl: true,
-    },
+    }
   );
 }
 
@@ -98,7 +98,7 @@ export const setLanguage = async (lang: Language) => {
     currentLangData = {};
   } else {
     try {
-      currentLangData = await import(`./locales/${currentLang.code}.json`);
+      currentLangData = await import(`../locales/${currentLang.code}.json`);
     } catch (error: any) {
       console.error(`Failed to load language ${lang.code}:`, error.message);
       currentLangData = fallbackLangData;
@@ -127,7 +127,7 @@ const findPartsForData = (data: any, parts: string[]) => {
 export const t = (
   path: NestedKeyOf<typeof fallbackLangData>,
   replacement?: { [key: string]: string | number } | null,
-  fallback?: string,
+  fallback?: string
 ) => {
   if (currentLang.code.startsWith(TEST_LANG_CODE)) {
     const name = replacement
