@@ -6,7 +6,7 @@ import { orderByFractionalIndex } from "@excalidraw/element";
 
 import type { SceneElementsMap } from "@excalidraw/element/types";
 
-import { ToolButton } from "../components/ToolButton";
+import { ToolButton } from "../../components/ToolButton";
 import { UndoIcon, RedoIcon } from "../components/icons";
 import { HistoryChangedEvent } from "../history";
 import { useEmitter } from "../hooks/useEmitter";

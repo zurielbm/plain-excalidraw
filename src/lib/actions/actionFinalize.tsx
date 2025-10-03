@@ -40,7 +40,7 @@ import type {
 import { t } from "../i18n";
 import { resetCursor } from "../cursor";
 import { done } from "../components/icons";
-import { ToolButton } from "../components/ToolButton";
+import { ToolButton } from "../../components/ToolButton";
 
 import { register } from "./register";
 

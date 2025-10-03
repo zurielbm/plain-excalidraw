@@ -1,3 +1,5 @@
+import type { MutableRefObject } from "react";
+
 import Spinner from "../Spinner";
 
 const ErrorComp = ({ error }: { error: string }) => {
@@ -13,7 +15,7 @@ const ErrorComp = ({ error }: { error: string }) => {
 
 interface TTDDialogOutputProps {
   error: Error | null;
-  canvasRef: React.RefObject<HTMLDivElement | null>;
+  canvasRef: MutableRefObject<HTMLDivElement | null>;
   loaded: boolean;
 }
 

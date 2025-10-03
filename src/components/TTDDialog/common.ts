@@ -5,6 +5,8 @@ import type { MermaidToExcalidrawResult } from "@excalidraw/mermaid-to-excalidra
 
 import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 
+import type { MutableRefObject } from "react";
+
 import { EditorLocalStorage } from "../../lib/data/EditorLocalStorage";
 import { canvasToBlob } from "../../lib/data/blob";
 import { t } from "../../lib/i18n";
@@ -16,7 +18,7 @@ const resetPreview = ({
   canvasRef,
   setError,
 }: {
-  canvasRef: React.RefObject<HTMLDivElement | null>;
+  canvasRef: MutableRefObject<HTMLDivElement | null>;
   setError: (error: Error | null) => void;
 }) => {
   const canvasNode = canvasRef.current;
@@ -44,11 +46,11 @@ export interface MermaidToExcalidrawLibProps {
 }
 
 interface ConvertMermaidToExcalidrawFormatProps {
-  canvasRef: React.RefObject<HTMLDivElement | null>;
+  canvasRef: MutableRefObject<HTMLDivElement | null>;
   mermaidToExcalidrawLib: MermaidToExcalidrawLibProps;
   mermaidDefinition: string;
   setError: (error: Error | null) => void;
-  data: React.MutableRefObject<{
+  data: MutableRefObject<{
     elements: readonly NonDeletedExcalidrawElement[];
     files: BinaryFiles | null;
   }>;
@@ -138,7 +140,7 @@ export const insertToEditor = ({
   shouldSaveMermaidDataToStorage,
 }: {
   app: AppClassProperties;
-  data: React.MutableRefObject<{
+  data: MutableRefObject<{
     elements: readonly NonDeletedExcalidrawElement[];
     files: BinaryFiles | null;
   }>;

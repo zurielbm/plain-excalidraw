@@ -16,7 +16,7 @@ import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import type { Distribution } from "@excalidraw/element";
 
-import { ToolButton } from "../components/ToolButton";
+import { ToolButton } from "../../components/ToolButton";
 import {
   DistributeHorizontallyIcon,
   DistributeVerticallyIcon,

@@ -36,7 +36,7 @@ import type {
   OrderedExcalidrawElement,
 } from "@excalidraw/element/types";
 
-import { ToolButton } from "../components/ToolButton";
+import { ToolButton } from "../../components/ToolButton";
 import { UngroupIcon, GroupIcon } from "../components/icons";
 
 import { t } from "../i18n";
