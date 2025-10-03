@@ -29,6 +29,30 @@ export const generateEncryptionKey = async <
   ) as T extends "cryptoKey" ? CryptoKey : string;
 };
 
+const toArrayBuffer = async (
+  data: Uint8Array | ArrayBuffer | Blob | File | string,
+): Promise<ArrayBuffer> => {
+  if (typeof data === "string") {
+    return new TextEncoder().encode(data).buffer;
+  }
+  if (data instanceof ArrayBuffer) {
+    return data;
+  }
+  if (data instanceof Uint8Array) {
+    return cloneToArrayBuffer(data);
+  }
+  return blobToArrayBuffer(data);
+};
+
+const cloneToArrayBuffer = (view: Uint8Array): ArrayBuffer => {
+  if (view.buffer instanceof ArrayBuffer) {
+    return view.buffer.slice(view.byteOffset, view.byteOffset + view.byteLength);
+  }
+  const copy = new Uint8Array(view.byteLength);
+  copy.set(view);
+  return copy.buffer;
+};
+
 export const getCryptoKey = (key: string, usage: KeyUsage) =>
   window.crypto.subtle.importKey(
     "jwk",
@@ -54,15 +78,10 @@ export const encryptData = async (
   const importedKey =
     typeof key === "string" ? await getCryptoKey(key, "encrypt") : key;
   const iv = createIV();
-  const buffer: ArrayBuffer | Uint8Array =
-    typeof data === "string"
-      ? new TextEncoder().encode(data)
-      : data instanceof Uint8Array
-      ? data
-      : data instanceof Blob
-      ? await blobToArrayBuffer(data)
-      : data;
 
+  const buffer = await toArrayBuffer(data);
+
+  // cspell:ignore ciphertext
   // We use symmetric encryption. AES-GCM is the recommended algorithm and
   // includes checks that the ciphertext has not been modified by an attacker.
   const encryptedBuffer = await window.crypto.subtle.encrypt(
@@ -71,7 +90,7 @@ export const encryptData = async (
       iv,
     },
     importedKey,
-    buffer as ArrayBuffer | Uint8Array,
+    buffer,
   );
 
   return { encryptedBuffer, iv };
@@ -83,12 +102,16 @@ export const decryptData = async (
   privateKey: string,
 ): Promise<ArrayBuffer> => {
   const key = await getCryptoKey(privateKey, "decrypt");
+  const normalizedEncrypted =
+    encrypted instanceof Uint8Array
+      ? cloneToArrayBuffer(encrypted)
+      : encrypted;
   return window.crypto.subtle.decrypt(
     {
       name: "AES-GCM",
       iv,
     },
     key,
-    encrypted,
+    normalizedEncrypted,
   );
 };

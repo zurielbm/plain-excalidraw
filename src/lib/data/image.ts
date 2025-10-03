@@ -42,8 +42,8 @@ export const encodePngMetadata = async ({
   );
   // insert metadata before last chunk (iEND)
   chunks.splice(-1, 0, metadataChunk);
-
-  return new Blob([encodePng(chunks)], { type: MIME_TYPES.png });
+  const pngData = encodePng(chunks);
+  return new Blob([toBlobBuffer(pngData)], { type: MIME_TYPES.png });
 };
 
 export const decodePngMetadata = async (blob: Blob) => {
@@ -68,4 +68,13 @@ export const decodePngMetadata = async (blob: Blob) => {
     }
   }
   throw new Error("INVALID");
+};
+
+const toBlobBuffer = (data: Uint8Array): ArrayBuffer => {
+  if (data.buffer instanceof ArrayBuffer) {
+    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+  }
+  const copy = new Uint8Array(data.byteLength);
+  copy.set(data);
+  return copy.buffer;
 };

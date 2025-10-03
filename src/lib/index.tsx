@@ -12,8 +12,8 @@ import { defaultLang } from "./i18n";
 import { EditorJotaiProvider, editorJotaiStore } from "./editor-jotai";
 import polyfill from "./polyfill";
 
-import "./css/app.scss";
-import "./css/styles.scss";
+import "../styles/app.scss";
+import "../styles/styles.scss";
 import "./fonts/fonts.css";
 
 import type { AppProps, ExcalidrawProps } from "./types";

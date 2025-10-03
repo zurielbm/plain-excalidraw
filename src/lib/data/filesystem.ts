@@ -10,11 +10,26 @@ import { AbortError } from "../errors";
 
 import { normalizeFile } from "./blob";
 
-import type { FileSystemHandle } from "browser-fs-access";
-
 type FILE_EXTENSION = Exclude<keyof typeof MIME_TYPES, "binary">;
 
 const INPUT_CHANGE_INTERVAL_MS = 5000;
+
+type LegacySetup<TReturn> = (
+  resolve: (value: TReturn) => void,
+  reject: (reason?: unknown) => void,
+  input: HTMLInputElement,
+) => (rejectPromise?: (reason?: unknown) => void) => void;
+
+const toFileHandle = (
+  handle: FileSystemHandle | null | undefined,
+): FileSystemFileHandle | null => {
+  if (!handle) {
+    return null;
+  }
+  return "kind" in handle && handle.kind === "file"
+    ? (handle as FileSystemFileHandle)
+    : null;
+};
 
 export const fileOpen = async <M extends boolean | undefined = false>(opts: {
   extensions?: FILE_EXTENSION[];
@@ -42,7 +57,11 @@ export const fileOpen = async <M extends boolean | undefined = false>(opts: {
     extensions,
     mimeTypes,
     multiple: opts.multiple ?? false,
-    legacySetup: (resolve, reject, input) => {
+    legacySetup: ((
+      resolve: (value: RetType) => void,
+      reject: (reason?: unknown) => void,
+      input: HTMLInputElement,
+    ) => {
       const scheduleRejection = debounce(reject, INPUT_CHANGE_INTERVAL_MS);
       const focusHandler = () => {
         checkForFile();
@@ -63,7 +82,7 @@ export const fileOpen = async <M extends boolean | undefined = false>(opts: {
       const interval = window.setInterval(() => {
         checkForFile();
       }, INPUT_CHANGE_INTERVAL_MS);
-      return (rejectPromise) => {
+      return (rejectPromise?: (reason?: unknown) => void) => {
         clearInterval(interval);
         scheduleRejection.cancel();
         window.removeEventListener(EVENT.FOCUS, focusHandler);
@@ -75,7 +94,9 @@ export const fileOpen = async <M extends boolean | undefined = false>(opts: {
           rejectPromise(new AbortError());
         }
       };
-    },
+    }) as LegacySetup<RetType>,
+  } as Parameters<typeof _fileOpen>[0] & {
+    legacySetup: LegacySetup<RetType>;
   });
 
   if (Array.isArray(files)) {
@@ -107,9 +128,9 @@ export const fileSave = (
       extensions: [`.${opts.extension}`],
       mimeTypes: opts.mimeTypes,
     },
-    opts.fileHandle,
+    toFileHandle(opts.fileHandle),
   );
 };
 
 export { nativeFileSystemSupported };
-export type { FileSystemHandle };
+export type FileSystemHandle = globalThis.FileSystemHandle;

@@ -25,8 +25,35 @@ import { restore, restoreLibraryItems } from "./restore";
 
 import type { AppState, DataURL, LibraryItem } from "../types";
 
-import type { FileSystemHandle } from "browser-fs-access";
 import type { ImportedLibraryData } from "./types";
+
+type BlobWithMetadata = Blob & {
+  name?: string;
+  handle?: FileSystemHandle | FileSystemFileHandle | null;
+};
+
+const isFileInstance = (blob: Blob | File): blob is File => {
+  return typeof File !== "undefined" && blob instanceof File;
+};
+
+const getBlobName = (blob: Blob | File): string => {
+  if (isFileInstance(blob)) {
+    return blob.name;
+  }
+  return (blob as Partial<BlobWithMetadata>).name ?? "";
+};
+
+export const getBlobHandle = (
+  blob: Blob | File | null | undefined,
+): FileSystemHandle | FileSystemFileHandle | null => {
+  if (!blob) {
+    return null;
+  }
+  return ((blob as Partial<BlobWithMetadata>).handle ?? null) as
+    | FileSystemHandle
+    | FileSystemFileHandle
+    | null;
+};
 
 const parseFileContents = async (blob: Blob | File): Promise<string> => {
   let contents: string;
@@ -86,7 +113,7 @@ export const getMimeType = (blob: Blob | string): string => {
     if (blob.type) {
       return blob.type;
     }
-    name = blob.name || "";
+    name = getBlobName(blob);
   }
   if (/\.(excalidraw|json)$/.test(name)) {
     return MIME_TYPES.json;
@@ -166,7 +193,7 @@ export const loadSceneOrLibraryFromBlob = async (
             elements: clearElementsForExport(data.elements || []),
             appState: {
               theme: localAppState?.theme,
-              fileHandle: fileHandle || blob.handle || null,
+              fileHandle: fileHandle ?? getBlobHandle(blob),
               ...cleanAppStateForExport(data.appState || {}),
               ...(localAppState
                 ? calculateScrollCenter(data.elements || [], localAppState)
@@ -343,11 +370,16 @@ export const resizeImageFile = async (
 
   if (opts.outputType) {
     const { outputType } = opts;
-    reduce._create_blob = function (env) {
-      return this.pica.toBlob(env.out_canvas, outputType, 0.8).then((blob) => {
-        env.out_blob = blob;
-        return env;
-      });
+    reduce._create_blob = function (env: {
+      out_canvas: HTMLCanvasElement;
+      out_blob?: Blob;
+    }) {
+      return this.pica
+        .toBlob(env.out_canvas, outputType, 0.8)
+        .then((blob: Blob) => {
+          env.out_blob = blob;
+          return env;
+        });
     };
   }
 
@@ -388,7 +420,7 @@ export const ImageURLToFile = async (
   const blob = await response.blob();
 
   if (blob.type && isSupportedImageFile(blob)) {
-    const name = filename || blob.name || "";
+    const name = filename || getBlobName(blob);
     return new File([blob], name, { type: blob.type });
   }
 

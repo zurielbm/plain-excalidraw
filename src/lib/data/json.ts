@@ -15,7 +15,7 @@ import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import { cleanAppStateForExport, clearAppStateForDatabase } from "../appState";
 
-import { isImageFileHandle, loadFromBlob } from "./blob";
+import { getBlobHandle, isImageFileHandle, loadFromBlob } from "./blob";
 import { fileOpen, fileSave } from "./filesystem";
 
 import type { AppState, BinaryFiles, LibraryItems } from "../types";
@@ -108,7 +108,12 @@ export const loadFromJSON = async (
     // gets resolved. Else, iOS users cannot open `.excalidraw` files.
     // extensions: ["json", "excalidraw", "png", "svg"],
   });
-  return loadFromBlob(file, localAppState, localElements, file.handle);
+  return loadFromBlob(
+    file,
+    localAppState,
+    localElements,
+    getBlobHandle(file),
+  );
 };
 
 export const isValidExcalidrawData = (data?: {

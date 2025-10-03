@@ -40,9 +40,10 @@ export const alignActionsPredicate = (
 ) => {
   const selectedElements: readonly ExcalidrawElement[] =
     app.scene.getSelectedElements(appState);
+  const selectedElementsArray = Array.from(selectedElements);
   return (
     getSelectedElementsByGroup(
-      selectedElements,
+      selectedElementsArray,
       app.scene.getNonDeletedElementsMap(),
       appState as Readonly<AppState>,
     ).length > 1
@@ -59,7 +60,7 @@ const alignSelectedElements = (
     app.scene.getSelectedElements(appState);
 
   const updatedElements = alignElements(
-    [...selectedElements],
+    Array.from(selectedElements),
     alignment,
     app.scene,
     appState,
