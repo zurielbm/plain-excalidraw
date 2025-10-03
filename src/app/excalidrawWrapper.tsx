@@ -26,7 +26,6 @@ const ExcalidrawWrapper: React.FC = () => {
         isCollaborating={false}
         aiEnabled={false}
         excalidrawAPI={(api) => {
-          // You can use the API here if needed
         }}
       >
         <Excalidraw />

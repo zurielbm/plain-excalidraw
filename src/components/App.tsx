@@ -383,7 +383,7 @@ import {
 } from "../components/hyperlink/Hyperlink";
 
 import { Fonts } from "../lib/fonts";
-import { editorJotaiStore, type WritableAtom } from "../lib/editor-jotai";
+import { editorJotaiStore, type WritableAtom, EditorJotaiProvider } from "../lib/editor-jotai";
 import { ImageSceneDataError } from "../lib/errors";
 import {
   getSnapLinesAtPointer,
