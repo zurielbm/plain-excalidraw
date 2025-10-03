@@ -7,8 +7,8 @@ import { sceneCoordsToViewportCoords } from "@excalidraw/common";
 
 import { flushSync } from "react-dom";
 
-import { actionToggleElementLock } from "../actions";
-import { t } from "../i18n";
+import { actionToggleElementLock } from "../lib/actions";
+import { t } from "../lib/i18n";
 
 import "./UnlockPopup.scss";
 
@@ -38,7 +38,7 @@ const UnlockPopup = ({
   const [x, y] = getCommonBounds(elements);
   const { x: viewX, y: viewY } = sceneCoordsToViewportCoords(
     { sceneX: x, sceneY: y },
-    app.state,
+    app.state
   );
 
   return (
@@ -57,7 +57,7 @@ const UnlockPopup = ({
                 ...acc,
                 [element.id]: true,
               }),
-              {},
+              {}
             ),
             selectedGroupIds: groupIds,
             activeLockedId: null,

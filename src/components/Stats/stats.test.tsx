@@ -20,7 +20,7 @@ import type {
 import { Excalidraw, getCommonBounds } from "../..";
 import { actionGroup } from "../../lib/actions";
 import { t } from "../../lib/i18n";
-import * as StaticScene from "../../renderer/staticScene";
+import * as StaticScene from "../../lib/renderer/staticScene";
 import { API } from "../../tests/helpers/api";
 import { Keyboard, Pointer, UI } from "../../tests/helpers/ui";
 import { getTextEditor, updateTextEditor } from "../../tests/queries/dom";

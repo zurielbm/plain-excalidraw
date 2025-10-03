@@ -6,7 +6,7 @@ import { supportsResizeObserver, isShallowEqual } from "@excalidraw/common";
 
 import type { MarkRequired } from "@excalidraw/common/utility-types";
 
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import { useExcalidrawActionManager } from "./App";
 import { Island } from "./Island";
@@ -16,7 +16,7 @@ import { Tooltip } from "./Tooltip";
 
 import "./UserList.scss";
 
-import type { ActionManager } from "../actions/manager";
+import type { ActionManager } from "../lib/actions/manager";
 import type { Collaborator, SocketId } from "../types";
 
 export type GoToCollaboratorComponentProps = {
@@ -123,18 +123,18 @@ export const UserList = React.memo(
       uniqueCollaboratorsMap.set(
         // filter on user id, else fall back on unique socketId
         userId,
-        { ...collaborator, socketId },
+        { ...collaborator, socketId }
       );
     });
 
     const uniqueCollaboratorsArray = Array.from(
-      uniqueCollaboratorsMap.values(),
+      uniqueCollaboratorsMap.values()
     ).filter((collaborator) => collaborator.username?.trim());
 
     const [searchTerm, setSearchTerm] = React.useState("");
     const filteredCollaborators = uniqueCollaboratorsArray.filter(
       (collaborator) =>
-        collaborator.username?.toLowerCase().includes(searchTerm),
+        collaborator.username?.toLowerCase().includes(searchTerm)
     );
 
     const userListWrapper = React.useRef<HTMLDivElement | null>(null);
@@ -171,7 +171,7 @@ export const UserList = React.memo(
 
     const firstNCollaborators = uniqueCollaboratorsArray.slice(
       0,
-      maxAvatars - 1,
+      maxAvatars - 1
     );
 
     const firstNAvatarsJSX = firstNCollaborators.map((collaborator) =>
@@ -181,7 +181,7 @@ export const UserList = React.memo(
         socketId: collaborator.socketId,
         shouldWrapWithTooltip: true,
         isBeingFollowed: collaborator.socketId === userToFollow,
-      }),
+      })
     );
 
     return mobile ? (
@@ -193,7 +193,7 @@ export const UserList = React.memo(
             socketId: collaborator.socketId,
             shouldWrapWithTooltip: true,
             isBeingFollowed: collaborator.socketId === userToFollow,
-          }),
+          })
         )}
       </div>
     ) : (
@@ -242,7 +242,7 @@ export const UserList = React.memo(
                               withName: true,
                               isBeingFollowed:
                                 collaborator.socketId === userToFollow,
-                            }),
+                            })
                           ),
                         ]
                       : []}
@@ -285,12 +285,12 @@ export const UserList = React.memo(
         !isShallowEqual(
           collaborator,
           nextCollaborator,
-          collaboratorComparatorKeys,
+          collaboratorComparatorKeys
         )
       ) {
         return false;
       }
     }
     return true;
-  },
+  }
 );

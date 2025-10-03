@@ -20,7 +20,7 @@ import StatsDragInput from "./DragInput";
 import { getStepSizedValue } from "./utils";
 
 import type { DragInputCallbackType } from "./DragInput";
-import type { AppState } from "../../types";
+import type { AppState } from "../../lib/types";
 
 interface MultiFontSizeProps {
   elements: readonly ExcalidrawElement[];
@@ -35,7 +35,7 @@ const STEP_SIZE = 4;
 
 const getApplicableTextElements = (
   elements: readonly (ExcalidrawElement | undefined)[],
-  elementsMap: NonDeletedSceneElementsMap,
+  elementsMap: NonDeletedSceneElementsMap
 ) =>
   elements.reduce(
     (acc: ExcalidrawTextElement[], el) => {
@@ -57,7 +57,7 @@ const getApplicableTextElements = (
       return acc;
     },
 
-    [],
+    []
   );
 
 const handleFontSizeChange: DragInputCallbackType<
@@ -72,7 +72,7 @@ const handleFontSizeChange: DragInputCallbackType<
 }) => {
   const elementsMap = scene.getNonDeletedElementsMap();
   const latestTextElements = originalElements.map((el) =>
-    elementsMap.get(el.id),
+    elementsMap.get(el.id)
   ) as ExcalidrawTextElement[];
 
   let nextFontSize;
@@ -88,7 +88,7 @@ const handleFontSizeChange: DragInputCallbackType<
       redrawTextBoundingBox(
         textElement,
         scene.getContainerElement(textElement),
-        scene,
+        scene
       );
     }
 
@@ -104,7 +104,7 @@ const handleFontSizeChange: DragInputCallbackType<
       const changeInFontSize = Math.round(accumulatedChange);
       let nextFontSize = Math.max(
         originalFontSize + changeInFontSize,
-        MIN_FONT_SIZE,
+        MIN_FONT_SIZE
       );
       if (shouldChangeByStepSize) {
         nextFontSize = getStepSizedValue(nextFontSize, STEP_SIZE);
@@ -116,7 +116,7 @@ const handleFontSizeChange: DragInputCallbackType<
       redrawTextBoundingBox(
         latestElement,
         scene.getContainerElement(latestElement),
-        scene,
+        scene
       );
     }
 
@@ -138,7 +138,7 @@ const MultiFontSize = ({
   }
 
   const fontSizes = latestTextElements.map(
-    (textEl) => Math.round(textEl.fontSize * 10) / 10,
+    (textEl) => Math.round(textEl.fontSize * 10) / 10
   );
   const value = new Set(fontSizes).size === 1 ? fontSizes[0] : "Mixed";
   const editable = fontSizes.length > 0;

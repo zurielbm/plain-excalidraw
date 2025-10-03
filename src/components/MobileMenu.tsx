@@ -4,7 +4,7 @@ import { showSelectedShapeActions } from "@excalidraw/element";
 
 import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 
-import { isHandToolActive } from "../appState";
+import { isHandToolActive } from "../lib/appState";
 import { useTunnels } from "../context/tunnels";
 import { t } from "../i18n";
 import { calculateScrollCenter } from "../scene";
@@ -20,7 +20,7 @@ import { PenModeButton } from "./PenModeButton";
 import { Section } from "./Section";
 import Stack from "./Stack";
 
-import type { ActionManager } from "../actions/manager";
+import type { ActionManager } from "../lib/actions/manager";
 import type {
   AppClassProperties,
   AppProps,
@@ -44,7 +44,7 @@ type MobileMenuProps = {
 
   renderTopRightUI?: (
     isMobile: boolean,
-    appState: UIAppState,
+    appState: UIAppState
   ) => JSX.Element | null;
   renderCustomStats?: ExcalidrawProps["renderCustomStats"];
   renderSidebars: () => JSX.Element | null;
@@ -152,7 +152,7 @@ export const MobileMenu = ({
         <MainMenuTunnel.Out />
         {actionManager.renderAction("toggleEditMenu")}
         {actionManager.renderAction(
-          appState.multiElement ? "finalize" : "duplicateSelection",
+          appState.multiElement ? "finalize" : "duplicateSelection"
         )}
         {actionManager.renderAction("deleteSelectedElements")}
         <div>

@@ -23,14 +23,14 @@ import type {
   NonDeletedExcalidrawElement,
 } from "@excalidraw/element/types";
 
-import { trackEvent } from "../analytics";
+import { trackEvent } from "../lib/analytics";
 import { useUIAppState } from "../context/ui-appState";
 import {
   distributeLibraryItemsOnSquareGrid,
   libraryItemsAtom,
 } from "../lib/data/library";
 import { atom, useAtom } from "../lib/editor-jotai";
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import { getSelectedElements } from "../scene";
 

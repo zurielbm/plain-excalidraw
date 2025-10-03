@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import React from "react";
 
-import { getShortcutFromShortcutName } from "../actions/shortcuts";
-import { t } from "../i18n";
+import { getShortcutFromShortcutName } from "../lib/actions/shortcuts";
+import { t } from "../lib/i18n";
 
 import { useExcalidrawAppState, useExcalidrawElements } from "./App";
 
@@ -10,11 +10,11 @@ import { Popover } from "./Popover";
 
 import "./ContextMenu.scss";
 
-import type { ActionManager } from "../actions/manager";
-import type { ShortcutName } from "../actions/shortcuts";
-import type { Action } from "../actions/types";
+import type { ActionManager } from "../lib/actions/manager";
+import type { ShortcutName } from "../lib/actions/shortcuts";
+import type { Action } from "../lib/actions/types";
 
-import type { TranslationKeys } from "../i18n";
+import type { TranslationKeys } from "../lib/i18n";
 
 export type ContextMenuItem = typeof CONTEXT_MENU_SEPARATOR | Action;
 
@@ -44,7 +44,7 @@ export const ContextMenu = React.memo(
             elements,
             appState,
             actionManager.app.props,
-            actionManager.app,
+            actionManager.app
           ))
       ) {
         acc.push(item);
@@ -88,8 +88,8 @@ export const ContextMenu = React.memo(
                   item.label(
                     elements,
                     appState,
-                    actionManager.app,
-                  ) as unknown as TranslationKeys,
+                    actionManager.app
+                  ) as unknown as TranslationKeys
                 );
               } else {
                 label = t(item.label as unknown as TranslationKeys);
@@ -129,5 +129,5 @@ export const ContextMenu = React.memo(
         </ul>
       </Popover>
     );
-  },
+  }
 );

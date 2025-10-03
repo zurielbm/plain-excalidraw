@@ -5,7 +5,7 @@ import { KEYS, queryFocusableElements } from "@excalidraw/common";
 
 import { useSetAtom } from "../lib/editor-jotai";
 import { useCallbackRefState } from "../lib/hooks/useCallbackRefState";
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import {
   useExcalidrawContainer,

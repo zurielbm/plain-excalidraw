@@ -7,8 +7,8 @@ import type {
   NonDeletedSceneElementsMap,
 } from "@excalidraw/element/types";
 
-import { isRenderThrottlingEnabled } from "../../reactUtils";
-import { renderStaticScene } from "../../renderer/staticScene";
+import { isRenderThrottlingEnabled } from "../../lib/reactUtils";
+import { renderStaticScene } from "../../lib/renderer/staticScene";
 
 import type {
   RenderableElementsMap,
@@ -67,7 +67,7 @@ const StaticCanvas = (props: StaticCanvasProps) => {
         appState: props.appState,
         renderConfig: props.renderConfig,
       },
-      isRenderThrottlingEnabled(),
+      isRenderThrottlingEnabled()
     );
   });
 
@@ -106,7 +106,7 @@ const getRelevantAppStateProps = (appState: AppState): StaticCanvasAppState => {
 
 const areEqual = (
   prevProps: StaticCanvasProps,
-  nextProps: StaticCanvasProps,
+  nextProps: StaticCanvasProps
 ) => {
   if (
     prevProps.sceneNonce !== nextProps.sceneNonce ||
@@ -125,7 +125,7 @@ const areEqual = (
       // asserting AppState because we're being passed the whole AppState
       // but resolve to only the StaticCanvas-relevant props
       getRelevantAppStateProps(prevProps.appState as AppState),
-      getRelevantAppStateProps(nextProps.appState as AppState),
+      getRelevantAppStateProps(nextProps.appState as AppState)
     ) && isShallowEqual(prevProps.renderConfig, nextProps.renderConfig)
   );
 };

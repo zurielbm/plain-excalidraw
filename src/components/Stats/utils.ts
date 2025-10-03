@@ -23,7 +23,7 @@ import type {
 
 import type { Scene } from "@excalidraw/element";
 
-import type { AppState } from "../../types";
+import type { AppState } from "../../lib/types";
 
 export type StatsInputProperty =
   | "x"
@@ -39,7 +39,7 @@ export const STEP_SIZE = 10;
 
 export const isPropertyEditable = (
   element: ExcalidrawElement,
-  property: keyof ExcalidrawElement,
+  property: keyof ExcalidrawElement
 ) => {
   if (property === "angle" && isFrameLikeElement(element)) {
     return false;
@@ -56,7 +56,7 @@ export type AtomicUnit = Record<string, true>;
 export const getElementsInAtomicUnit = (
   atomicUnit: AtomicUnit,
   elementsMap: ElementsMap,
-  originalElementsMap?: ElementsMap,
+  originalElementsMap?: ElementsMap
 ) => {
   return Object.keys(atomicUnit)
     .map((id) => ({
@@ -76,7 +76,7 @@ export const newOrigin = (
   h1: number,
   w2: number,
   h2: number,
-  angle: number,
+  angle: number
 ) => {
   /**
    * The formula below is the result of solving
@@ -111,7 +111,7 @@ export const moveElement = (
   originalElement: ExcalidrawElement,
   scene: Scene,
   originalElementsMap: ElementsMap,
-  shouldInformMutation = true,
+  shouldInformMutation = true
 ) => {
   const elementsMap = scene.getNonDeletedElementsMap();
   const latestElement = elementsMap.get(originalElement.id);
@@ -125,7 +125,7 @@ export const moveElement = (
   const [topLeftX, topLeftY] = pointRotateRads(
     pointFrom(originalElement.x, originalElement.y),
     pointFrom(cx, cy),
-    originalElement.angle,
+    originalElement.angle
   );
 
   const changeInX = newTopLeftX - topLeftX;
@@ -134,7 +134,7 @@ export const moveElement = (
   const [x, y] = pointRotateRads(
     pointFrom(newTopLeftX, newTopLeftY),
     pointFrom(cx + changeInX, cy + changeInY),
-    -originalElement.angle as Radians,
+    -originalElement.angle as Radians
   );
 
   scene.mutateElement(
@@ -143,13 +143,13 @@ export const moveElement = (
       x,
       y,
     },
-    { informMutation: shouldInformMutation, isDragging: false },
+    { informMutation: shouldInformMutation, isDragging: false }
   );
   updateBindings(latestElement, scene);
 
   const boundTextElement = getBoundTextElement(
     originalElement,
-    originalElementsMap,
+    originalElementsMap
   );
   if (boundTextElement) {
     const latestBoundTextElement = elementsMap.get(boundTextElement.id);
@@ -160,14 +160,14 @@ export const moveElement = (
           x: boundTextElement.x + changeInX,
           y: boundTextElement.y + changeInY,
         },
-        { informMutation: shouldInformMutation, isDragging: false },
+        { informMutation: shouldInformMutation, isDragging: false }
       );
   }
 
   if (isFrameLikeElement(originalElement)) {
     const originalChildren = getFrameChildren(
       originalElementsMap,
-      originalElement.id,
+      originalElement.id
     );
     originalChildren.forEach((child) => {
       const latestChildElement = elementsMap.get(child.id);
@@ -183,7 +183,7 @@ export const moveElement = (
       const [childTopLeftX, childTopLeftY] = pointRotateRads(
         pointFrom(child.x, child.y),
         pointFrom(childCX, childCY),
-        child.angle,
+        child.angle
       );
 
       const childNewTopLeftX = Math.round(childTopLeftX + changeInX);
@@ -192,7 +192,7 @@ export const moveElement = (
       const [childX, childY] = pointRotateRads(
         pointFrom(childNewTopLeftX, childNewTopLeftY),
         pointFrom(childCX + changeInX, childCY + changeInY),
-        -child.angle as Radians,
+        -child.angle as Radians
       );
 
       scene.mutateElement(
@@ -201,7 +201,7 @@ export const moveElement = (
           x: childX,
           y: childY,
         },
-        { informMutation: shouldInformMutation, isDragging: false },
+        { informMutation: shouldInformMutation, isDragging: false }
       );
       updateBindings(latestChildElement, scene, {
         simultaneouslyUpdated: originalChildren,
@@ -212,7 +212,7 @@ export const moveElement = (
 
 export const getAtomicUnits = (
   targetElements: readonly ExcalidrawElement[],
-  appState: AppState,
+  appState: AppState
 ) => {
   const selectedGroupIds = getSelectedGroupIds(appState);
   const _atomicUnits = selectedGroupIds.map((gid) => {

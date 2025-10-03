@@ -77,7 +77,7 @@ import {
   ROUNDNESS,
   sceneCoordsToViewportCoords,
 } from "../lib";
-import { trackEvent } from "../analytics";
+import { trackEvent } from "../lib/analytics";
 import { atom } from "../lib/editor-jotai";
 
 import "./ConvertElementTypePopup.scss";

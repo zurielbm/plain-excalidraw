@@ -4,11 +4,11 @@ import { getFrame } from "@excalidraw/common";
 
 import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 
-import { actionSaveFileToDisk } from "../actions/actionExport";
+import { actionSaveFileToDisk } from "../lib/actions/actionExport";
 
-import { trackEvent } from "../analytics";
+import { trackEvent } from "../lib/analytics";
 import { nativeFileSystemSupported } from "../lib/data/filesystem";
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import { Card } from "./Card";
 import { Dialog } from "./Dialog";
@@ -17,7 +17,7 @@ import { exportToFileIcon, LinkIcon } from "./icons";
 
 import "./ExportDialog.scss";
 
-import type { ActionManager } from "../actions/manager";
+import type { ActionManager } from "../lib/actions/manager";
 
 import type { ExportOpts, BinaryFiles, UIAppState } from "../types";
 

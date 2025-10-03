@@ -17,7 +17,7 @@ import {
   actionChangeExportEmbedScene,
   actionChangeExportScale,
   actionChangeProjectName,
-} from "../actions/actionExport";
+} from "../lib/actions/actionExport";
 import { probablySupportsClipboardBlob } from "../clipboard";
 import { prepareElementsForExport } from "../lib/data";
 import { canvasToBlob } from "../lib/data/blob";
@@ -36,7 +36,7 @@ import { FilledButton } from "./FilledButton";
 
 import "./ImageExportDialog.scss";
 
-import type { ActionManager } from "../actions/manager";
+import type { ActionManager } from "../lib/actions/manager";
 
 import type { AppClassProperties, BinaryFiles, UIAppState } from "../types";
 

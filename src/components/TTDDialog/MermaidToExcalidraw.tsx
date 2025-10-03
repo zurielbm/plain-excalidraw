@@ -23,7 +23,7 @@ import {
 
 import "./MermaidToExcalidraw.scss";
 
-import type { BinaryFiles } from "../../types";
+import type { BinaryFiles } from "../../lib/types";
 import type { MermaidToExcalidrawLibProps } from "./common";
 
 const MERMAID_EXAMPLE =

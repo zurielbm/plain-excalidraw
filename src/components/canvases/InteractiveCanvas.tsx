@@ -12,8 +12,8 @@ import type {
 } from "@excalidraw/element/types";
 
 import { t } from "../../lib/i18n";
-import { isRenderThrottlingEnabled } from "../../reactUtils";
-import { renderInteractiveScene } from "../../renderer/interactiveScene";
+import { isRenderThrottlingEnabled } from "../../lib/reactUtils";
+import { renderInteractiveScene } from "../../lib/renderer/interactiveScene";
 
 import type {
   InteractiveCanvasRenderConfig,

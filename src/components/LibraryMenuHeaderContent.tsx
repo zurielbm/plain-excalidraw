@@ -9,7 +9,7 @@ import { saveLibraryAsJSON } from "../lib/data/json";
 import { libraryItemsAtom } from "../lib/data/library";
 import { useAtom } from "../lib/editor-jotai";
 import { useLibraryCache } from "../lib/hooks/useLibraryItemSvg";
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import { useApp, useExcalidrawSetAppState } from "./App";
 import ConfirmDialog from "./ConfirmDialog";

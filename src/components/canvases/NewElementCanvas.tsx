@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 
 import type { NonDeletedSceneElementsMap } from "@excalidraw/element/types";
 
-import { isRenderThrottlingEnabled } from "../../reactUtils";
-import { renderNewElementScene } from "../../renderer/renderNewElementScene";
+import { isRenderThrottlingEnabled } from "../../lib/reactUtils";
+import { renderNewElementScene } from "../../lib/renderer/renderNewElementScene";
 
 import type {
   RenderableElementsMap,
@@ -38,7 +38,7 @@ const NewElementCanvas = (props: NewElementCanvasProps) => {
         renderConfig: props.renderConfig,
         appState: props.appState,
       },
-      isRenderThrottlingEnabled(),
+      isRenderThrottlingEnabled()
     );
   });
 

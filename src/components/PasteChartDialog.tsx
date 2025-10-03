@@ -3,8 +3,8 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 
 import type { ChartType } from "@excalidraw/element/types";
 
-import { trackEvent } from "../analytics";
-import { renderSpreadsheet } from "../charts";
+import { trackEvent } from "../lib/analytics";
+import { renderSpreadsheet } from "../lib/charts";
 import { t } from "../i18n";
 import { exportToSvg } from "../scene/export";
 
@@ -13,7 +13,7 @@ import { Dialog } from "./Dialog";
 
 import "./PasteChartDialog.scss";
 
-import type { ChartElements, Spreadsheet } from "../charts";
+import type { ChartElements, Spreadsheet } from "../lib/charts";
 import type { UIAppState } from "../types";
 
 type OnInsertChart = (chartType: ChartType, elements: ChartElements) => void;
@@ -26,7 +26,7 @@ const ChartPreviewBtn = (props: {
 }) => {
   const previewRef = useRef<HTMLDivElement | null>(null);
   const [chartElements, setChartElements] = useState<ChartElements | null>(
-    null,
+    null
   );
 
   useLayoutEffect(() => {
@@ -38,7 +38,7 @@ const ChartPreviewBtn = (props: {
       props.chartType,
       props.spreadsheet,
       0,
-      0,
+      0
     );
     setChartElements(elements);
     let svg: SVGSVGElement;
@@ -54,7 +54,7 @@ const ChartPreviewBtn = (props: {
         null, // files
         {
           skipInliningFonts: true,
-        },
+        }
       );
       svg.querySelector(".style-fonts")?.remove();
       previewNode.replaceChildren();

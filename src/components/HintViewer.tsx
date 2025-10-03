@@ -14,7 +14,7 @@ import { getShortcutKey } from "@excalidraw/common";
 import { isNodeInFlowchart } from "@excalidraw/element";
 
 import { t } from "../i18n";
-import { isEraserActive } from "../appState";
+import { isEraserActive } from "../lib/appState";
 import { isGridModeEnabled } from "../snapping";
 
 import "./HintViewer.scss";
@@ -148,7 +148,7 @@ const getHints = ({
           if (
             isNodeInFlowchart(
               selectedElements[0],
-              app.scene.getNonDeletedElementsMap(),
+              app.scene.getNonDeletedElementsMap()
             )
           ) {
             return [t("hints.bindTextToElement"), t("hints.createFlowchart")];

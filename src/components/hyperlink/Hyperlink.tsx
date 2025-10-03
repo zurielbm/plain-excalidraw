@@ -44,7 +44,7 @@ import { t } from "../../lib/i18n";
 import { useAppProps, useDevice, useExcalidrawAppState } from "../App";
 import { ToolButton } from "../ToolButton";
 import { FreedrawIcon, TrashIcon, elementLinkIcon } from "../icons";
-import { getSelectedElements } from "../../scene";
+import { getSelectedElements } from "../../lib/scene";
 
 import { getLinkHandleFromCoords } from "./helpers";
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import "./Range.scss";
 

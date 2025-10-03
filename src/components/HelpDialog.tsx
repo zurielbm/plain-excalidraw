@@ -4,7 +4,7 @@ import { isDarwin, isFirefox, isWindows } from "@excalidraw/common";
 
 import { KEYS, getShortcutKey } from "@excalidraw/common";
 
-import { getShortcutFromShortcutName } from "../actions/shortcuts";
+import { getShortcutFromShortcutName } from "../lib/actions/shortcuts";
 import { probablySupportsClipboardBlob } from "../clipboard";
 import { t } from "../i18n";
 

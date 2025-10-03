@@ -302,45 +302,54 @@ import {
   actionToggleLinearEditor,
   actionToggleObjectsSnapMode,
   actionToggleCropEditor,
-} from "../actions";
-import { actionWrapTextInContainer } from "../actions/actionBoundText";
-import { actionToggleHandTool, zoomToFit } from "../actions/actionCanvas";
-import { actionPaste } from "../actions/actionClipboard";
-import { actionCopyElementLink } from "../actions/actionElementLink";
-import { actionUnlockAllElements } from "../actions/actionElementLock";
+} from "../lib/actions";
+import { actionWrapTextInContainer } from "../lib/actions/actionBoundText";
+import { actionToggleHandTool, zoomToFit } from "../lib/actions/actionCanvas";
+import { actionPaste } from "../lib/actions/actionClipboard";
+import { actionCopyElementLink } from "../lib/actions/actionElementLink";
+import { actionUnlockAllElements } from "../lib/actions/actionElementLock";
 import {
   actionRemoveAllElementsFromFrame,
   actionSelectAllElementsInFrame,
   actionWrapSelectionInFrame,
-} from "../actions/actionFrame";
-import { createRedoAction, createUndoAction } from "../actions/actionHistory";
-import { actionTextAutoResize } from "../actions/actionTextAutoResize";
-import { actionToggleViewMode } from "../actions/actionToggleViewMode";
-import { ActionManager } from "../actions/manager";
-import { actions } from "../actions/register";
-import { getShortcutFromShortcutName } from "../actions/shortcuts";
-import { trackEvent } from "../analytics";
-import { AnimationFrameHandler } from "../animation-frame-handler";
+} from "../lib/actions/actionFrame";
+import {
+  createRedoAction,
+  createUndoAction,
+} from "../lib/actions/actionHistory";
+import { actionTextAutoResize } from "../lib/actions/actionTextAutoResize";
+import { actionToggleViewMode } from "../lib/actions/actionToggleViewMode";
+import { ActionManager } from "../lib/actions/manager";
+import { actions } from "../lib/actions/register";
+import { getShortcutFromShortcutName } from "../lib/actions/shortcuts";
+import { trackEvent } from "../lib/analytics";
+import { AnimationFrameHandler } from "../lib/animation-frame-handler";
 import {
   getDefaultAppState,
   isEraserActive,
   isHandToolActive,
-} from "../appState";
+} from "../lib/appState";
 import {
   copyTextToSystemClipboard,
   parseClipboard,
   parseDataTransferEvent,
   type ParsedDataTransferFile,
-} from "../clipboard";
+} from "../lib/clipboard";
 
 import { exportCanvas, loadFromBlob } from "../lib/data";
 import Library, {
   distributeLibraryItemsOnSquareGrid,
 } from "../lib/data/library";
 import { restore, restoreElements } from "../lib/data/restore";
-import { getCenter, getDistance } from "../gesture";
-import { History } from "../history";
-import { defaultLang, getLanguage, languages, setLanguage, t } from "../i18n";
+import { getCenter, getDistance } from "../lib/gesture";
+import { History } from "../lib/history";
+import {
+  defaultLang,
+  getLanguage,
+  languages,
+  setLanguage,
+  t,
+} from "../lib/i18n";
 
 import {
   calculateScrollCenter,
@@ -349,8 +358,8 @@ import {
   getSelectedElements,
   hasBackground,
   isSomeElementSelected,
-} from "../scene";
-import { getStateForZoom } from "../scene/zoom";
+} from "../lib/scene";
+import { getStateForZoom } from "../lib/scene/zoom";
 import {
   dataURLToString,
   generateIdFromFile,
@@ -373,9 +382,9 @@ import {
   Hyperlink,
 } from "../components/hyperlink/Hyperlink";
 
-import { Fonts } from "../fonts";
+import { Fonts } from "../lib/fonts";
 import { editorJotaiStore, type WritableAtom } from "../lib/editor-jotai";
-import { ImageSceneDataError } from "../errors";
+import { ImageSceneDataError } from "../lib/errors";
 import {
   getSnapLinesAtPointer,
   snapDraggedElements,
@@ -387,26 +396,29 @@ import {
   getReferenceSnapPoints,
   SnapCache,
   isGridModeEnabled,
-} from "../snapping";
+} from "../lib/snapping";
 import { convertToExcalidrawElements } from "../lib/data/transform";
-import { Renderer } from "../scene/Renderer";
+import { Renderer } from "../lib/scene/Renderer";
 import {
   setEraserCursor,
   setCursor,
   resetCursor,
   setCursorForShape,
-} from "../cursor";
+} from "../lib/cursor";
 import { ElementCanvasButtons } from "../components/ElementCanvasButtons";
-import { LaserTrails } from "../laser-trails";
-import { withBatchedUpdates, withBatchedUpdatesThrottled } from "../reactUtils";
-import { textWysiwyg } from "../wysiwyg/textWysiwyg";
-import { isOverScrollBars } from "../scene/scrollbars";
+import { LaserTrails } from "../lib/laser-trails";
+import {
+  withBatchedUpdates,
+  withBatchedUpdatesThrottled,
+} from "../lib/reactUtils";
+import { textWysiwyg } from "../lib/wysiwyg/textWysiwyg";
+import { isOverScrollBars } from "../lib/scene/scrollbars";
 
-import { isMaybeMermaidDefinition } from "../mermaid";
+import { isMaybeMermaidDefinition } from "../lib/mermaid";
 
-import { LassoTrail } from "../lasso";
+import { LassoTrail } from "../lib/lasso";
 
-import { EraserTrail } from "../eraser";
+import { EraserTrail } from "../lib/eraser";
 
 import ConvertElementTypePopup, {
   getConversionTypeFromElements,
@@ -475,9 +487,9 @@ import type {
   GenerateDiagramToCode,
   NullableGridSize,
   Offsets,
-} from "../types";
+} from "../lib/types";
 import type { RoughCanvas } from "roughjs/bin/canvas";
-import type { Action, ActionResult } from "../actions/types";
+import type { Action, ActionResult } from "../lib/actions/types";
 
 const AppContext = React.createContext<AppClassProperties>(null!);
 const AppPropsContext = React.createContext<AppProps>(null!);

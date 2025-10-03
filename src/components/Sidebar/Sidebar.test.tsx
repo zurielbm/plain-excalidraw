@@ -3,7 +3,7 @@ import { vi } from "vitest";
 
 import { DEFAULT_SIDEBAR } from "@excalidraw/common";
 
-import { Excalidraw, Sidebar } from "../../index";
+import { Excalidraw, Sidebar } from "../../lib/index";
 import {
   act,
   fireEvent,
@@ -37,7 +37,7 @@ describe("Sidebar", () => {
           <Sidebar name="customSidebar">
             <div id="test-sidebar-content">42</div>
           </Sidebar>
-        </Excalidraw>,
+        </Excalidraw>
       );
 
       const node = container.querySelector("#test-sidebar-content");
@@ -52,7 +52,7 @@ describe("Sidebar", () => {
           <Sidebar name="customSidebar">
             <div id="test-sidebar-content">42</div>
           </Sidebar>
-        </Excalidraw>,
+        </Excalidraw>
       );
 
       await waitFor(() => {
@@ -72,7 +72,7 @@ describe("Sidebar", () => {
           <Sidebar name="customSidebar">
             <div id="test-sidebar-content">42</div>
           </Sidebar>
-        </Excalidraw>,
+        </Excalidraw>
       );
 
       // sidebar isn't rendered initially
@@ -103,7 +103,7 @@ describe("Sidebar", () => {
       // force-toggle sidebar off (=> still hidden)
       // -------------------------------------------------------------------------
       expect(await toggleSidebar({ name: "customSidebar", force: false })).toBe(
-        false,
+        false
       );
 
       await waitFor(() => {
@@ -114,10 +114,10 @@ describe("Sidebar", () => {
       // force-toggle sidebar on
       // -------------------------------------------------------------------------
       expect(await toggleSidebar({ name: "customSidebar", force: true })).toBe(
-        true,
+        true
       );
       expect(await toggleSidebar({ name: "customSidebar", force: true })).toBe(
-        true,
+        true
       );
 
       await waitFor(() => {
@@ -165,7 +165,7 @@ describe("Sidebar", () => {
               <div id="test-sidebar-header-content">42</div>
             </Sidebar.Header>
           </Sidebar>
-        </Excalidraw>,
+        </Excalidraw>
       );
 
       const node = container.querySelector("#test-sidebar-header-content");
@@ -231,7 +231,7 @@ describe("Sidebar", () => {
       fireEvent.click(closeButton);
       await waitFor(() => {
         expect(container.querySelector<HTMLElement>(".test-sidebar")).toBe(
-          null,
+          null
         );
         expect(onStateChange).toHaveBeenCalledWith(null);
       });
@@ -247,7 +247,7 @@ describe("Sidebar", () => {
         "customSidebar",
         async () => {
           await assertSidebarDockButton(false);
-        },
+        }
       );
     });
 
@@ -259,7 +259,7 @@ describe("Sidebar", () => {
         "customSidebar",
         async () => {
           await assertSidebarDockButton(false);
-        },
+        }
       );
     });
 
@@ -271,7 +271,7 @@ describe("Sidebar", () => {
         "customSidebar",
         async () => {
           await assertSidebarDockButton(false);
-        },
+        }
       );
     });
 
@@ -288,14 +288,14 @@ describe("Sidebar", () => {
           >
             <Sidebar.Header />
           </Sidebar>
-        </Excalidraw>,
+        </Excalidraw>
       );
 
       await withExcalidrawDimensions(
         { width: 1920, height: 1080 },
         async () => {
           await assertSidebarDockButton(true);
-        },
+        }
       );
     });
 
@@ -314,14 +314,14 @@ describe("Sidebar", () => {
           >
             <Sidebar.Header />
           </Sidebar>
-        </Excalidraw>,
+        </Excalidraw>
       );
 
       await withExcalidrawDimensions(
         { width: 1920, height: 1080 },
         async () => {
           await assertSidebarDockButton(false);
-        },
+        }
       );
 
       mock.mockRestore();
@@ -338,7 +338,7 @@ describe("Sidebar", () => {
               <Sidebar.Tab tab="comments">Comments</Sidebar.Tab>
             </Sidebar.Tabs>
           </Sidebar>
-        </Excalidraw>,
+        </Excalidraw>
       );
 
       await withExcalidrawDimensions(
@@ -346,50 +346,50 @@ describe("Sidebar", () => {
         async () => {
           expect(
             container.querySelector<HTMLElement>(
-              "[role=tabpanel][data-testid=library]",
-            ),
+              "[role=tabpanel][data-testid=library]"
+            )
           ).toBeNull();
 
           // open library sidebar
           expect(await toggleSidebar({ name: "custom", tab: "library" })).toBe(
-            true,
+            true
           );
           expect(
             container.querySelector<HTMLElement>(
-              "[role=tabpanel][data-testid=library]",
-            ),
+              "[role=tabpanel][data-testid=library]"
+            )
           ).not.toBeNull();
 
           // switch to comments tab
           expect(await toggleSidebar({ name: "custom", tab: "comments" })).toBe(
-            true,
+            true
           );
           expect(
             container.querySelector<HTMLElement>(
-              "[role=tabpanel][data-testid=comments]",
-            ),
+              "[role=tabpanel][data-testid=comments]"
+            )
           ).not.toBeNull();
 
           // toggle sidebar closed
           expect(await toggleSidebar({ name: "custom", tab: "comments" })).toBe(
-            false,
+            false
           );
           expect(
             container.querySelector<HTMLElement>(
-              "[role=tabpanel][data-testid=comments]",
-            ),
+              "[role=tabpanel][data-testid=comments]"
+            )
           ).toBeNull();
 
           // toggle sidebar open
           expect(await toggleSidebar({ name: "custom", tab: "comments" })).toBe(
-            true,
+            true
           );
           expect(
             container.querySelector<HTMLElement>(
-              "[role=tabpanel][data-testid=comments]",
-            ),
+              "[role=tabpanel][data-testid=comments]"
+            )
           ).not.toBeNull();
-        },
+        }
       );
     });
   });

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Excalidraw, MainMenu } from "../../index";
+import { Excalidraw, MainMenu } from "../../lib/index";
 import { render, queryAllByTestId } from "../../tests/test-utils";
 
 describe("Test internal component fallback rendering", () => {
@@ -11,20 +11,20 @@ describe("Test internal component fallback rendering", () => {
           <MainMenu>test</MainMenu>
         </Excalidraw>
         <Excalidraw />
-      </div>,
+      </div>
     );
 
     expect(queryAllByTestId(container, "main-menu-trigger")?.length).toBe(2);
 
     const excalContainers = container.querySelectorAll<HTMLDivElement>(
-      ".excalidraw-container",
+      ".excalidraw-container"
     );
 
     expect(
-      queryAllByTestId(excalContainers[0], "main-menu-trigger")?.length,
+      queryAllByTestId(excalContainers[0], "main-menu-trigger")?.length
     ).toBe(1);
     expect(
-      queryAllByTestId(excalContainers[1], "main-menu-trigger")?.length,
+      queryAllByTestId(excalContainers[1], "main-menu-trigger")?.length
     ).toBe(1);
   });
 
@@ -35,20 +35,20 @@ describe("Test internal component fallback rendering", () => {
         <Excalidraw>
           <MainMenu>test</MainMenu>
         </Excalidraw>
-      </div>,
+      </div>
     );
 
     expect(queryAllByTestId(container, "main-menu-trigger")?.length).toBe(2);
 
     const excalContainers = container.querySelectorAll<HTMLDivElement>(
-      ".excalidraw-container",
+      ".excalidraw-container"
     );
 
     expect(
-      queryAllByTestId(excalContainers[0], "main-menu-trigger")?.length,
+      queryAllByTestId(excalContainers[0], "main-menu-trigger")?.length
     ).toBe(1);
     expect(
-      queryAllByTestId(excalContainers[1], "main-menu-trigger")?.length,
+      queryAllByTestId(excalContainers[1], "main-menu-trigger")?.length
     ).toBe(1);
   });
 
@@ -61,20 +61,20 @@ describe("Test internal component fallback rendering", () => {
         <Excalidraw>
           <MainMenu>test</MainMenu>
         </Excalidraw>
-      </div>,
+      </div>
     );
 
     expect(queryAllByTestId(container, "main-menu-trigger")?.length).toBe(2);
 
     const excalContainers = container.querySelectorAll<HTMLDivElement>(
-      ".excalidraw-container",
+      ".excalidraw-container"
     );
 
     expect(
-      queryAllByTestId(excalContainers[0], "main-menu-trigger")?.length,
+      queryAllByTestId(excalContainers[0], "main-menu-trigger")?.length
     ).toBe(1);
     expect(
-      queryAllByTestId(excalContainers[1], "main-menu-trigger")?.length,
+      queryAllByTestId(excalContainers[1], "main-menu-trigger")?.length
     ).toBe(1);
   });
 
@@ -83,20 +83,20 @@ describe("Test internal component fallback rendering", () => {
       <div>
         <Excalidraw />
         <Excalidraw />
-      </div>,
+      </div>
     );
 
     expect(queryAllByTestId(container, "main-menu-trigger")?.length).toBe(2);
 
     const excalContainers = container.querySelectorAll<HTMLDivElement>(
-      ".excalidraw-container",
+      ".excalidraw-container"
     );
 
     expect(
-      queryAllByTestId(excalContainers[0], "main-menu-trigger")?.length,
+      queryAllByTestId(excalContainers[0], "main-menu-trigger")?.length
     ).toBe(1);
     expect(
-      queryAllByTestId(excalContainers[1], "main-menu-trigger")?.length,
+      queryAllByTestId(excalContainers[1], "main-menu-trigger")?.length
     ).toBe(1);
   });
 });

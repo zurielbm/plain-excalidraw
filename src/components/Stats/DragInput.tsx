@@ -19,11 +19,11 @@ import { SMALLEST_DELTA } from "./utils";
 import "./DragInput.scss";
 
 import type { StatsInputProperty } from "./utils";
-import type { AppState } from "../../types";
+import type { AppState } from "../../lib/types";
 
 export type DragInputCallbackType<
   P extends StatsInputProperty,
-  E = ExcalidrawElement,
+  E = ExcalidrawElement
 > = (props: {
   accumulatedChange: number;
   instantChange: number;
@@ -49,7 +49,7 @@ export type DragFinishedCallbackType<E = ExcalidrawElement> = (props: {
 
 interface StatsDragInputProps<
   T extends StatsInputProperty,
-  E = ExcalidrawElement,
+  E = ExcalidrawElement
 > {
   label: string | React.ReactNode;
   icon?: React.ReactNode;
@@ -68,7 +68,7 @@ interface StatsDragInputProps<
 
 const StatsDragInput = <
   T extends StatsInputProperty,
-  E extends ExcalidrawElement = ExcalidrawElement,
+  E extends ExcalidrawElement = ExcalidrawElement
 >({
   label,
   icon,
@@ -114,7 +114,7 @@ const StatsDragInput = <
   const handleInputValue = (
     updatedValue: string,
     elements: readonly E[],
-    appState: AppState,
+    appState: AppState
   ) => {
     if (!stateRef.current.updatePending) {
       return false;
@@ -178,7 +178,7 @@ const StatsDragInput = <
         callbacks.handleInputValue?.(
           nextValue,
           stateRef.current.originalElements,
-          stateRef.current.originalAppState,
+          stateRef.current.originalAppState
         );
       }
 
@@ -188,12 +188,12 @@ const StatsDragInput = <
       window.removeEventListener(
         EVENT.POINTER_MOVE,
         callbacks.onPointerMove!,
-        false,
+        false
       );
       window.removeEventListener(
         EVENT.POINTER_UP,
         callbacks.onPointerUp!,
-        false,
+        false
       );
     };
   }, [
@@ -240,7 +240,7 @@ const StatsDragInput = <
               }, new Map());
 
             let originalElements: readonly E[] | null = elements.map(
-              (element) => originalElementsMap!.get(element.id) as E,
+              (element) => originalElementsMap!.get(element.id) as E
             );
 
             const originalAppState: AppState = cloneJSON(appState);
@@ -296,7 +296,7 @@ const StatsDragInput = <
               window.removeEventListener(
                 EVENT.POINTER_MOVE,
                 onPointerMove,
-                false,
+                false
               );
 
               app.syncActionResult({
@@ -371,7 +371,7 @@ const StatsDragInput = <
             handleInputValue(
               event.target.value,
               stateRef.current.originalElements,
-              stateRef.current.originalAppState,
+              stateRef.current.originalAppState
             );
           }
         }}

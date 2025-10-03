@@ -1,6 +1,6 @@
 import type { Scene } from "@excalidraw/element";
 
-import { getNormalizedGridStep } from "../../scene";
+import { getNormalizedGridStep } from "../../lib/scene";
 
 import StatsDragInput from "./DragInput";
 import { getStepSizedValue } from "./utils";
@@ -42,7 +42,7 @@ const CanvasGrid = ({
             nextGridStep = shouldChangeByStepSize
               ? getStepSizedValue(
                   state.gridStep + STEP_SIZE * Math.sign(instantChange),
-                  STEP_SIZE,
+                  STEP_SIZE
                 )
               : state.gridStep + instantChange;
           }

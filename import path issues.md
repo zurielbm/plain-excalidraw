@@ -195,6 +195,157 @@ import { useScrollPosition } from "../lib/hooks/useScrollPosition";
 
 **Files Updated**: Sidebar.tsx, ColorPicker.tsx, SearchMenu.tsx, LibraryMenuSection.tsx, Modal.tsx, Dialog.tsx, ImageExportDialog.tsx, LibraryMenuHeaderContent.tsx, ShareableLinkDialog.tsx, CommandPalette.tsx, EyeDropper.tsx, LibraryMenuItems.tsx, DropdownMenuContent.tsx, Actions.tsx, and LibraryUnit.tsx.
 
+### 13. ReactUtils, Renderer, and Scene Import Corrections ✅
+
+**Problem**: Components were importing from `"../../reactUtils"`, `"../../renderer/"`, and `"../../scene"` but these are in `"../../lib/reactUtils"`, `"../../lib/renderer/"`, and `"../../lib/scene"`
+
+**Solution**: Fixed all remaining lib-level imports:
+
+```typescript
+// Fixed lib-level imports
+import { isRenderThrottlingEnabled } from "../../lib/reactUtils";
+import { renderInteractiveScene } from "../../lib/renderer/interactiveScene";
+import { renderStaticScene } from "../../lib/renderer/staticScene";
+import { renderNewElementScene } from "../../lib/renderer/renderNewElementScene";
+import { getSelectedElements } from "../../lib/scene";
+import { getNormalizedGridStep } from "../../lib/scene";
+import * as StaticScene from "../../lib/renderer/staticScene";
+```
+
+**Files Updated**: InteractiveCanvas.tsx, NewElementCanvas.tsx, StaticCanvas.tsx, stats.test.tsx, CanvasGrid.tsx, CommandPalette.tsx, and Hyperlink.tsx.
+
+### 14. Additional Lib-Level Import Corrections ✅
+
+**Problem**: Additional components had imports from `"../../types"`, `"../../snapping"`, `"../../fonts"`, and `"../../index"` that needed to be updated to use the lib directory
+
+**Solution**: Fixed remaining lib-level imports:
+
+```typescript
+// Fixed additional lib-level imports
+import type { AppState, BinaryFiles, UIAppState } from "../../lib/types";
+import { isGridModeEnabled } from "../../lib/snapping";
+import { Fonts } from "../../lib/fonts";
+import { Excalidraw, MainMenu, Sidebar } from "../../lib/index";
+```
+
+**Files Updated**: Stats components (index.tsx, MultiFontSize.tsx, DragInput.tsx, utils.ts), TTDDialog/MermaidToExcalidraw.tsx, FontPicker/FontPickerList.tsx, test files (DropdownMenu.test.tsx, withInternalFallback.test.tsx, Sidebar.test.tsx).
+
+### 15. Final Actions and i18n Import Corrections ✅
+
+**Problem**: Additional components still had imports from `"../actions"` and `"../i18n"` that needed to be updated to `"../lib/actions"` and `"../lib/i18n"`
+
+**Solution**: Fixed remaining actions and i18n imports:
+
+```typescript
+// Fixed final actions and i18n imports
+import {
+  actionClearCanvas,
+  actionToggleElementLock,
+  actionToggleStats,
+} from "../lib/actions";
+import {
+  t,
+  useI18n,
+  defaultLang,
+  getLanguage,
+  languages,
+  setLanguage,
+} from "../lib/i18n";
+import type { TranslationKeys, Language } from "../lib/i18n";
+```
+
+**Files Updated**: ActiveConfirmDialog.tsx, UnlockPopup.tsx, LayerUI.tsx, App.tsx, Range.tsx, JSONExportDialog.tsx, UserList.tsx, LibraryMenuHeaderContent.tsx, Dialog.tsx, LibraryMenu.tsx, and many more.
+
+### 16. Final Action Subdirectory Import Corrections ✅
+
+**Problem**: Remaining components had imports from action subdirectories like `"../actions/actionExport"`, `"../actions/manager"`, etc. that needed to be updated to use the lib directory
+
+**Solution**: Fixed all remaining action subdirectory imports:
+
+```typescript
+// Fixed final action subdirectory imports
+import { actionSaveFileToDisk } from "../lib/actions/actionExport";
+import { actionWrapTextInContainer } from "../lib/actions/actionBoundText";
+import { actionToggleHandTool, zoomToFit } from "../lib/actions/actionCanvas";
+import { actionPaste } from "../lib/actions/actionClipboard";
+import { actionCopyElementLink } from "../lib/actions/actionElementLink";
+import { ActionManager } from "../lib/actions/manager";
+import { actions } from "../lib/actions/register";
+import { getShortcutFromShortcutName } from "../lib/actions/shortcuts";
+import type { ActionManager } from "../lib/actions/manager";
+```
+
+**Files Updated**: App.tsx, JSONExportDialog.tsx, ImageExportDialog.tsx, MobileMenu.tsx, UserList.tsx, ContextMenu.tsx, LayerUI.tsx, and HelpDialog.tsx.
+
+### 17. Final Action Types and Shortcuts Import Corrections ✅
+
+**Problem**: Final remaining components had imports from `"../actions/shortcuts"` and `"../actions/types"` that needed to be updated
+
+**Solution**: Fixed the last remaining action imports:
+
+```typescript
+// Fixed final action imports
+import { getShortcutFromShortcutName } from "../lib/actions/shortcuts";
+import type { ShortcutName } from "../lib/actions/shortcuts";
+import type { Action, ActionResult } from "../lib/actions/types";
+import type { TranslationKeys } from "../lib/i18n";
+```
+
+**Files Updated**: ContextMenu.tsx, HelpDialog.tsx, and App.tsx.
+
+### 18. Final Comprehensive App.tsx Import Corrections ✅
+
+**Problem**: App.tsx had numerous remaining imports from various lib-level modules that needed to be updated to use the lib directory
+
+**Solution**: Fixed all remaining lib-level imports in the main App component:
+
+```typescript
+// Fixed comprehensive lib-level imports
+import { trackEvent } from "../lib/analytics";
+import { AnimationFrameHandler } from "../lib/animation-frame-handler";
+import {
+  getDefaultAppState,
+  isEraserActive,
+  isHandToolActive,
+} from "../lib/appState";
+import { copyTextToSystemClipboard, parseClipboard } from "../lib/clipboard";
+import { getCenter, getDistance } from "../lib/gesture";
+import { History } from "../lib/history";
+import { calculateScrollCenter, getSelectedElements } from "../lib/scene";
+import { getStateForZoom } from "../lib/scene/zoom";
+import { Fonts } from "../lib/fonts";
+import { ImageSceneDataError } from "../lib/errors";
+import { isGridModeEnabled } from "../lib/snapping";
+import { Renderer } from "../lib/scene/Renderer";
+import { setCursor, resetCursor } from "../lib/cursor";
+import { LaserTrails } from "../lib/laser-trails";
+import { withBatchedUpdates } from "../lib/reactUtils";
+import { textWysiwyg } from "../lib/wysiwyg/textWysiwyg";
+import { isOverScrollBars } from "../lib/scene/scrollbars";
+import { isMaybeMermaidDefinition } from "../lib/mermaid";
+import { LassoTrail } from "../lib/lasso";
+import { EraserTrail } from "../lib/eraser";
+import type { AppState, BinaryFiles, Device } from "../lib/types";
+```
+
+**Files Updated**: App.tsx (comprehensive update of 20+ import statements).
+
+### 19. Final Remaining Lib-Level Import Corrections ✅
+
+**Problem**: Additional components still had imports from various lib-level modules like `"../analytics"`, `"../appState"`, and `"../charts"` that needed to be updated
+
+**Solution**: Fixed the final remaining lib-level imports:
+
+```typescript
+// Fixed final remaining lib-level imports
+import { trackEvent } from "../lib/analytics";
+import { isHandToolActive, isEraserActive } from "../lib/appState";
+import { renderSpreadsheet } from "../lib/charts";
+import type { ChartElements, Spreadsheet } from "../lib/charts";
+```
+
+**Files Updated**: ConvertElementTypePopup.tsx, JSONExportDialog.tsx, LibraryMenu.tsx, PasteChartDialog.tsx, LayerUI.tsx, MobileMenu.tsx, and HintViewer.tsx.
+
 ## Remaining Opportunities
 
 ### Path Alias Usage

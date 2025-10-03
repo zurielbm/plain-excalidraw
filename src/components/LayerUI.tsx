@@ -19,9 +19,9 @@ import { ShapeCache } from "@excalidraw/element";
 
 import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 
-import { actionToggleStats } from "../actions";
-import { trackEvent } from "../analytics";
-import { isHandToolActive } from "../appState";
+import { actionToggleStats } from "../lib/actions";
+import { trackEvent } from "../lib/analytics";
+import { isHandToolActive } from "../lib/appState";
 import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
 import { UIAppStateContext } from "../context/ui-appState";
 import { useAtom, useAtomValue } from "../lib/editor-jotai";
@@ -67,7 +67,7 @@ import { LaserPointerButton } from "./LaserPointerButton";
 import "./LayerUI.scss";
 import "./Toolbar.scss";
 
-import type { ActionManager } from "../actions/manager";
+import type { ActionManager } from "../lib/actions/manager";
 
 import type { Language } from "../i18n";
 import type {

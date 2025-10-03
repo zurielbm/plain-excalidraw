@@ -39,7 +39,7 @@ import {
 import { Dialog } from "../Dialog";
 import { InlineIcon } from "../InlineIcon";
 import { TextField } from "../TextField";
-import { getSelectedElements } from "../../scene";
+import { getSelectedElements } from "../../lib/scene";
 import {
   LockedIcon,
   UnlockedIcon,
