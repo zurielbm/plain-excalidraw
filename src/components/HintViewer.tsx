@@ -13,9 +13,9 @@ import { getShortcutKey } from "@excalidraw/common";
 
 import { isNodeInFlowchart } from "@excalidraw/element";
 
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 import { isEraserActive } from "../lib/appState";
-import { isGridModeEnabled } from "../snapping";
+import { isGridModeEnabled } from "../lib/snapping";
 
 import "./HintViewer.scss";
 

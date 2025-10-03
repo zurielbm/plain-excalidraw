@@ -1,4 +1,4 @@
-import { actionToggleTheme } from "../../actions";
+import { actionToggleTheme } from "../../lib/actions";
 
 import type { CommandPaletteItem } from "./types";
 

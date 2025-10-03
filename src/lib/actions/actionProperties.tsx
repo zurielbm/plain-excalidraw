@@ -77,14 +77,14 @@ import type { Scene } from "@excalidraw/element";
 import type { CaptureUpdateActionType } from "@excalidraw/element";
 
 import { trackEvent } from "../analytics";
-import { RadioSelection } from "../components/RadioSelection";
-import { ColorPicker } from "../components/ColorPicker/ColorPicker";
-import { FontPicker } from "../components/FontPicker/FontPicker";
-import { IconPicker } from "../components/IconPicker";
+import { RadioSelection } from "../../components/RadioSelection";
+import { ColorPicker } from "../../components/ColorPicker/ColorPicker";
+import { FontPicker } from "../../components/FontPicker/FontPicker";
+import { IconPicker } from "../../components/IconPicker";
 // TODO barnabasmolnar/editor-redesign
 // TextAlignTopIcon, TextAlignBottomIcon,TextAlignMiddleIcon,
 // ArrowHead icons
-import { Range } from "../components/Range";
+import { Range } from "../../components/Range";
 import {
   ArrowheadArrowIcon,
   ArrowheadBarIcon,
@@ -126,7 +126,7 @@ import {
   ArrowheadCrowfootIcon,
   ArrowheadCrowfootOneIcon,
   ArrowheadCrowfootOneOrManyIcon,
-} from "../components/icons";
+} from "../../components/icons";
 
 import { Fonts } from "../fonts";
 import { getLanguage, t } from "../i18n";
@@ -152,12 +152,12 @@ export const changeProperty = (
   elements: readonly ExcalidrawElement[],
   appState: AppState,
   callback: (element: ExcalidrawElement) => ExcalidrawElement,
-  includeBoundText = false,
+  includeBoundText = false
 ) => {
   const selectedElementIds = arrayToMap(
     getSelectedElements(elements, appState, {
       includeBoundTextElement: includeBoundText,
-    }),
+    })
   );
 
   return elements.map((element) => {
@@ -176,7 +176,7 @@ export const getFormValue = function <T extends Primitive>(
   app: AppClassProperties,
   getAttribute: (element: ExcalidrawElement) => T,
   isRelevantElement: true | ((element: ExcalidrawElement) => boolean),
-  defaultValue: T | ((isSomeElementSelected: boolean) => T),
+  defaultValue: T | ((isSomeElementSelected: boolean) => T)
 ): T {
   const editingTextElement = app.state.editingTextElement;
   const nonDeletedElements = getNonDeletedElements(elements);
@@ -214,7 +214,7 @@ export const getFormValue = function <T extends Primitive>(
 const offsetElementAfterFontResize = (
   prevElement: ExcalidrawTextElement,
   nextElement: ExcalidrawTextElement,
-  scene: Scene,
+  scene: Scene
 ) => {
   if (isBoundToContainer(nextElement) || !nextElement.autoResize) {
     return nextElement;
@@ -237,7 +237,7 @@ const changeFontSize = (
   appState: AppState,
   app: AppClassProperties,
   getNewFontSize: (element: ExcalidrawTextElement) => number,
-  fallbackValue?: ExcalidrawTextElement["fontSize"],
+  fallbackValue?: ExcalidrawTextElement["fontSize"]
 ) => {
   const newFontSizes = new Set<number>();
 
@@ -255,20 +255,20 @@ const changeFontSize = (
         redrawTextBoundingBox(
           newElement,
           app.scene.getContainerElement(oldElement),
-          app.scene,
+          app.scene
         );
 
         newElement = offsetElementAfterFontResize(
           oldElement,
           newElement,
-          app.scene,
+          app.scene
         );
 
         return newElement;
       }
       return oldElement;
     },
-    true,
+    true
   );
 
   // Update arrow elements after text elements have been updated
@@ -314,7 +314,7 @@ export const actionChangeStrokeColor = register({
                 })
               : el;
           },
-          true,
+          true
         ),
       }),
       appState: {
@@ -342,7 +342,7 @@ export const actionChangeStrokeColor = register({
           (element) => element.strokeColor,
           true,
           (hasSelection) =>
-            !hasSelection ? appState.currentItemStrokeColor : null,
+            !hasSelection ? appState.currentItemStrokeColor : null
         )}
         onChange={(color) => updateData({ currentItemStrokeColor: color })}
         elements={elements}
@@ -375,7 +375,7 @@ export const actionChangeBackgroundColor = register({
     const shouldEnablePolygon =
       !isTransparent(value.currentItemBackgroundColor) &&
       selectedElements.every(
-        (el) => isLineElement(el) && canBecomePolygon(el.points),
+        (el) => isLineElement(el) && canBecomePolygon(el.points)
       );
 
     if (shouldEnablePolygon) {
@@ -393,7 +393,7 @@ export const actionChangeBackgroundColor = register({
       nextElements = changeProperty(elements, appState, (el) =>
         newElementWith(el, {
           backgroundColor: value.currentItemBackgroundColor,
-        }),
+        })
       );
     }
 
@@ -422,7 +422,7 @@ export const actionChangeBackgroundColor = register({
           (element) => element.backgroundColor,
           true,
           (hasSelection) =>
-            !hasSelection ? appState.currentItemBackgroundColor : null,
+            !hasSelection ? appState.currentItemBackgroundColor : null
         )}
         onChange={(color) => updateData({ currentItemBackgroundColor: color })}
         elements={elements}
@@ -442,13 +442,13 @@ export const actionChangeFillStyle = register({
     trackEvent(
       "element",
       "changeFillStyle",
-      `${value} (${app.device.editor.isMobile ? "mobile" : "desktop"})`,
+      `${value} (${app.device.editor.isMobile ? "mobile" : "desktop"})`
     );
     return {
       elements: changeProperty(elements, appState, (el) =>
         newElementWith(el, {
           fillStyle: value,
-        }),
+        })
       ),
       appState: { ...appState, currentItemFillStyle: value },
       captureUpdate: CaptureUpdateAction.IMMEDIATELY,
@@ -495,7 +495,7 @@ export const actionChangeFillStyle = register({
               (element) => element.fillStyle,
               (element) => element.hasOwnProperty("fillStyle"),
               (hasSelection) =>
-                hasSelection ? null : appState.currentItemFillStyle,
+                hasSelection ? null : appState.currentItemFillStyle
             )}
             onClick={(value, event) => {
               const nextValue =
@@ -523,7 +523,7 @@ export const actionChangeStrokeWidth = register({
       elements: changeProperty(elements, appState, (el) =>
         newElementWith(el, {
           strokeWidth: value,
-        }),
+        })
       ),
       appState: { ...appState, currentItemStrokeWidth: value },
       captureUpdate: CaptureUpdateAction.IMMEDIATELY,
@@ -563,7 +563,7 @@ export const actionChangeStrokeWidth = register({
             (element) => element.strokeWidth,
             (element) => element.hasOwnProperty("strokeWidth"),
             (hasSelection) =>
-              hasSelection ? null : appState.currentItemStrokeWidth,
+              hasSelection ? null : appState.currentItemStrokeWidth
           )}
           onChange={(value) => updateData(value)}
         />
@@ -582,7 +582,7 @@ export const actionChangeSloppiness = register({
         newElementWith(el, {
           seed: randomInteger(),
           roughness: value,
-        }),
+        })
       ),
       appState: { ...appState, currentItemRoughness: value },
       captureUpdate: CaptureUpdateAction.IMMEDIATELY,
@@ -619,7 +619,7 @@ export const actionChangeSloppiness = register({
             (element) => element.roughness,
             (element) => element.hasOwnProperty("roughness"),
             (hasSelection) =>
-              hasSelection ? null : appState.currentItemRoughness,
+              hasSelection ? null : appState.currentItemRoughness
           )}
           onChange={(value) => updateData(value)}
         />
@@ -637,7 +637,7 @@ export const actionChangeStrokeStyle = register({
       elements: changeProperty(elements, appState, (el) =>
         newElementWith(el, {
           strokeStyle: value,
-        }),
+        })
       ),
       appState: { ...appState, currentItemStrokeStyle: value },
       captureUpdate: CaptureUpdateAction.IMMEDIATELY,
@@ -674,7 +674,7 @@ export const actionChangeStrokeStyle = register({
             (element) => element.strokeStyle,
             (element) => element.hasOwnProperty("strokeStyle"),
             (hasSelection) =>
-              hasSelection ? null : appState.currentItemStrokeStyle,
+              hasSelection ? null : appState.currentItemStrokeStyle
           )}
           onChange={(value) => updateData(value)}
         />
@@ -696,7 +696,7 @@ export const actionChangeOpacity = register({
           newElementWith(el, {
             opacity: value,
           }),
-        true,
+        true
       ),
       appState: { ...appState, currentItemOpacity: value },
       captureUpdate: CaptureUpdateAction.IMMEDIATELY,
@@ -755,7 +755,7 @@ export const actionChangeFontSize = register({
               }
               const boundTextElement = getBoundTextElement(
                 element,
-                app.scene.getNonDeletedElementsMap(),
+                app.scene.getNonDeletedElementsMap()
               );
               if (boundTextElement) {
                 return boundTextElement.fontSize;
@@ -766,19 +766,19 @@ export const actionChangeFontSize = register({
               isTextElement(element) ||
               getBoundTextElement(
                 element,
-                app.scene.getNonDeletedElementsMap(),
+                app.scene.getNonDeletedElementsMap()
               ) !== null,
             (hasSelection) =>
               hasSelection
                 ? null
-                : appState.currentItemFontSize || DEFAULT_FONT_SIZE,
+                : appState.currentItemFontSize || DEFAULT_FONT_SIZE
           )}
           onChange={(value) => {
             withCaretPositionPreservation(
               () => updateData(value),
               appState.stylesPanelMode === "compact",
               !!appState.editingTextElement,
-              data?.onPreventClose,
+              data?.onPreventClose
             );
           }}
         />
@@ -797,8 +797,8 @@ export const actionDecreaseFontSize = register({
       Math.round(
         // get previous value before relative increase (doesn't work fully
         // due to rounding and float precision issues)
-        (1 / (1 + FONT_SIZE_RELATIVE_INCREASE_STEP)) * element.fontSize,
-      ),
+        (1 / (1 + FONT_SIZE_RELATIVE_INCREASE_STEP)) * element.fontSize
+      )
     );
   },
   keyTest: (event) => {
@@ -818,7 +818,7 @@ export const actionIncreaseFontSize = register({
   trackEvent: false,
   perform: (elements, appState, value, app) => {
     return changeFontSize(elements, appState, app, (element) =>
-      Math.round(element.fontSize * (1 + FONT_SIZE_RELATIVE_INCREASE_STEP)),
+      Math.round(element.fontSize * (1 + FONT_SIZE_RELATIVE_INCREASE_STEP))
     );
   },
   keyTest: (event) => {
@@ -869,7 +869,7 @@ export const actionChangeFontFamily = register({
 
           return element;
         },
-        true,
+        true
       );
 
       return {
@@ -940,7 +940,7 @@ export const actionChangeFontFamily = register({
 
       const fontsCache = Array.from(Fonts.loadedFontsCache.values());
       const fontFamily = Object.entries(FONT_FAMILY).find(
-        ([_, value]) => value === nextFontFamily,
+        ([_, value]) => value === nextFontFamily
       )?.[0];
 
       // skip `document.font.check` check on hover, if at least one font family has loaded as it's super slow (could result in slightly different bbox, which is fine)
@@ -969,7 +969,7 @@ export const actionChangeFontFamily = register({
                 {
                   fontFamily: nextFontFamily,
                   lineHeight: getLineHeight(nextFontFamily!),
-                },
+                }
               );
 
               const cachedContainer =
@@ -996,7 +996,7 @@ export const actionChangeFontFamily = register({
 
             return oldElement;
           },
-          true,
+          true
         ),
       });
 
@@ -1027,7 +1027,7 @@ export const actionChangeFontFamily = register({
               redrawTextBoundingBox(
                 latestElement as ExcalidrawTextElement,
                 latestContainer,
-                app.scene,
+                app.scene
               );
             }
           }
@@ -1050,7 +1050,7 @@ export const actionChangeFontFamily = register({
     const selectedFontFamily = useMemo(() => {
       const getFontFamily = (
         elementsArray: readonly ExcalidrawElement[],
-        elementsMap: ElementsMap,
+        elementsMap: ElementsMap
       ) =>
         getFormValue(
           elementsArray,
@@ -1071,7 +1071,7 @@ export const actionChangeFontFamily = register({
           (hasSelection) =>
             hasSelection
               ? null
-              : appState.currentItemFontFamily || DEFAULT_FONT_FAMILY,
+              : appState.currentItemFontFamily || DEFAULT_FONT_FAMILY
         );
 
       // popup opened, use cached elements
@@ -1081,7 +1081,7 @@ export const actionChangeFontFamily = register({
       ) {
         return getFontFamily(
           Array.from(cachedElementsRef.current?.values() ?? []),
-          cachedElementsRef.current,
+          cachedElementsRef.current
         );
       }
 
@@ -1138,7 +1138,7 @@ export const actionChangeFontFamily = register({
                 cachedElementsRef.current.clear();
               },
               appState.stylesPanelMode === "compact",
-              !!appState.editingTextElement,
+              !!appState.editingTextElement
             );
           }}
           onHover={(fontFamily) => {
@@ -1166,7 +1166,7 @@ export const actionChangeFontFamily = register({
               if (editingTextElement?.type === "text") {
                 // retrieve the latest version from the scene, as `editingTextElement` isn't mutated
                 const latesteditingTextElement = app.scene.getElement(
-                  editingTextElement.id,
+                  editingTextElement.id
                 );
 
                 // inside the wysiwyg editor
@@ -1175,8 +1175,8 @@ export const actionChangeFontFamily = register({
                   newElementWith(
                     latesteditingTextElement || editingTextElement,
                     {},
-                    true,
-                  ),
+                    true
+                  )
                 );
               } else {
                 const selectedElements = getSelectedElements(
@@ -1184,13 +1184,13 @@ export const actionChangeFontFamily = register({
                   appState,
                   {
                     includeBoundTextElement: true,
-                  },
+                  }
                 );
 
                 for (const element of selectedElements) {
                   cachedElementsRef.current.set(
                     element.id,
-                    newElementWith(element, {}, true),
+                    newElementWith(element, {}, true)
                   );
                 }
               }
@@ -1239,19 +1239,19 @@ export const actionChangeTextAlign = register({
           if (isTextElement(oldElement)) {
             const newElement: ExcalidrawTextElement = newElementWith(
               oldElement,
-              { textAlign: value },
+              { textAlign: value }
             );
             redrawTextBoundingBox(
               newElement,
               app.scene.getContainerElement(oldElement),
-              app.scene,
+              app.scene
             );
             return newElement;
           }
 
           return oldElement;
         },
-        true,
+        true
       ),
       appState: {
         ...appState,
@@ -1298,7 +1298,7 @@ export const actionChangeTextAlign = register({
                 }
                 const boundTextElement = getBoundTextElement(
                   element,
-                  elementsMap,
+                  elementsMap
                 );
                 if (boundTextElement) {
                   return boundTextElement.textAlign;
@@ -1309,14 +1309,14 @@ export const actionChangeTextAlign = register({
                 isTextElement(element) ||
                 getBoundTextElement(element, elementsMap) !== null,
               (hasSelection) =>
-                hasSelection ? null : appState.currentItemTextAlign,
+                hasSelection ? null : appState.currentItemTextAlign
             )}
             onChange={(value) => {
               withCaretPositionPreservation(
                 () => updateData(value),
                 appState.stylesPanelMode === "compact",
                 !!appState.editingTextElement,
-                data?.onPreventClose,
+                data?.onPreventClose
               );
             }}
           />
@@ -1339,20 +1339,20 @@ export const actionChangeVerticalAlign = register({
           if (isTextElement(oldElement)) {
             const newElement: ExcalidrawTextElement = newElementWith(
               oldElement,
-              { verticalAlign: value },
+              { verticalAlign: value }
             );
 
             redrawTextBoundingBox(
               newElement,
               app.scene.getContainerElement(oldElement),
-              app.scene,
+              app.scene
             );
             return newElement;
           }
 
           return oldElement;
         },
-        true,
+        true
       ),
       appState: {
         ...appState,
@@ -1395,7 +1395,7 @@ export const actionChangeVerticalAlign = register({
                 }
                 const boundTextElement = getBoundTextElement(
                   element,
-                  app.scene.getNonDeletedElementsMap(),
+                  app.scene.getNonDeletedElementsMap()
                 );
                 if (boundTextElement) {
                   return boundTextElement.verticalAlign;
@@ -1406,16 +1406,16 @@ export const actionChangeVerticalAlign = register({
                 isTextElement(element) ||
                 getBoundTextElement(
                   element,
-                  app.scene.getNonDeletedElementsMap(),
+                  app.scene.getNonDeletedElementsMap()
                 ) !== null,
-              (hasSelection) => (hasSelection ? null : VERTICAL_ALIGN.MIDDLE),
+              (hasSelection) => (hasSelection ? null : VERTICAL_ALIGN.MIDDLE)
             )}
             onChange={(value) => {
               withCaretPositionPreservation(
                 () => updateData(value),
                 appState.stylesPanelMode === "compact",
                 !!appState.editingTextElement,
-                data?.onPreventClose,
+                data?.onPreventClose
               );
             }}
           />
@@ -1457,11 +1457,11 @@ export const actionChangeRoundness = register({
   PanelComponent: ({ elements, appState, updateData, app, renderAction }) => {
     const targetElements = getTargetElements(
       getNonDeletedElements(elements),
-      appState,
+      appState
     );
 
     const hasLegacyRoundness = targetElements.some(
-      (el) => el.roundness?.type === ROUNDNESS.LEGACY,
+      (el) => el.roundness?.type === ROUNDNESS.LEGACY
     );
 
     return (
@@ -1494,7 +1494,7 @@ export const actionChangeRoundness = register({
               (element) =>
                 !isArrowElement(element) && element.hasOwnProperty("roundness"),
               (hasSelection) =>
-                hasSelection ? null : appState.currentItemRoundness,
+                hasSelection ? null : appState.currentItemRoundness
             )}
             onChange={(value) => updateData(value)}
           />
@@ -1589,7 +1589,7 @@ export const actionChangeArrowhead = register({
   perform: (
     elements,
     appState,
-    value: { position: "start" | "end"; type: Arrowhead },
+    value: { position: "start" | "end"; type: Arrowhead }
   ) => {
     return {
       elements: changeProperty(elements, appState, (el) => {
@@ -1638,7 +1638,7 @@ export const actionChangeArrowhead = register({
                   ? element.startArrowhead
                   : appState.currentItemStartArrowhead,
               true,
-              appState.currentItemStartArrowhead,
+              appState.currentItemStartArrowhead
             )}
             onChange={(value) => updateData({ position: "start", type: value })}
             numberOfOptionsToAlwaysShow={4}
@@ -1655,7 +1655,7 @@ export const actionChangeArrowhead = register({
                   ? element.endArrowhead
                   : appState.currentItemEndArrowhead,
               true,
-              appState.currentItemEndArrowhead,
+              appState.currentItemEndArrowhead
             )}
             onChange={(value) => updateData({ position: "end", type: value })}
             numberOfOptionsToAlwaysShow={4}
@@ -1719,23 +1719,23 @@ export const actionChangeArrowType = register({
           LinearElementEditor.getPointAtIndexGlobalCoordinates(
             newElement,
             0,
-            elementsMap,
+            elementsMap
           );
         const endGlobalPoint =
           LinearElementEditor.getPointAtIndexGlobalCoordinates(
             newElement,
             -1,
-            elementsMap,
+            elementsMap
           );
         const startElement =
           newElement.startBinding &&
           (elementsMap.get(
-            newElement.startBinding.elementId,
+            newElement.startBinding.elementId
           ) as ExcalidrawBindableElement);
         const endElement =
           newElement.endBinding &&
           (elementsMap.get(
-            newElement.endBinding.elementId,
+            newElement.endBinding.elementId
           ) as ExcalidrawBindableElement);
 
         const startBinding =
@@ -1747,7 +1747,7 @@ export const actionChangeArrowType = register({
                   newElement,
                   startElement,
                   "start",
-                  elementsMap,
+                  elementsMap
                 ),
               }
             : null;
@@ -1760,7 +1760,7 @@ export const actionChangeArrowType = register({
                   newElement,
                   endElement,
                   "end",
-                  elementsMap,
+                  elementsMap
                 ),
               }
             : null;
@@ -1772,7 +1772,7 @@ export const actionChangeArrowType = register({
           ...updateElbowArrowPoints(newElement, elementsMap, {
             points: [startGlobalPoint, endGlobalPoint].map(
               (p): LocalPoint =>
-                pointFrom(p[0] - newElement.x, p[1] - newElement.y),
+                pointFrom(p[0] - newElement.x, p[1] - newElement.y)
             ),
             startBinding,
             endBinding,
@@ -1783,7 +1783,7 @@ export const actionChangeArrowType = register({
         const elementsMap = app.scene.getNonDeletedElementsMap();
         if (newElement.startBinding) {
           const startElement = elementsMap.get(
-            newElement.startBinding.elementId,
+            newElement.startBinding.elementId
           ) as ExcalidrawBindableElement;
           if (startElement) {
             bindLinearElement(newElement, startElement, "start", app.scene);
@@ -1791,7 +1791,7 @@ export const actionChangeArrowType = register({
         }
         if (newElement.endBinding) {
           const endElement = elementsMap.get(
-            newElement.endBinding.elementId,
+            newElement.endBinding.elementId
           ) as ExcalidrawBindableElement;
           if (endElement) {
             bindLinearElement(newElement, endElement, "end", app.scene);
@@ -1815,7 +1815,7 @@ export const actionChangeArrowType = register({
       if (selected) {
         newState.selectedLinearElement = new LinearElementEditor(
           selected as ExcalidrawLinearElement,
-          arrayToMap(elements),
+          arrayToMap(elements)
         );
       }
     }
@@ -1869,7 +1869,7 @@ export const actionChangeArrowType = register({
               },
               (element) => isArrowElement(element),
               (hasSelection) =>
-                hasSelection ? null : appState.currentItemArrowType,
+                hasSelection ? null : appState.currentItemArrowType
             )}
             onChange={(value) => updateData(value)}
           />

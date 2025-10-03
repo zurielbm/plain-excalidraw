@@ -10,7 +10,7 @@ import { atom } from "../lib/editor-jotai";
 import { useCreatePortalContainer } from "../lib/hooks/useCreatePortalContainer";
 import { useOutsideClick } from "../lib/hooks/useOutsideClick";
 import { useStable } from "../lib/hooks/useStable";
-import { getSelectedElements } from "../scene";
+import { getSelectedElements } from "../lib/scene";
 
 import { useApp, useExcalidrawContainer, useExcalidrawElements } from "./App";
 

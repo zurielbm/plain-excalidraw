@@ -11,13 +11,13 @@ import { CaptureUpdateAction } from "@excalidraw/element";
 
 import type { Theme } from "@excalidraw/element/types";
 
-import { useDevice } from "../components/App";
-import { CheckboxItem } from "../components/CheckboxItem";
-import { DarkModeToggle } from "../components/DarkModeToggle";
-import { ProjectName } from "../components/ProjectName";
-import { ToolButton } from "../components/ToolButton";
-import { Tooltip } from "../components/Tooltip";
-import { ExportIcon, questionCircle, saveAs } from "../components/icons";
+import { useDevice } from "../../components/App";
+import { CheckboxItem } from "../../components/CheckboxItem";
+import { DarkModeToggle } from "../../components/DarkModeToggle";
+import { ProjectName } from "../../components/ProjectName";
+import { ToolButton } from "../../components/ToolButton";
+import { Tooltip } from "../../components/Tooltip";
+import { ExportIcon, questionCircle, saveAs } from "../../components/icons";
 import { loadFromJSON, saveAsJSON } from "../data";
 import { isImageFileHandle } from "../data/blob";
 import { nativeFileSystemSupported } from "../data/filesystem";
@@ -74,11 +74,11 @@ export const actionChangeExportScale = register({
           const [width, height] = getExportSize(
             exportedElements,
             DEFAULT_EXPORT_PADDING,
-            s,
+            s
           );
 
           const scaleButtonTitle = `${t(
-            "imageExportDialog.label.scale",
+            "imageExportDialog.label.scale"
           )} ${s}x (${width}x${height})`;
 
           return (
@@ -165,7 +165,7 @@ export const actionSaveToActiveFile = register({
             elements,
             appState,
             app.files,
-            app.getName(),
+            app.getName()
           )
         : await saveAsJSON(elements, appState, app.files, app.getName());
 
@@ -179,7 +179,7 @@ export const actionSaveToActiveFile = register({
                 message: fileHandle?.name
                   ? t("toast.fileSavedToFilename").replace(
                       "{filename}",
-                      `"${fileHandle.name}"`,
+                      `"${fileHandle.name}"`
                     )
                   : t("toast.fileSaved"),
               }
@@ -214,7 +214,7 @@ export const actionSaveFileToDisk = register({
           fileHandle: null,
         },
         app.files,
-        app.getName(),
+        app.getName()
       );
       return {
         captureUpdate: CaptureUpdateAction.EVENTUALLY,

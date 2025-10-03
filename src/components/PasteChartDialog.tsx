@@ -5,8 +5,8 @@ import type { ChartType } from "@excalidraw/element/types";
 
 import { trackEvent } from "../lib/analytics";
 import { renderSpreadsheet } from "../lib/charts";
-import { t } from "../i18n";
-import { exportToSvg } from "../scene/export";
+import { t } from "../lib/i18n";
+import { exportToSvg } from "../lib/scene/export";
 
 import { useApp } from "./App";
 import { Dialog } from "./Dialog";

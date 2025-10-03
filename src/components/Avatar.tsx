@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React, { useState } from "react";
 
-import { getNameInitial } from "../clients";
+import { getNameInitial } from "../lib/clients";
 
 import "./Avatar.scss";
 

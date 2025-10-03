@@ -11,8 +11,8 @@ import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import type { Scene } from "@excalidraw/element";
 
-import { t } from "../i18n";
-import { getSelectedElements } from "../scene";
+import { t } from "../lib/i18n";
+import { getSelectedElements } from "../lib/scene";
 
 import DialogActionButton from "./DialogActionButton";
 import { TextField } from "./TextField";
@@ -48,12 +48,12 @@ const ElementLinkDialog = ({
     if (selectedElements.length > 0 && generateLinkForSelection) {
       const idAndType = getLinkIdAndTypeFromSelection(
         selectedElements,
-        appState as AppState,
+        appState as AppState
       );
 
       if (idAndType) {
         nextLink = normalizeLink(
-          generateLinkForSelection(idAndType.id, idAndType.type),
+          generateLinkForSelection(idAndType.id, idAndType.type)
         );
       }
     }

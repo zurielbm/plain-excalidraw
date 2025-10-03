@@ -18,14 +18,14 @@ import {
   actionChangeExportScale,
   actionChangeProjectName,
 } from "../lib/actions/actionExport";
-import { probablySupportsClipboardBlob } from "../clipboard";
+import { probablySupportsClipboardBlob } from "../lib/clipboard";
 import { prepareElementsForExport } from "../lib/data";
 import { canvasToBlob } from "../lib/data/blob";
 import { nativeFileSystemSupported } from "../lib/data/filesystem";
 import { useCopyStatus } from "../lib/hooks/useCopiedIndicator";
 
-import { t } from "../i18n";
-import { isSomeElementSelected } from "../scene";
+import { t } from "../lib/i18n";
+import { isSomeElementSelected } from "../lib/scene";
 
 import { copyIcon, downloadIcon, helpIcon } from "./icons";
 import { Dialog } from "./Dialog";

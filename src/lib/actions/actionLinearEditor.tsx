@@ -15,12 +15,12 @@ import type {
   ExcalidrawLineElement,
 } from "@excalidraw/element/types";
 
-import { DEFAULT_CATEGORIES } from "../components/CommandPalette/CommandPalette";
-import { ToolButton } from "../components/ToolButton";
-import { lineEditorIcon, polygonIcon } from "../components/icons";
+import { DEFAULT_CATEGORIES } from "../../components/CommandPalette/CommandPalette";
+import { ToolButton } from "../../components/ToolButton";
+import { lineEditorIcon, polygonIcon } from "../../components/icons";
 import { t } from "../i18n";
 
-import { ButtonIcon } from "../components/ButtonIcon";
+import { ButtonIcon } from "../../components/ButtonIcon";
 
 import { newElementWith } from "@excalidraw/element";
 

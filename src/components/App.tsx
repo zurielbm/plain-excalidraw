@@ -456,7 +456,7 @@ import type {
   ScrollBars,
 } from "../scene/types";
 
-import type { ClipboardData, PastedMixedContent } from "../clipboard";
+import type { ClipboardData, PastedMixedContent } from "../lib/clipboard";
 import type { ExportedElements } from "../lib/data";
 import type { ContextMenuItems } from "./ContextMenu";
 import type { FileSystemHandle } from "../lib/data/filesystem";

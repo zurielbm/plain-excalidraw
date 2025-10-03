@@ -346,6 +346,236 @@ import type { ChartElements, Spreadsheet } from "../lib/charts";
 
 **Files Updated**: ConvertElementTypePopup.tsx, JSONExportDialog.tsx, LibraryMenu.tsx, PasteChartDialog.tsx, LayerUI.tsx, MobileMenu.tsx, and HintViewer.tsx.
 
+### 20. Final Clipboard and Scene Export Import Corrections ✅
+
+**Problem**: Final remaining components had imports from `"../clipboard"`, `"../scene/export"`, and remaining `"../i18n"` that needed to be updated
+
+**Solution**: Fixed the absolutely final remaining imports:
+
+```typescript
+// Fixed absolutely final remaining imports
+import {
+  probablySupportsClipboardBlob,
+  copyTextToSystemClipboard,
+} from "../lib/clipboard";
+import type { ClipboardData, PastedMixedContent } from "../lib/clipboard";
+import { exportToSvg } from "../lib/scene/export";
+import { t, useI18n } from "../lib/i18n";
+```
+
+**Files Updated**: HelpDialog.tsx, ImageExportDialog.tsx, ShareableLinkDialog.tsx, PasteChartDialog.tsx, and App.tsx.
+
+### 21. Lib Actions Component Import Corrections ✅
+
+**Problem**: A lib/actions file was importing from `"../components"` which should be `"../../components"` since lib files are one level deeper
+
+**Solution**: Fixed the component imports from lib/actions:
+
+```typescript
+// Fixed lib/actions component imports
+import { useDevice } from "../../components/App";
+import { CheckboxItem } from "../../components/CheckboxItem";
+import { DarkModeToggle } from "../../components/DarkModeToggle";
+import { ProjectName } from "../../components/ProjectName";
+import { ToolButton } from "../../components/ToolButton";
+import { Tooltip } from "../../components/Tooltip";
+import { ExportIcon, questionCircle, saveAs } from "../../components/icons";
+```
+
+**Files Updated**: actionExport.tsx
+
+### 22. Lib Hooks Component Import Corrections ✅
+
+**Problem**: A lib/hooks file was importing from `"../components"` which should be `"../../components"` since lib files are one level deeper
+
+**Solution**: Fixed the component imports from lib/hooks:
+
+```typescript
+// Fixed lib/hooks component imports
+import { useDevice, useExcalidrawContainer } from "../../components/App";
+```
+
+**Files Updated**: useCreatePortalContainer.ts
+
+### 23. Additional Lib Actions Component Import Corrections ✅
+
+**Problem**: Another lib/actions file was importing from `"../components"` which should be `"../../components"` since lib files are one level deeper
+
+**Solution**: Fixed additional component imports from lib/actions:
+
+```typescript
+// Fixed additional lib/actions component imports
+import { Avatar } from "../../components/Avatar";
+import {
+  eyeIcon,
+  microphoneIcon,
+  microphoneMutedIcon,
+} from "../../components/icons";
+```
+
+**Files Updated**: actionNavigate.tsx
+
+### 24. Final Component Lib Module Import Corrections ✅
+
+**Problem**: Several components were importing from lib modules without the `lib/` prefix (e.g., `"../clients"`, `"../snapping"`, `"../scene"`, `"../i18n"`)
+
+**Solution**: Fixed all remaining component imports to lib modules:
+
+```typescript
+// Fixed component imports to lib modules
+import { getNameInitial } from "../lib/clients";
+import { isGridModeEnabled } from "../lib/snapping";
+import { calculateScrollCenter, getSelectedElements } from "../lib/scene";
+import { SCROLLBAR_WIDTH, SCROLLBAR_MARGIN } from "../lib/scene/scrollbars";
+import { isSomeElementSelected } from "../lib/scene";
+import { t } from "../lib/i18n";
+```
+
+**Files Updated**: Avatar.tsx, HintViewer.tsx, MobileMenu.tsx, ElementLinkDialog.tsx, LibraryMenu.tsx, ImageExportDialog.tsx, LayerUI.tsx, and EyeDropper.tsx.
+
+### 25. Final Lib Actions Component Import Corrections ✅
+
+**Problem**: Another lib/actions file had remaining component imports using `"../components"` instead of `"../../components"`
+
+**Solution**: Fixed the final component imports from lib/actions:
+
+```typescript
+// Fixed final lib/actions component imports
+import { DEFAULT_CATEGORIES } from "../../components/CommandPalette/CommandPalette";
+import { ToolButton } from "../../components/ToolButton";
+import { lineEditorIcon, polygonIcon } from "../../components/icons";
+import { ButtonIcon } from "../../components/ButtonIcon";
+```
+
+**Files Updated**: actionLinearEditor.tsx
+
+### 26. Final CommandPalette Import Corrections ✅
+
+**Problem**: CommandPalette directory files had remaining imports from `"../../actions"` and `"../../types"` that needed to be updated to use the lib directory
+
+**Solution**: Fixed the final CommandPalette imports:
+
+```typescript
+// Fixed final CommandPalette imports
+import { actionToggleTheme } from "../../lib/actions";
+import type { ActionManager } from "../../lib/actions/manager";
+import type { Action } from "../../lib/actions/types";
+import type { UIAppState } from "../../lib/types";
+```
+
+**Files Updated**: defaultCommandPaletteItems.ts and types.ts
+
+### 27. Final ActionCanvas Component Import Corrections ✅
+
+**Problem**: lib/actions/actionCanvas.tsx had remaining component imports using `"../components"` instead of `"../../components"`
+
+**Solution**: Fixed the final component imports from actionCanvas:
+
+```typescript
+// Fixed final actionCanvas component imports
+import { ColorPicker } from "../../components/ColorPicker/ColorPicker";
+import { ToolButton } from "../../components/ToolButton";
+import { Tooltip } from "../../components/Tooltip";
+import {
+  handIcon,
+  LassoIcon,
+  MoonIcon,
+  SunIcon,
+  TrashIcon,
+  zoomAreaIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
+  ZoomResetIcon,
+} from "../../components/icons";
+```
+
+**Files Updated**: actionCanvas.tsx
+
+### 28. Final ActionProperties Component Import Corrections ✅
+
+**Problem**: lib/actions/actionProperties.tsx had remaining component imports using `"../components"` instead of `"../../components"`
+
+**Solution**: Fixed the final component imports from actionProperties:
+
+```typescript
+// Fixed final actionProperties component imports
+import { RadioSelection } from "../../components/RadioSelection";
+import { ColorPicker } from "../../components/ColorPicker/ColorPicker";
+import { FontPicker } from "../../components/FontPicker/FontPicker";
+import { IconPicker } from "../../components/IconPicker";
+import { Range } from "../../components/Range";
+import {
+  ArrowheadArrowIcon,
+  StrokeStyleDashedIcon /* and many more icons */,
+} from "../../components/icons";
+```
+
+**Files Updated**: actionProperties.tsx
+
+### 29. Fonts Import Path Correction ✅
+
+**Problem**: FontPickerList.tsx was importing Fonts from `"../../lib/fonts"` but the Fonts class is actually located in the public/fonts directory
+
+**Solution**: Fixed the Fonts import to point to the correct location:
+
+```typescript
+// Fixed Fonts import
+import { Fonts } from "../../../public/fonts";
+```
+
+**Files Updated**: FontPickerList.tsx
+
+### 30. Final ActionToggleShapeSwitch Component Import Corrections ✅
+
+**Problem**: lib/actions/actionToggleShapeSwitch.tsx had component imports using `"../components"` instead of `"../../components"`
+
+**Solution**: Fixed the final component imports from actionToggleShapeSwitch:
+
+```typescript
+// Fixed final actionToggleShapeSwitch component imports
+import {
+  getConversionTypeFromElements,
+  convertElementTypePopupAtom,
+} from "../../components/ConvertElementTypePopup";
+```
+
+**Files Updated**: actionToggleShapeSwitch.tsx
+
+### 31. Final ActionAlign Component Import Corrections ✅
+
+**Problem**: lib/actions/actionAlign.tsx had component imports using `"../components"` instead of `"../../components"`
+
+**Solution**: Fixed the final component imports from actionAlign:
+
+```typescript
+// Fixed final actionAlign component imports
+import { ToolButton } from "../../components/ToolButton";
+import {
+  AlignBottomIcon,
+  AlignLeftIcon,
+  AlignRightIcon,
+  AlignTopIcon,
+  CenterHorizontallyIcon,
+  CenterVerticallyIcon,
+} from "../../components/icons";
+```
+
+**Files Updated**: actionAlign.tsx
+
+### 32. Final ActionCropEditor Component Import Corrections ✅
+
+**Problem**: lib/actions/actionCropEditor.tsx had component imports using `"../components"` instead of `"../../components"`
+
+**Solution**: Fixed the final component imports from actionCropEditor:
+
+```typescript
+// Fixed final actionCropEditor component imports
+import { ToolButton } from "../../components/ToolButton";
+import { cropIcon } from "../../components/icons";
+```
+
+**Files Updated**: actionCropEditor.tsx
+
 ## Remaining Opportunities
 
 ### Path Alias Usage

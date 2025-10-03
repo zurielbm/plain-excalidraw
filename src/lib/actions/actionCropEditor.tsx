@@ -4,8 +4,8 @@ import { CaptureUpdateAction } from "@excalidraw/element";
 
 import type { ExcalidrawImageElement } from "@excalidraw/element/types";
 
-import { ToolButton } from "../components/ToolButton";
-import { cropIcon } from "../components/icons";
+import { ToolButton } from "../../components/ToolButton";
+import { cropIcon } from "../../components/icons";
 import { t } from "../i18n";
 
 import { register } from "./register";

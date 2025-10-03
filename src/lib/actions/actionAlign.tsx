@@ -16,7 +16,7 @@ import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import type { Alignment } from "@excalidraw/element";
 
-import { ToolButton } from "../components/ToolButton";
+import { ToolButton } from "../../components/ToolButton";
 import {
   AlignBottomIcon,
   AlignLeftIcon,
@@ -24,7 +24,7 @@ import {
   AlignTopIcon,
   CenterHorizontallyIcon,
   CenterVerticallyIcon,
-} from "../components/icons";
+} from "../../components/icons";
 
 import { t } from "../i18n";
 
@@ -36,14 +36,14 @@ import type { AppClassProperties, AppState, UIAppState } from "../types";
 
 export const alignActionsPredicate = (
   appState: UIAppState,
-  app: AppClassProperties,
+  app: AppClassProperties
 ) => {
   const selectedElements = app.scene.getSelectedElements(appState);
   return (
     getSelectedElementsByGroup(
       selectedElements,
       app.scene.getNonDeletedElementsMap(),
-      appState as Readonly<AppState>,
+      appState as Readonly<AppState>
     ).length > 1 &&
     // TODO enable aligning frames when implemented properly
     !selectedElements.some((el) => isFrameLikeElement(el))
@@ -54,7 +54,7 @@ const alignSelectedElements = (
   elements: readonly ExcalidrawElement[],
   appState: Readonly<AppState>,
   app: AppClassProperties,
-  alignment: Alignment,
+  alignment: Alignment
 ) => {
   const selectedElements = app.scene.getSelectedElements(appState);
 
@@ -62,7 +62,7 @@ const alignSelectedElements = (
     selectedElements,
     alignment,
     app.scene,
-    appState,
+    appState
   );
 
   const updatedElementsMap = arrayToMap(updatedElements);
@@ -70,7 +70,7 @@ const alignSelectedElements = (
   return updateFrameMembershipOfSelectedElements(
     elements.map((element) => updatedElementsMap.get(element.id) || element),
     appState,
-    app,
+    app
   );
 };
 
@@ -100,7 +100,7 @@ export const actionAlignTop = register({
       icon={AlignTopIcon}
       onClick={() => updateData(null)}
       title={`${t("labels.alignTop")} — ${getShortcutKey(
-        "CtrlOrCmd+Shift+Up",
+        "CtrlOrCmd+Shift+Up"
       )}`}
       aria-label={t("labels.alignTop")}
       visible={isSomeElementSelected(getNonDeletedElements(elements), appState)}
@@ -134,7 +134,7 @@ export const actionAlignBottom = register({
       icon={AlignBottomIcon}
       onClick={() => updateData(null)}
       title={`${t("labels.alignBottom")} — ${getShortcutKey(
-        "CtrlOrCmd+Shift+Down",
+        "CtrlOrCmd+Shift+Down"
       )}`}
       aria-label={t("labels.alignBottom")}
       visible={isSomeElementSelected(getNonDeletedElements(elements), appState)}
@@ -168,7 +168,7 @@ export const actionAlignLeft = register({
       icon={AlignLeftIcon}
       onClick={() => updateData(null)}
       title={`${t("labels.alignLeft")} — ${getShortcutKey(
-        "CtrlOrCmd+Shift+Left",
+        "CtrlOrCmd+Shift+Left"
       )}`}
       aria-label={t("labels.alignLeft")}
       visible={isSomeElementSelected(getNonDeletedElements(elements), appState)}
@@ -202,7 +202,7 @@ export const actionAlignRight = register({
       icon={AlignRightIcon}
       onClick={() => updateData(null)}
       title={`${t("labels.alignRight")} — ${getShortcutKey(
-        "CtrlOrCmd+Shift+Right",
+        "CtrlOrCmd+Shift+Right"
       )}`}
       aria-label={t("labels.alignRight")}
       visible={isSomeElementSelected(getNonDeletedElements(elements), appState)}

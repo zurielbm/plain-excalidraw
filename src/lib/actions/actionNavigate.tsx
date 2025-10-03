@@ -3,12 +3,12 @@ import clsx from "clsx";
 import { CaptureUpdateAction } from "@excalidraw/element";
 
 import { getClientColor } from "../clients";
-import { Avatar } from "../components/Avatar";
+import { Avatar } from "../../components/Avatar";
 import {
   eyeIcon,
   microphoneIcon,
   microphoneMutedIcon,
-} from "../components/icons";
+} from "../../components/icons";
 import { t } from "../i18n";
 
 import { register } from "./register";

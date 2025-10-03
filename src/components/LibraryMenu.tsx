@@ -32,7 +32,7 @@ import {
 import { atom, useAtom } from "../lib/editor-jotai";
 import { t } from "../lib/i18n";
 
-import { getSelectedElements } from "../scene";
+import { getSelectedElements } from "../lib/scene";
 
 import {
   useApp,

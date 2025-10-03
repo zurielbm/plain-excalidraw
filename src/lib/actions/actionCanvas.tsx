@@ -26,9 +26,9 @@ import {
   isEraserActive,
   isHandToolActive,
 } from "../appState";
-import { ColorPicker } from "../components/ColorPicker/ColorPicker";
-import { ToolButton } from "../components/ToolButton";
-import { Tooltip } from "../components/Tooltip";
+import { ColorPicker } from "../../components/ColorPicker/ColorPicker";
+import { ToolButton } from "../../components/ToolButton";
+import { Tooltip } from "../../components/Tooltip";
 import {
   handIcon,
   LassoIcon,
@@ -39,7 +39,7 @@ import {
   ZoomInIcon,
   ZoomOutIcon,
   ZoomResetIcon,
-} from "../components/icons";
+} from "../../components/icons";
 import { setCursor } from "../cursor";
 
 import { t } from "../i18n";
@@ -105,7 +105,7 @@ export const actionClearCanvas = register({
     app.imageCache.clear();
     return {
       elements: elements.map((element) =>
-        newElementWith(element, { isDeleted: true }),
+        newElementWith(element, { isDeleted: true })
       ),
       appState: {
         ...getDefaultAppState(),
@@ -146,7 +146,7 @@ export const actionZoomIn = register({
             viewportY: appState.height / 2 + appState.offsetTop,
             nextZoom: getNormalizedZoom(appState.zoom.value + ZOOM_STEP),
           },
-          appState,
+          appState
         ),
         userToFollow: null,
       },
@@ -187,7 +187,7 @@ export const actionZoomOut = register({
             viewportY: appState.height / 2 + appState.offsetTop,
             nextZoom: getNormalizedZoom(appState.zoom.value - ZOOM_STEP),
           },
-          appState,
+          appState
         ),
         userToFollow: null,
       },
@@ -228,7 +228,7 @@ export const actionResetZoom = register({
             viewportY: appState.height / 2 + appState.offsetTop,
             nextZoom: getNormalizedZoom(1),
           },
-          appState,
+          appState
         ),
         userToFollow: null,
       },
@@ -258,7 +258,7 @@ export const actionResetZoom = register({
 const zoomValueToFitBoundsOnViewport = (
   bounds: SceneBounds,
   viewportDimensions: { width: number; height: number },
-  viewportZoomFactor: number = 1, // default to 1 if not provided
+  viewportZoomFactor: number = 1 // default to 1 if not provided
 ) => {
   const [x1, y1, x2, y2] = bounds;
   const commonBoundsWidth = x2 - x1;
@@ -317,7 +317,7 @@ export const zoomToFitBounds = ({
     adjustedZoomValue =
       Math.min(
         effectiveCanvasWidth / commonBoundsWidth,
-        effectiveCanvasHeight / commonBoundsHeight,
+        effectiveCanvasHeight / commonBoundsHeight
       ) * viewportZoomFactor;
   } else {
     adjustedZoomValue = zoomValueToFitBoundsOnViewport(
@@ -326,12 +326,12 @@ export const zoomToFitBounds = ({
         width: effectiveCanvasWidth,
         height: effectiveCanvasHeight,
       },
-      viewportZoomFactor,
+      viewportZoomFactor
     );
   }
 
   const newZoomValue = getNormalizedZoom(
-    clamp(roundToStep(adjustedZoomValue, ZOOM_STEP, "floor"), minZoom, maxZoom),
+    clamp(roundToStep(adjustedZoomValue, ZOOM_STEP, "floor"), minZoom, maxZoom)
   );
 
   const centerScroll = centerScrollOn({

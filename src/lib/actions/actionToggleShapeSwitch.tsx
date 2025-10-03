@@ -5,7 +5,7 @@ import type { ExcalidrawElement } from "@excalidraw/element/types";
 import {
   getConversionTypeFromElements,
   convertElementTypePopupAtom,
-} from "../components/ConvertElementTypePopup";
+} from "../../components/ConvertElementTypePopup";
 import { editorJotaiStore } from "../editor-jotai";
 
 import { register } from "./register";

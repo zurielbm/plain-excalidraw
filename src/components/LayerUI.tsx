@@ -26,8 +26,8 @@ import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
 import { UIAppStateContext } from "../context/ui-appState";
 import { useAtom, useAtomValue } from "../lib/editor-jotai";
 
-import { t } from "../i18n";
-import { calculateScrollCenter } from "../scene";
+import { t } from "../lib/i18n";
+import { calculateScrollCenter } from "../lib/scene";
 
 import {
   SelectedShapeActions,
