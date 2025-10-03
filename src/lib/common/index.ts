@@ -5,7 +5,7 @@ export * from "./font-metadata";
 export * from "./queue";
 export * from "./keys";
 export * from "./points";
-// export * from "./promise-pool";
+export * from "./promise-pool";
 export * from "./random";
 export * from "./url";
 export * from "./utils";

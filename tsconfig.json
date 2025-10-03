@@ -35,7 +35,11 @@
       "@/lib/element": ["./src/lib/element"],
       "@/lib/element/*": ["./src/lib/element/*"],
       "@/lib/math": ["./src/lib/math"],
-      "@/lib/math/*": ["./src/lib/math/*"]
+      "@/lib/math/*": ["./src/lib/math/*"],
+      "@components/": ["./src/components"],
+      "@components/*": ["./src/components*"],
+      "@lib/": ["./src/lib"],
+      "@lib/*": ["./src/lib*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
