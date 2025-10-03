@@ -138,7 +138,7 @@ const DefaultOverwriteConfirmDialog = () => {
   );
 };
 
-const LayerUI = ({
+const LayerUIImpl = ({
   actionManager,
   appState,
   files,
@@ -160,7 +160,7 @@ const LayerUI = ({
   generateLinkForSelection,
 }: LayerUIProps) => {
   const device = useDevice();
-  const tunnels = useInitializeTunnels();
+  const tunnels = React.useContext(TunnelsContext);
 
   const spacing =
     appState.stylesPanelMode === "compact"
@@ -180,8 +180,6 @@ const LayerUI = ({
           islandPadding: 1,
           collabMarginLeft: 8,
         };
-
-  const TunnelsJotaiProvider = tunnels.tunnelsJotai.Provider;
 
   const [eyeDropperState, setEyeDropperState] = useAtom(activeEyeDropperAtom);
 
@@ -455,7 +453,7 @@ const LayerUI = ({
 
   const isSidebarDocked = useAtomValue(isSidebarDockedAtom);
 
-  const layerUIJSX = (
+  return (
     <>
       {/* ------------------------- tunneled UI ---------------------------- */}
       {/* make sure we render host app components first so that we can detect
@@ -632,12 +630,17 @@ const LayerUI = ({
       )}
     </>
   );
+};
+
+const LayerUI = (props: LayerUIProps) => {
+  const tunnels = useInitializeTunnels();
+  const TunnelsJotaiProvider = tunnels.tunnelsJotai.Provider;
 
   return (
-    <UIAppStateContext.Provider value={appState}>
+    <UIAppStateContext.Provider value={stripIrrelevantAppStateProps(props.appState as AppState)}>
       <TunnelsJotaiProvider>
         <TunnelsContext.Provider value={tunnels}>
-          {layerUIJSX}
+          <LayerUIImpl {...props} />
         </TunnelsContext.Provider>
       </TunnelsJotaiProvider>
     </UIAppStateContext.Provider>

@@ -40,7 +40,8 @@
       "@components/*": ["./src/components*"],
       "@lib/": ["./src/lib"],
       "@lib/*": ["./src/lib*"]
-    }
+    },
+    "types": ["jest", "vitest/globals"]
   },
   "include": [
     "next-env.d.ts",

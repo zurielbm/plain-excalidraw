@@ -800,12 +800,12 @@ const handleSearch = debounce(
     const texts = elements.filter(
       (el: ExcalidrawElement): el is ExcalidrawTextElement =>
         isTextElement(el),
-    );
+    ) as ExcalidrawTextElement[];
 
     const frames = elements.filter(
       (el: ExcalidrawElement): el is ExcalidrawFrameLikeElement =>
         isFrameLikeElement(el),
-    );
+    ) as ExcalidrawFrameLikeElement[];
 
     texts.sort((a: ExcalidrawTextElement, b: ExcalidrawTextElement) => a.y - b.y);
     frames.sort(

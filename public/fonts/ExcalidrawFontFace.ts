@@ -159,7 +159,7 @@ export class ExcalidrawFontFace {
     }
 
     // fallback url for bundled fonts
-    urls.push(new URL(assetUrl, ExcalidrawFontFace.ASSETS_FALLBACK_URL));
+    urls.push(new URL(assetUrl, "https://unpkg.com/@excalidraw/excalidraw@0.17.3/dist/"));
 
     return urls;
   }
