@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { EditorJotaiProvider } from "../editor-jotai";
+import { EditorJotaiProvider } from "../lib/editor-jotai";
 import fallbackLangData from "../locales/en.json";
 
 import Trans from "./Trans";
@@ -53,21 +53,21 @@ describe("Test <Trans/>", () => {
             connect-link={(el) => <a href="https://example.com">{el}</a>}
           />
         </div>
-      </EditorJotaiProvider>,
+      </EditorJotaiProvider>
     );
 
     expect(getByTestId("test1").innerHTML).toEqual("Hello world");
     expect(getByTestId("test2").innerHTML).toEqual(
-      `Please <a href="https://example.com">click the button</a> to continue.`,
+      `Please <a href="https://example.com">click the button</a> to continue.`
     );
     expect(getByTestId("test3").innerHTML).toEqual(
-      `Please <a href="https://example.com">click the button</a> to continue.`,
+      `Please <a href="https://example.com">click the button</a> to continue.`
     );
     expect(getByTestId("test4").innerHTML).toEqual(
-      `Please <a href="https://example.com">click <strong>the button</strong></a> to continue.`,
+      `Please <a href="https://example.com">click <strong>the button</strong></a> to continue.`
     );
     expect(getByTestId("test5").innerHTML).toEqual(
-      `Please <a href="https://example.com">click the button</a> to continue.`,
+      `Please <a href="https://example.com">click the button</a> to continue.`
     );
   });
 });

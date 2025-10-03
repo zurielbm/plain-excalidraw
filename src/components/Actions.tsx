@@ -95,7 +95,7 @@ const PROPERTIES_CLASSES = clsx([
 
 export const canChangeStrokeColor = (
   appState: UIAppState,
-  targetElements: ExcalidrawElement[],
+  targetElements: ExcalidrawElement[]
 ) => {
   let commonSelectedType: ExcalidrawElementType | null =
     targetElements[0]?.type || null;
@@ -118,7 +118,7 @@ export const canChangeStrokeColor = (
 
 export const canChangeBackgroundColor = (
   appState: UIAppState,
-  targetElements: ExcalidrawElement[],
+  targetElements: ExcalidrawElement[]
 ) => {
   return (
     hasBackground(appState.activeTool.type) ||
@@ -148,7 +148,7 @@ export const SelectedShapeActions = ({
     isSingleElementBoundContainer = true;
   }
   const isEditingTextOrNewElement = Boolean(
-    appState.editingTextElement || appState.newElement,
+    appState.editingTextElement || appState.newElement
   );
   const device = useDevice();
   const isRTL = document.documentElement.getAttribute("dir") === "rtl";
@@ -158,7 +158,7 @@ export const SelectedShapeActions = ({
       !isTransparent(appState.currentItemBackgroundColor)) ||
     targetElements.some(
       (element) =>
-        hasBackground(element.type) && !isTransparent(element.backgroundColor),
+        hasBackground(element.type) && !isTransparent(element.backgroundColor)
     );
 
   const showLinkIcon =
@@ -323,7 +323,7 @@ export const CompactShapeActions = ({
   const { container } = useExcalidrawContainer();
 
   const isEditingTextOrNewElement = Boolean(
-    appState.editingTextElement || appState.newElement,
+    appState.editingTextElement || appState.newElement
   );
 
   const showFillIcons =
@@ -331,7 +331,7 @@ export const CompactShapeActions = ({
       !isTransparent(appState.currentItemBackgroundColor)) ||
     targetElements.some(
       (element) =>
-        hasBackground(element.type) && !isTransparent(element.backgroundColor),
+        hasBackground(element.type) && !isTransparent(element.backgroundColor)
     );
 
   const showLinkIcon = targetElements.length === 1;
@@ -426,12 +426,12 @@ export const CompactShapeActions = ({
                   {showFillIcons && renderAction("changeFillStyle")}
                   {(hasStrokeWidth(appState.activeTool.type) ||
                     targetElements.some((element) =>
-                      hasStrokeWidth(element.type),
+                      hasStrokeWidth(element.type)
                     )) &&
                     renderAction("changeStrokeWidth")}
                   {(hasStrokeStyle(appState.activeTool.type) ||
                     targetElements.some((element) =>
-                      hasStrokeStyle(element.type),
+                      hasStrokeStyle(element.type)
                     )) && (
                     <>
                       {renderAction("changeStrokeStyle")}
@@ -440,7 +440,7 @@ export const CompactShapeActions = ({
                   )}
                   {(canChangeRoundness(appState.activeTool.type) ||
                     targetElements.some((element) =>
-                      canChangeRoundness(element.type),
+                      canChangeRoundness(element.type)
                     )) &&
                     renderAction("changeRoundness")}
                   {renderAction("changeOpacity")}
@@ -499,7 +499,7 @@ export const CompactShapeActions = ({
                     },
                     (element) => isArrowElement(element),
                     (hasSelection) =>
-                      hasSelection ? null : appState.currentItemArrowType,
+                      hasSelection ? null : appState.currentItemArrowType
                   );
 
                   if (arrowType === "elbow") {
@@ -820,7 +820,7 @@ export const ShapesSwitcher = ({
               }}
             />
           );
-        },
+        }
       )}
       <div className="App-toolbar__divider" />
 

@@ -32,9 +32,9 @@ import type {
   ExcalidrawTextElement,
 } from "@excalidraw/element/types";
 
-import { atom, useAtom } from "../editor-jotai";
+import { atom, useAtom } from "../lib/editor-jotai";
 
-import { useStable } from "../hooks/useStable";
+import { useStable } from "../lib/hooks/useStable";
 import { t } from "../i18n";
 
 import { useApp, useExcalidrawSetAppState } from "./App";
@@ -229,7 +229,7 @@ export const SearchMenu = () => {
               zoom: app.state.zoom,
             },
             app.scene.getNonDeletedElementsMap(),
-            app.getEditorUIOffsets(),
+            app.getEditorUIOffsets()
           ) ||
           isTextTiny
         ) {
@@ -447,10 +447,10 @@ const ListItem = (props: {
     props.preview.previewText.slice(0, props.preview.indexInSearchQuery),
     props.preview.previewText.slice(
       props.preview.indexInSearchQuery,
-      props.preview.indexInSearchQuery + props.searchQuery.length,
+      props.preview.indexInSearchQuery + props.searchQuery.length
     ),
     props.preview.previewText.slice(
-      props.preview.indexInSearchQuery + props.searchQuery.length,
+      props.preview.indexInSearchQuery + props.searchQuery.length
     ),
     props.preview.moreAfter ? "..." : "",
   ];
@@ -488,12 +488,12 @@ const MatchListBase = (props: MatchListProps) => {
   const frameNameMatches = useMemo(
     () =>
       props.matches.items.filter((match) => isFrameLikeElement(match.element)),
-    [props.matches],
+    [props.matches]
   );
 
   const textMatches = useMemo(
     () => props.matches.items.filter((match) => isTextElement(match.element)),
-    [props.matches],
+    [props.matches]
   );
 
   return (
@@ -551,7 +551,7 @@ const MatchList = memo(MatchListBase, areEqual);
 const getMatchPreview = (
   text: string,
   index: number,
-  searchQuery: SearchQuery,
+  searchQuery: SearchQuery
 ) => {
   const WORDS_BEFORE = 2;
   const WORDS_AFTER = 5;
@@ -599,7 +599,7 @@ const getMatchPreview = (
 
 const normalizeWrappedText = (
   wrappedText: string,
-  originalText: string,
+  originalText: string
 ): string => {
   const wrappedLines = wrappedText.split("\n");
   const normalizedLines: string[] = [];
@@ -612,7 +612,7 @@ const normalizeWrappedText = (
     if (nextLine) {
       const nextLineIndexInOriginal = originalText.indexOf(
         nextLine,
-        originalIndex,
+        originalIndex
       );
 
       if (nextLineIndexInOriginal > currentLine.length + originalIndex) {
@@ -635,11 +635,11 @@ const normalizeWrappedText = (
 const getMatchedLines = (
   textElement: ExcalidrawTextElement,
   searchQuery: SearchQuery,
-  index: number,
+  index: number
 ) => {
   const normalizedText = normalizeWrappedText(
     textElement.text,
-    textElement.originalText,
+    textElement.originalText
   );
 
   const lines = normalizedText.split("\n");
@@ -667,7 +667,7 @@ const getMatchedLines = (
   let startIndex = index;
   let remainingQuery = textElement.originalText.slice(
     index,
-    index + searchQuery.length,
+    index + searchQuery.length
   );
   const matchedLines: SearchMatch["matchedLines"] = [];
 
@@ -683,7 +683,7 @@ const getMatchedLines = (
       const matchCapacity = lineIndexRange.endIndex + 1 - startIndex;
       const textToStart = lineIndexRange.line.slice(
         0,
-        startIndex - lineIndexRange.startIndex,
+        startIndex - lineIndexRange.startIndex
       );
 
       const matchedWord = remainingQuery.slice(0, matchCapacity);
@@ -692,7 +692,7 @@ const getMatchedLines = (
       const offset = measureText(
         textToStart,
         getFontString(textElement),
-        textElement.lineHeight,
+        textElement.lineHeight
       );
 
       // measureText returns a non-zero width for the empty string
@@ -705,7 +705,7 @@ const getMatchedLines = (
         const lineLength = measureText(
           lineIndexRange.line,
           getFontString(textElement),
-          textElement.lineHeight,
+          textElement.lineHeight
         );
 
         const spaceToStart =
@@ -718,7 +718,7 @@ const getMatchedLines = (
       const { width, height } = measureText(
         matchedWord,
         getFontString(textElement),
-        textElement.lineHeight,
+        textElement.lineHeight
       );
 
       const offsetX = offset.width;
@@ -743,7 +743,7 @@ const getMatchInFrame = (
   frame: ExcalidrawFrameLikeElement,
   searchQuery: SearchQuery,
   index: number,
-  zoomValue: number,
+  zoomValue: number
 ): SearchMatch["matchedLines"] => {
   const text = frame.name ?? getDefaultFrameName(frame);
   const matchedText = text.slice(index, index + searchQuery.length);
@@ -788,7 +788,7 @@ const handleSearch = debounce(
   (
     searchQuery: SearchQuery,
     app: AppClassProperties,
-    cb: (matchItems: SearchMatchItem[], focusIndex: number | null) => void,
+    cb: (matchItems: SearchMatchItem[], focusIndex: number | null) => void
   ) => {
     if (!searchQuery || searchQuery === "") {
       cb([], null);
@@ -797,11 +797,11 @@ const handleSearch = debounce(
 
     const elements = app.scene.getNonDeletedElements();
     const texts = elements.filter((el) =>
-      isTextElement(el),
+      isTextElement(el)
     ) as ExcalidrawTextElement[];
 
     const frames = elements.filter((el) =>
-      isFrameLikeElement(el),
+      isFrameLikeElement(el)
     ) as ExcalidrawFrameLikeElement[];
 
     texts.sort((a, b) => a.y - b.y);
@@ -843,7 +843,7 @@ const handleSearch = debounce(
           frame,
           searchQuery,
           match.index,
-          app.state.zoom.value,
+          app.state.zoom.value
         );
 
         if (matchedLines.length > 0) {
@@ -859,7 +859,7 @@ const handleSearch = debounce(
     }
 
     const visibleIds = new Set(
-      app.visibleElements.map((visibleElement) => visibleElement.id),
+      app.visibleElements.map((visibleElement) => visibleElement.id)
     );
 
     // putting frame matches first
@@ -867,10 +867,10 @@ const handleSearch = debounce(
 
     const focusIndex =
       matchItems.findIndex((matchItem) =>
-        visibleIds.has(matchItem.element.id),
+        visibleIds.has(matchItem.element.id)
       ) ?? null;
 
     cb(matchItems, focusIndex);
   },
-  SEARCH_DEBOUNCE,
+  SEARCH_DEBOUNCE
 );

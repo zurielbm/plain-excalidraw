@@ -1,5 +1,5 @@
 import { actionClearCanvas } from "../actions";
-import { atom, useAtom } from "../editor-jotai";
+import { atom, useAtom } from "../lib/editor-jotai";
 import { t } from "../i18n";
 
 import { useExcalidrawActionManager } from "./App";
@@ -9,7 +9,7 @@ export const activeConfirmDialogAtom = atom<"clearCanvas" | null>(null);
 
 export const ActiveConfirmDialog = () => {
   const [activeConfirmDialog, setActiveConfirmDialog] = useAtom(
-    activeConfirmDialogAtom,
+    activeConfirmDialogAtom
   );
   const actionManager = useExcalidrawActionManager();
 

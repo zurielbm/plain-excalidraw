@@ -364,9 +364,9 @@ import {
   parseLibraryJSON,
   resizeImageFile,
   SVGStringToFile,
-} from "../data/blob";
+} from "../lib/data/blob";
 
-import { fileOpen } from "../data/filesystem";
+import { fileOpen } from "../lib/data/filesystem";
 import {
   showHyperlinkTooltip,
   hideHyperlinkToolip,
@@ -374,7 +374,7 @@ import {
 } from "../components/hyperlink/Hyperlink";
 
 import { Fonts } from "../fonts";
-import { editorJotaiStore, type WritableAtom } from "../editor-jotai";
+import { editorJotaiStore, type WritableAtom } from "../lib/editor-jotai";
 import { ImageSceneDataError } from "../errors";
 import {
   getSnapLinesAtPointer,
@@ -388,7 +388,7 @@ import {
   SnapCache,
   isGridModeEnabled,
 } from "../snapping";
-import { convertToExcalidrawElements } from "../data/transform";
+import { convertToExcalidrawElements } from "../lib/data/transform";
 import { Renderer } from "../scene/Renderer";
 import {
   setEraserCursor,
@@ -437,7 +437,7 @@ import { findShapeByKey } from "./shapes";
 
 import UnlockPopup from "./UnlockPopup";
 
-import type { ExcalidrawLibraryIds } from "../data/types";
+import type { ExcalidrawLibraryIds } from "../lib/data/types";
 
 import type {
   RenderInteractiveSceneCallback,
@@ -445,10 +445,10 @@ import type {
 } from "../scene/types";
 
 import type { ClipboardData, PastedMixedContent } from "../clipboard";
-import type { ExportedElements } from "../data";
+import type { ExportedElements } from "../lib/data";
 import type { ContextMenuItems } from "./ContextMenu";
-import type { FileSystemHandle } from "../data/filesystem";
-import type { ExcalidrawElementSkeleton } from "../data/transform";
+import type { FileSystemHandle } from "../lib/data/filesystem";
+import type { ExcalidrawElementSkeleton } from "../lib/data/transform";
 import type {
   AppClassProperties,
   AppProps,

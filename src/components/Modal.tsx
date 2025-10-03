@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 
 import { KEYS } from "@excalidraw/common";
 
-import { useCreatePortalContainer } from "../hooks/useCreatePortalContainer";
+import { useCreatePortalContainer } from "../lib/hooks/useCreatePortalContainer";
 
 import "./Modal.scss";
 
@@ -25,7 +25,7 @@ export const Modal: React.FC<{
   });
 
   const animationsDisabledRef = useRef(
-    document.body.classList.contains("excalidraw-animations-disabled"),
+    document.body.classList.contains("excalidraw-animations-disabled")
   );
 
   if (!modalRoot) {
@@ -63,6 +63,6 @@ export const Modal: React.FC<{
         {props.children}
       </div>
     </div>,
-    modalRoot,
+    modalRoot
   );
 };

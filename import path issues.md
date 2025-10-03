@@ -124,6 +124,77 @@ import { prepareElementsForExport } from "../lib/data";
 
 **Files Updated**: MermaidToExcalidraw, CommandPalette, App.tsx, ImageExportDialog, and others.
 
+### 9. Additional Data Subdirectory Import Corrections ✅
+
+**Problem**: More components had imports from `"../data/"` subdirectories that needed to be updated to `"../lib/data/"`
+
+**Solution**: Fixed remaining data subdirectory imports:
+
+```typescript
+// Fixed additional data imports
+import { canvasToBlob } from "../lib/data/blob";
+import { fileOpen } from "../lib/data/filesystem";
+import { saveLibraryAsJSON } from "../lib/data/json";
+import { libraryItemsAtom } from "../lib/data/library";
+import { convertToExcalidrawElements } from "../lib/data/transform";
+import type { ExportedLibraryData } from "../lib/data/types";
+import type { FileSystemHandle } from "../lib/data/filesystem";
+```
+
+**Files Updated**: TTDDialog/common.ts, PublishLibrary.tsx, LibraryMenuHeaderContent.tsx, JSONExportDialog.tsx, LibraryMenu.tsx, ImageExportDialog.tsx, LibraryMenuItems.tsx, and App.tsx.
+
+### 10. Final Editor-Jotai Import Corrections ✅
+
+**Problem**: Additional components still had imports from `"../editor-jotai"` and `"../../editor-jotai"` that needed to be updated to `"../lib/editor-jotai"` and `"../../lib/editor-jotai"`
+
+**Solution**: Fixed all remaining editor-jotai imports:
+
+```typescript
+// Fixed final editor-jotai imports
+import { atom, useAtom, useSetAtom, useAtomValue } from "../lib/editor-jotai";
+import { editorJotaiStore, EditorJotaiProvider } from "../lib/editor-jotai";
+import type { WritableAtom } from "../lib/editor-jotai";
+```
+
+**Files Updated**: OverwriteConfirmState.ts, all ColorPicker components, LibraryMenuHeaderContent.tsx, Dialog.tsx, LibraryMenu.tsx, IconPicker.tsx, SearchMenu.tsx, ConvertElementTypePopup.tsx, LayerUI.tsx, Trans.test.tsx, EyeDropper.tsx, ActiveConfirmDialog.tsx, ConfirmDialog.tsx, and App.tsx.
+
+### 11. Element Module Import Correction ✅
+
+**Problem**: Action file had an incorrect import path `"../../element/src/mutateElement"` which doesn't exist
+
+**Solution**: Fixed to use the proper path alias:
+
+```typescript
+// Fixed element import
+import { newElementWith } from "@excalidraw/element";
+```
+
+**Files Updated**: actionLinearEditor.tsx
+
+### 12. Hooks Directory Import Corrections ✅
+
+**Problem**: Components were importing from `"../hooks/"` and `"../../hooks/"` but these are in `"../lib/hooks/"` and `"../../lib/hooks/"`
+
+**Solution**: Fixed all hooks imports across components:
+
+```typescript
+// Fixed hooks imports
+import { useOutsideClick } from "../../lib/hooks/useOutsideClick";
+import { useStable, useStableCallback } from "../lib/hooks/useStable";
+import { useCreatePortalContainer } from "../lib/hooks/useCreatePortalContainer";
+import {
+  useLibraryItemSvg,
+  useLibraryCache,
+} from "../lib/hooks/useLibraryItemSvg";
+import { useCopyStatus } from "../lib/hooks/useCopiedIndicator";
+import { useTextEditorFocus } from "../lib/hooks/useTextEditorFocus";
+import { useCallbackRefState } from "../lib/hooks/useCallbackRefState";
+import { useTransition } from "../lib/hooks/useTransition";
+import { useScrollPosition } from "../lib/hooks/useScrollPosition";
+```
+
+**Files Updated**: Sidebar.tsx, ColorPicker.tsx, SearchMenu.tsx, LibraryMenuSection.tsx, Modal.tsx, Dialog.tsx, ImageExportDialog.tsx, LibraryMenuHeaderContent.tsx, ShareableLinkDialog.tsx, CommandPalette.tsx, EyeDropper.tsx, LibraryMenuItems.tsx, DropdownMenuContent.tsx, Actions.tsx, and LibraryUnit.tsx.
+
 ## Remaining Opportunities
 
 ### Path Alias Usage

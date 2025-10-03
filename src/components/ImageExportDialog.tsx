@@ -20,9 +20,9 @@ import {
 } from "../actions/actionExport";
 import { probablySupportsClipboardBlob } from "../clipboard";
 import { prepareElementsForExport } from "../lib/data";
-import { canvasToBlob } from "../data/blob";
-import { nativeFileSystemSupported } from "../data/filesystem";
-import { useCopyStatus } from "../hooks/useCopiedIndicator";
+import { canvasToBlob } from "../lib/data/blob";
+import { nativeFileSystemSupported } from "../lib/data/filesystem";
+import { useCopyStatus } from "../lib/hooks/useCopiedIndicator";
 
 import { t } from "../i18n";
 import { isSomeElementSelected } from "../scene";

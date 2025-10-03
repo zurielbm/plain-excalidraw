@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { KEYS, getShortcutKey } from "@excalidraw/common";
 
-import { useAtom } from "../../editor-jotai";
+import { useAtom } from "../../lib/editor-jotai";
 import { t } from "../../lib/i18n";
 import { useDevice } from "../App";
 import { activeEyeDropperAtom } from "../EyeDropper";

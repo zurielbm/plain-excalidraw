@@ -6,10 +6,10 @@ import { EVENT, KEYS, rgbToHex } from "@excalidraw/common";
 import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import { useUIAppState } from "../context/ui-appState";
-import { atom } from "../editor-jotai";
-import { useCreatePortalContainer } from "../hooks/useCreatePortalContainer";
-import { useOutsideClick } from "../hooks/useOutsideClick";
-import { useStable } from "../hooks/useStable";
+import { atom } from "../lib/editor-jotai";
+import { useCreatePortalContainer } from "../lib/hooks/useCreatePortalContainer";
+import { useOutsideClick } from "../lib/hooks/useOutsideClick";
+import { useStable } from "../lib/hooks/useStable";
 import { getSelectedElements } from "../scene";
 
 import { useApp, useExcalidrawContainer, useExcalidrawElements } from "./App";
@@ -41,7 +41,7 @@ export const EyeDropper: React.FC<{
     type: ColorPickerType,
     color: string,
     selectedElements: ExcalidrawElement[],
-    event: { altKey: boolean },
+    event: { altKey: boolean }
   ) => void;
   colorPickerType: EyeDropperProperties["colorPickerType"];
 }> = ({ onCancel, onChange, onSelect, colorPickerType }) => {
@@ -87,7 +87,7 @@ export const EyeDropper: React.FC<{
         (clientX - appState.offsetLeft) * window.devicePixelRatio,
         (clientY - appState.offsetTop) * window.devicePixelRatio,
         1,
-        1,
+        1
       ).data;
 
       return rgbToHex(pixel[0], pixel[1], pixel[2]);
@@ -113,7 +113,7 @@ export const EyeDropper: React.FC<{
           colorPickerType,
           currentColor,
           stableProps.selectedElements,
-          { altKey },
+          { altKey }
         );
       }
 
@@ -126,7 +126,7 @@ export const EyeDropper: React.FC<{
 
     const onSelect: Required<EyeDropperProperties>["onSelect"] = (
       color,
-      event,
+      event
     ) => {
       stableProps.onSelect(color, event);
     };
@@ -175,7 +175,7 @@ export const EyeDropper: React.FC<{
     eyeDropperContainer.addEventListener(EVENT.KEYDOWN, keyDownListener);
     eyeDropperContainer.addEventListener(
       EVENT.POINTER_DOWN,
-      pointerDownListener,
+      pointerDownListener
     );
     eyeDropperContainer.addEventListener(EVENT.POINTER_UP, pointerUpListener);
     window.addEventListener("pointermove", mouseMoveListener, {
@@ -188,11 +188,11 @@ export const EyeDropper: React.FC<{
       eyeDropperContainer.removeEventListener(EVENT.KEYDOWN, keyDownListener);
       eyeDropperContainer.removeEventListener(
         EVENT.POINTER_DOWN,
-        pointerDownListener,
+        pointerDownListener
       );
       eyeDropperContainer.removeEventListener(
         EVENT.POINTER_UP,
-        pointerUpListener,
+        pointerUpListener
       );
       window.removeEventListener("pointermove", mouseMoveListener);
       window.removeEventListener(EVENT.BLUR, onCancel);
@@ -217,14 +217,14 @@ export const EyeDropper: React.FC<{
     (event) => {
       if (
         event.target.closest(
-          ".excalidraw-eye-dropper-trigger, .excalidraw-eye-dropper-backdrop",
+          ".excalidraw-eye-dropper-trigger, .excalidraw-eye-dropper-backdrop"
         )
       ) {
         return true;
       }
       // consider all other clicks as outside
       return false;
-    },
+    }
   );
 
   if (!eyeDropperContainer) {
@@ -233,6 +233,6 @@ export const EyeDropper: React.FC<{
 
   return createPortal(
     <div ref={ref} className="excalidraw-eye-dropper-preview" />,
-    eyeDropperContainer,
+    eyeDropperContainer
   );
 };

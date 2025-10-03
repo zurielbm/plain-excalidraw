@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 import type { ColorPaletteCustom } from "@excalidraw/common";
 
-import { useAtom } from "../../editor-jotai";
+import { useAtom } from "../../lib/editor-jotai";
 import { t } from "../../lib/i18n";
 
 import HotkeyLabel from "./HotkeyLabel";

@@ -13,7 +13,7 @@ import type { ColorTuple, ColorPaletteCustom } from "@excalidraw/common";
 
 import type { ExcalidrawElement } from "@excalidraw/element/types";
 
-import { useAtom } from "../../editor-jotai";
+import { useAtom } from "../../lib/editor-jotai";
 import { t } from "../../lib/i18n";
 import { useExcalidrawContainer } from "../App";
 import { ButtonSeparator } from "../ButtonSeparator";
@@ -24,7 +24,7 @@ import {
   saveCaretPosition,
   restoreCaretPosition,
   temporarilyDisableTextEditorBlur,
-} from "../../hooks/useTextEditorFocus";
+} from "../../lib/hooks/useTextEditorFocus";
 
 import { ColorInput } from "./ColorInput";
 import { Picker } from "./Picker";

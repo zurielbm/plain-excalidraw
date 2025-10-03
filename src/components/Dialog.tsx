@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import { KEYS, queryFocusableElements } from "@excalidraw/common";
 
-import { useSetAtom } from "../editor-jotai";
-import { useCallbackRefState } from "../hooks/useCallbackRefState";
+import { useSetAtom } from "../lib/editor-jotai";
+import { useCallbackRefState } from "../lib/hooks/useCallbackRefState";
 import { t } from "../i18n";
 
 import {
@@ -72,7 +72,7 @@ export const Dialog = (props: DialogProps) => {
         const focusableElements = queryFocusableElements(islandNode);
         const { activeElement } = document;
         const currentIndex = focusableElements.findIndex(
-          (element) => element === activeElement,
+          (element) => element === activeElement
         );
 
         if (currentIndex === 0 && event.shiftKey) {

@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from "react";
 
 import { EVENT, KEYS } from "@excalidraw/common";
 
-import { useOutsideClick } from "../../hooks/useOutsideClick";
-import { useStable } from "../../hooks/useStable";
+import { useOutsideClick } from "../../lib/hooks/useOutsideClick";
+import { useStable } from "../../lib/hooks/useStable";
 import { useDevice } from "../App";
 import { Island } from "../Island";
 import Stack from "../Stack";

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
 
-import { useAtom } from "../../editor-jotai";
+import { useAtom } from "../../lib/editor-jotai";
 
 import HotkeyLabel from "./HotkeyLabel";
 import { activeColorPickerSectionAtom } from "./colorPickerUtils";
@@ -20,7 +20,7 @@ export const CustomColorList = ({
   label,
 }: CustomColorListProps) => {
   const [activeColorPickerSection, setActiveColorPickerSection] = useAtom(
-    activeColorPickerSectionAtom,
+    activeColorPickerSectionAtom
   );
 
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -44,7 +44,7 @@ export const CustomColorList = ({
               {
                 active: color === c,
                 "is-transparent": c === "transparent" || !c,
-              },
+              }
             )}
             onClick={() => {
               onChange(c);

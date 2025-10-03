@@ -4,7 +4,7 @@ import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import type { ColorPickerColor, ColorPaletteCustom } from "@excalidraw/common";
 
-import { atom } from "../../editor-jotai";
+import { atom } from "../../lib/editor-jotai";
 
 export const getColorNameAndShadeFromColor = ({
   palette,
@@ -52,7 +52,7 @@ export const isCustomColor = ({
 export const getMostUsedCustomColors = (
   elements: readonly ExcalidrawElement[],
   type: "elementBackground" | "elementStroke",
-  palette: ColorPaletteCustom,
+  palette: ColorPaletteCustom
 ) => {
   const elementColorTypeMap = {
     elementBackground: "backgroundColor",

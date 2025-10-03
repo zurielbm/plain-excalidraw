@@ -24,7 +24,7 @@ import { trackEvent } from "../analytics";
 import { isHandToolActive } from "../appState";
 import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
 import { UIAppStateContext } from "../context/ui-appState";
-import { useAtom, useAtomValue } from "../editor-jotai";
+import { useAtom, useAtomValue } from "../lib/editor-jotai";
 
 import { t } from "../i18n";
 import { calculateScrollCenter } from "../scene";
@@ -286,7 +286,7 @@ const LayerUI = ({
   const renderFixedSideContainer = () => {
     const shouldRenderSelectedShapeActions = showSelectedShapeActions(
       appState,
-      elements,
+      elements
     );
 
     const shouldShowStats =
@@ -406,7 +406,7 @@ const LayerUI = ({
                 "transition-right": appState.zenModeEnabled,
                 "layer-ui__wrapper__top-right--compact":
                   appState.stylesPanelMode === "compact",
-              },
+              }
             )}
           >
             {appState.collaborators.size > 0 && (
@@ -446,7 +446,7 @@ const LayerUI = ({
           trackEvent(
             "sidebar",
             `toggleDock (${docked ? "dock" : "undock"})`,
-            `(${device.editor.isMobile ? "mobile" : "desktop"})`,
+            `(${device.editor.isMobile ? "mobile" : "desktop"})`
           );
         }}
       />
@@ -474,7 +474,7 @@ const LayerUI = ({
             trackEvent(
               "sidebar",
               `${DEFAULT_SIDEBAR.name} (open)`,
-              `button (${device.editor.isMobile ? "mobile" : "desktop"})`,
+              `button (${device.editor.isMobile ? "mobile" : "desktop"})`
             );
           }
         }}
@@ -674,7 +674,7 @@ const areEqual = (prevProps: LayerUIProps, nextProps: LayerUIProps) => {
       {
         selectedElementIds: isShallowEqual,
         selectedGroupIds: isShallowEqual,
-      },
+      }
     ) && isShallowEqual(prev, next)
   );
 };

@@ -78,7 +78,7 @@ import {
   sceneCoordsToViewportCoords,
 } from "../lib";
 import { trackEvent } from "../analytics";
-import { atom } from "../editor-jotai";
+import { atom } from "../lib/editor-jotai";
 
 import "./ConvertElementTypePopup.scss";
 import { ToolButton } from "./ToolButton";

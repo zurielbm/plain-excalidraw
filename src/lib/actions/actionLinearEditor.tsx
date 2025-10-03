@@ -22,7 +22,7 @@ import { t } from "../i18n";
 
 import { ButtonIcon } from "../components/ButtonIcon";
 
-import { newElementWith } from "../../element/src/mutateElement";
+import { newElementWith } from "@excalidraw/element";
 
 import { register } from "./register";
 
@@ -63,11 +63,11 @@ export const actionToggleLinearEditor = register({
     invariant(selectedElement, "No selected element found");
     invariant(
       appState.selectedLinearElement,
-      "No selected linear element found",
+      "No selected linear element found"
     );
     invariant(
       selectedElement.id === appState.selectedLinearElement.elementId,
-      "Selected element ID and linear editor elementId does not match",
+      "Selected element ID and linear editor elementId does not match"
     );
 
     const selectedLinearElement = {
@@ -95,7 +95,7 @@ export const actionToggleLinearEditor = register({
     const label = t(
       selectedElement.type === "arrow"
         ? "labels.lineEditor.editArrow"
-        : "labels.lineEditor.edit",
+        : "labels.lineEditor.edit"
     );
     return (
       <ToolButton
@@ -120,7 +120,7 @@ export const actionTogglePolygon = register({
     });
 
     const allPolygons = !selectedElements.some(
-      (element) => !isLineElement(element) || !element.polygon,
+      (element) => !isLineElement(element) || !element.polygon
     );
 
     return allPolygons
@@ -138,7 +138,7 @@ export const actionTogglePolygon = register({
     return (
       selectedElements.length > 0 &&
       selectedElements.every(
-        (element) => isLineElement(element) && element.points.length >= 4,
+        (element) => isLineElement(element) && element.points.length >= 4
       )
     );
   },
@@ -187,20 +187,20 @@ export const actionTogglePolygon = register({
           // a polygon, effectively showing this button only to allow for
           // disabling the polygon state
           !element.polygon ||
-          element.points.length < 3,
+          element.points.length < 3
       )
     ) {
       return null;
     }
 
     const allPolygon = selectedElements.every(
-      (element) => isLineElement(element) && element.polygon,
+      (element) => isLineElement(element) && element.polygon
     );
 
     const label = t(
       allPolygon
         ? "labels.polygon.breakPolygon"
-        : "labels.polygon.convertToPolygon",
+        : "labels.polygon.convertToPolygon"
     );
 
     return (

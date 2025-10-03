@@ -14,8 +14,8 @@ import clsx from "clsx";
 
 import { deburr } from "../deburr";
 
-import { useLibraryCache } from "../hooks/useLibraryItemSvg";
-import { useScrollPosition } from "../hooks/useScrollPosition";
+import { useLibraryCache } from "../lib/hooks/useLibraryItemSvg";
+import { useScrollPosition } from "../lib/hooks/useScrollPosition";
 import { t } from "../i18n";
 
 import { LibraryMenuControlButtons } from "./LibraryMenuControlButtons";
@@ -36,7 +36,7 @@ import { useDevice } from "./App";
 
 import { Button } from "./Button";
 
-import type { ExcalidrawLibraryIds } from "../data/types";
+import type { ExcalidrawLibraryIds } from "../lib/data/types";
 
 import type {
   ExcalidrawProps,
@@ -113,12 +113,12 @@ export default function LibraryMenuItems({
 
   const unpublishedItems = useMemo(
     () => libraryItems.filter((item) => item.status !== "published"),
-    [libraryItems],
+    [libraryItems]
   );
 
   const publishedItems = useMemo(
     () => libraryItems.filter((item) => item.status === "published"),
-    [libraryItems],
+    [libraryItems]
   );
 
   const onItemSelectToggle = useCallback(
@@ -128,7 +128,7 @@ export default function LibraryMenuItems({
       if (shouldSelect) {
         if (event.shiftKey && lastSelectedItem) {
           const rangeStart = orderedItems.findIndex(
-            (item) => item.id === lastSelectedItem,
+            (item) => item.id === lastSelectedItem
           );
           const rangeEnd = orderedItems.findIndex((item) => item.id === id);
 
@@ -151,7 +151,7 @@ export default function LibraryMenuItems({
               }
               return acc;
             },
-            [],
+            []
           );
           onSelectItems(nextSelectedIds);
         } else {
@@ -169,7 +169,7 @@ export default function LibraryMenuItems({
       publishedItems,
       selectedItems,
       unpublishedItems,
-    ],
+    ]
   );
 
   useEffect(() => {
@@ -185,7 +185,7 @@ export default function LibraryMenuItems({
       let targetElements;
       if (selectedItems.includes(id)) {
         targetElements = libraryItems.filter((item) =>
-          selectedItems.includes(item.id),
+          selectedItems.includes(item.id)
         );
       } else {
         targetElements = libraryItems.filter((item) => item.id === id);
@@ -203,7 +203,7 @@ export default function LibraryMenuItems({
         };
       });
     },
-    [libraryItems, selectedItems],
+    [libraryItems, selectedItems]
   );
 
   const onItemDrag = useCallback(
@@ -215,10 +215,10 @@ export default function LibraryMenuItems({
       };
       event.dataTransfer.setData(
         MIME_TYPES.excalidrawlibIds,
-        JSON.stringify(data),
+        JSON.stringify(data)
       );
     },
-    [selectedItems],
+    [selectedItems]
   );
 
   const isItemSelected = useCallback(
@@ -228,7 +228,7 @@ export default function LibraryMenuItems({
       }
       return selectedItems.includes(id);
     },
-    [selectedItems],
+    [selectedItems]
   );
 
   const onAddToLibraryClick = useCallback(() => {
@@ -241,7 +241,7 @@ export default function LibraryMenuItems({
         onInsertLibraryItems(getInsertedElements(id));
       }
     },
-    [getInsertedElements, onInsertLibraryItems],
+    [getInsertedElements, onInsertLibraryItems]
   );
 
   const itemsRenderedPerBatch =

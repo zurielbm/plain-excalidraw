@@ -7,7 +7,7 @@ import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 import { actionSaveFileToDisk } from "../actions/actionExport";
 
 import { trackEvent } from "../analytics";
-import { nativeFileSystemSupported } from "../data/filesystem";
+import { nativeFileSystemSupported } from "../lib/data/filesystem";
 import { t } from "../i18n";
 
 import { Card } from "./Card";
@@ -23,7 +23,7 @@ import type { ExportOpts, BinaryFiles, UIAppState } from "../types";
 
 export type ExportCB = (
   elements: readonly NonDeletedExcalidrawElement[],
-  scale?: number,
+  scale?: number
 ) => void;
 
 const JSONExportModal = ({

@@ -55,9 +55,9 @@ import {
 
 import { SHAPES } from "../shapes";
 import { canChangeBackgroundColor, canChangeStrokeColor } from "../Actions";
-import { useStableCallback } from "../../hooks/useStableCallback";
+import { useStableCallback } from "../../lib/hooks/useStableCallback";
 import { activeConfirmDialogAtom } from "../ActiveConfirmDialog";
-import { useStable } from "../../hooks/useStable";
+import { useStable } from "../../lib/hooks/useStable";
 
 import { Ellipsify } from "../Ellipsify";
 
@@ -69,7 +69,7 @@ import {
 import {
   useLibraryCache,
   useLibraryItemSvg,
-} from "../../hooks/useLibraryItemSvg";
+} from "../../lib/hooks/useLibraryItemSvg";
 
 import * as defaultItems from "./defaultCommandPaletteItems";
 import "./CommandPalette.scss";

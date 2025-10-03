@@ -11,8 +11,8 @@ import {
   getExportSource,
 } from "@excalidraw/common";
 
-import { EditorLocalStorage } from "../data/EditorLocalStorage";
-import { canvasToBlob, resizeImageFile } from "../data/blob";
+import { EditorLocalStorage } from "../lib/data/EditorLocalStorage";
+import { canvasToBlob, resizeImageFile } from "../lib/data/blob";
 import { t } from "../i18n";
 
 import { Dialog } from "./Dialog";
@@ -24,7 +24,7 @@ import { CloseIcon } from "./icons";
 import "./PublishLibrary.scss";
 
 import type { ReactNode } from "react";
-import type { ExportedLibraryData } from "../data/types";
+import type { ExportedLibraryData } from "../lib/data/types";
 import type { LibraryItems, LibraryItem, UIAppState } from "../types";
 
 interface PublishLibraryDataParams {
@@ -81,7 +81,7 @@ const generatePreviewImage = async (libraryItems: LibraryItems) => {
     ctx.drawImage(
       itemCanvas,
       colOffset + (BOX_SIZE - width) / 2 + BOX_PADDING,
-      rowOffset + (BOX_SIZE - height) / 2 + BOX_PADDING,
+      rowOffset + (BOX_SIZE - height) / 2 + BOX_PADDING
     );
 
     // draw item border
@@ -92,7 +92,7 @@ const generatePreviewImage = async (libraryItems: LibraryItems) => {
       colOffset + BOX_PADDING / 2,
       rowOffset + BOX_PADDING / 2,
       BOX_SIZE + BOX_PADDING,
-      BOX_SIZE + BOX_PADDING,
+      BOX_SIZE + BOX_PADDING
     );
   }
 
@@ -101,7 +101,7 @@ const generatePreviewImage = async (libraryItems: LibraryItems) => {
     {
       outputType: MIME_TYPES.jpg,
       maxWidthOrHeight: 5000,
-    },
+    }
   );
 };
 
@@ -234,7 +234,7 @@ const PublishLibrary = ({
 
   useEffect(() => {
     const data = EditorLocalStorage.get<PublishLibraryDataParams>(
-      EDITOR_LS_KEYS.PUBLISH_LIBRARY,
+      EDITOR_LS_KEYS.PUBLISH_LIBRARY
     );
     if (data) {
       setLibraryData(data);
@@ -242,7 +242,7 @@ const PublishLibrary = ({
   }, []);
 
   const [clonedLibItems, setClonedLibItems] = useState<LibraryItems>(
-    libraryItems.slice(),
+    libraryItems.slice()
   );
 
   useEffect(() => {
@@ -323,7 +323,7 @@ const PublishLibrary = ({
             })
             .then((error) => {
               throw new Error(
-                error.message || response.statusText || "something went wrong",
+                error.message || response.statusText || "something went wrong"
               );
             });
         },
@@ -331,7 +331,7 @@ const PublishLibrary = ({
           console.error(err);
           onError(err);
           setIsSubmitting(false);
-        },
+        }
       )
       .catch((err) => {
         console.error(err);
@@ -356,7 +356,7 @@ const PublishLibrary = ({
             }}
             onRemove={onRemove}
           />
-        </div>,
+        </div>
       );
     });
     return <div className="selected-library-items">{items}</div>;
@@ -371,7 +371,7 @@ const PublishLibrary = ({
   const shouldRenderForm = !!libraryItems.length;
 
   const containsPublishedItems = libraryItems.some(
-    (item) => item.status === "published",
+    (item) => item.status === "published"
   );
 
   return (

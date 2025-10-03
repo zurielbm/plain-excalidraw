@@ -12,7 +12,7 @@ import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import type { ColorPaletteCustom } from "@excalidraw/common";
 
-import { useAtom } from "../../editor-jotai";
+import { useAtom } from "../../lib/editor-jotai";
 import { t } from "../../lib/i18n";
 
 import { CustomColorList } from "./CustomColorList";

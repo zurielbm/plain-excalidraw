@@ -28,8 +28,8 @@ import { useUIAppState } from "../context/ui-appState";
 import {
   distributeLibraryItemsOnSquareGrid,
   libraryItemsAtom,
-} from "../data/library";
-import { atom, useAtom } from "../editor-jotai";
+} from "../lib/data/library";
+import { atom, useAtom } from "../lib/editor-jotai";
 import { t } from "../i18n";
 
 import { getSelectedElements } from "../scene";
@@ -53,7 +53,7 @@ import type {
   UIAppState,
   AppClassProperties,
 } from "../types";
-import type Library from "../data/library";
+import type Library from "../lib/data/library";
 
 export const isLibraryMenuOpenAtom = atom(false);
 
@@ -91,7 +91,7 @@ const LibraryMenuContent = memo(
       (elements: LibraryItem["elements"]) => {
         const addToLibrary = async (
           processedElements: LibraryItem["elements"],
-          libraryItems: LibraryItems,
+          libraryItems: LibraryItems
         ) => {
           trackEvent("element", "addToLibrary", "ui");
           for (const type of LIBRARY_DISABLED_TYPES) {
@@ -117,12 +117,12 @@ const LibraryMenuContent = memo(
         };
         addToLibrary(elements, libraryItemsData.libraryItems);
       },
-      [onAddToLibrary, library, setAppState, libraryItemsData.libraryItems],
+      [onAddToLibrary, library, setAppState, libraryItemsData.libraryItems]
     );
 
     const libraryItems = useMemo(
       () => libraryItemsData.libraryItems,
-      [libraryItemsData],
+      [libraryItemsData]
     );
 
     if (
@@ -169,12 +169,12 @@ const LibraryMenuContent = memo(
         )}
       </LibraryMenuWrapper>
     );
-  },
+  }
 );
 
 const getPendingElements = (
   elements: readonly NonDeletedExcalidrawElement[],
-  selectedElementIds: UIAppState["selectedElementIds"],
+  selectedElementIds: UIAppState["selectedElementIds"]
 ) => ({
   elements,
   pending: getSelectedElements(
@@ -183,22 +183,22 @@ const getPendingElements = (
     {
       includeBoundTextElement: true,
       includeElementsInFrames: true,
-    },
+    }
   ),
   selectedElementIds,
 });
 
 const usePendingElementsMemo = (
   appState: UIAppState,
-  app: AppClassProperties,
+  app: AppClassProperties
 ) => {
   const elements = useExcalidrawElements();
   const [state, setState] = useState(() =>
-    getPendingElements(elements, appState.selectedElementIds),
+    getPendingElements(elements, appState.selectedElementIds)
   );
 
   const selectedElementVersions = useRef(
-    new Map<ExcalidrawElement["id"], ExcalidrawElement["version"]>(),
+    new Map<ExcalidrawElement["id"], ExcalidrawElement["version"]>()
   );
 
   useEffect(() => {
@@ -307,7 +307,7 @@ export const LibraryMenu = memo(() => {
           }
         }
       },
-      { capture: true },
+      { capture: true }
     );
   }, [selectedItems, setAppState, app]);
 
@@ -316,7 +316,7 @@ export const LibraryMenu = memo(() => {
       onInsertElements(distributeLibraryItemsOnSquareGrid(libraryItems));
       app.focusContainer();
     },
-    [onInsertElements, app],
+    [onInsertElements, app]
   );
 
   const deselectItems = useCallback(() => {

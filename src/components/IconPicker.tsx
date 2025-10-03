@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 
 import { isArrowKey, KEYS } from "@excalidraw/common";
 
-import { atom, useAtom } from "../editor-jotai";
+import { atom, useAtom } from "../lib/editor-jotai";
 import { getLanguage, t } from "../i18n";
 
 import Collapsible from "./Stats/Collapsible";
@@ -42,7 +42,7 @@ function Picker<T>({
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     const pressedOption = options.find(
-      (option) => option.keyBinding === event.key.toLowerCase(),
+      (option) => option.keyBinding === event.key.toLowerCase()
     )!;
 
     if (!(event.metaKey || event.altKey || event.ctrlKey) && pressedOption) {
@@ -102,11 +102,11 @@ function Picker<T>({
 
   const alwaysVisibleOptions = React.useMemo(
     () => options.slice(0, numberOfOptionsToAlwaysShow),
-    [options, numberOfOptionsToAlwaysShow],
+    [options, numberOfOptionsToAlwaysShow]
   );
   const moreOptions = React.useMemo(
     () => options.slice(numberOfOptionsToAlwaysShow),
-    [options, numberOfOptionsToAlwaysShow],
+    [options, numberOfOptionsToAlwaysShow]
   );
 
   useEffect(() => {

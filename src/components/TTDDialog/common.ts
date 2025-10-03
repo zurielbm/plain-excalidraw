@@ -6,11 +6,11 @@ import type { MermaidToExcalidrawResult } from "@excalidraw/mermaid-to-excalidra
 import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 
 import { EditorLocalStorage } from "../../lib/data/EditorLocalStorage";
-import { canvasToBlob } from "../../data/blob";
-import { t } from "../../i18n";
-import { convertToExcalidrawElements, exportToCanvas } from "../../index";
+import { canvasToBlob } from "../../lib/data/blob";
+import { t } from "../../lib/i18n";
+import { convertToExcalidrawElements, exportToCanvas } from "../../lib/index";
 
-import type { AppClassProperties, BinaryFiles } from "../../types";
+import type { AppClassProperties, BinaryFiles } from "../../lib/types";
 
 const resetPreview = ({
   canvasRef,

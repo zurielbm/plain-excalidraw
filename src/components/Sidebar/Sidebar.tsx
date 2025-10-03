@@ -19,7 +19,7 @@ import {
 
 import { useUIAppState } from "../../lib/context/ui-appState";
 import { atom, useSetAtom } from "../../lib/editor-jotai";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { useOutsideClick } from "../../lib/hooks/useOutsideClick";
 import { useDevice, useExcalidrawSetAppState } from "../App";
 import { Island } from "../Island";
 

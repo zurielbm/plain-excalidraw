@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { memo, useRef, useState } from "react";
 
-import { useLibraryItemSvg } from "../hooks/useLibraryItemSvg";
+import { useLibraryItemSvg } from "../lib/hooks/useLibraryItemSvg";
 
 import { useDevice } from "./App";
 import { CheckboxItem } from "./CheckboxItem";
@@ -10,7 +10,7 @@ import { PlusIcon } from "./icons";
 import "./LibraryUnit.scss";
 
 import type { LibraryItem } from "../types";
-import type { SvgCache } from "../hooks/useLibraryItemSvg";
+import type { SvgCache } from "../lib/hooks/useLibraryItemSvg";
 
 export const LibraryUnit = memo(
   ({
@@ -88,7 +88,7 @@ export const LibraryUnit = memo(
         )}
       </div>
     );
-  },
+  }
 );
 
 export const EmptyLibraryUnit = () => (
