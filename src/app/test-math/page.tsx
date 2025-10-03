@@ -1,17 +1,17 @@
 "use client";
 
-import { pointDistance, vectorAdd } from "@/lib/math";
+import { pointDistance, vectorAdd, pointFrom, vector } from "@/lib/math";
 
 export default function TestMathPage() {
-  const distance = pointDistance([0, 0], [3, 4]);
-  const vector = vectorAdd([1, 2], [3, 4]);
+  const distance = pointDistance(pointFrom(0, 0), pointFrom(3, 4));
+  const resultVector = vectorAdd(vector(1, 2), vector(3, 4));
 
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-4">✅ Math Module Test</h1>
       <p>Distance: {distance}</p>
       <p>
-        Vector add: [{vector[0]}, {vector[1]}]
+        Vector add: [{resultVector[0]}, {resultVector[1]}]
       </p>
     </div>
   );

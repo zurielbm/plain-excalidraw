@@ -13,6 +13,7 @@ import {
 import type {
   ExcalidrawLinearElement,
   ExcalidrawLineElement,
+  ExcalidrawElement,
 } from "@excalidraw/element/types";
 
 import { DEFAULT_CATEGORIES } from "../../components/CommandPalette/CommandPalette";
@@ -120,7 +121,7 @@ export const actionTogglePolygon = register({
     });
 
     const allPolygons = !selectedElements.some(
-      (element) => !isLineElement(element) || !element.polygon
+      (element: ExcalidrawElement) => !isLineElement(element) || !element.polygon
     );
 
     return allPolygons
@@ -138,14 +139,14 @@ export const actionTogglePolygon = register({
     return (
       selectedElements.length > 0 &&
       selectedElements.every(
-        (element) => isLineElement(element) && element.points.length >= 4
+        (element: ExcalidrawElement) => isLineElement(element) && element.points.length >= 4
       )
     );
   },
   perform(elements, appState, _, app) {
     const selectedElements = app.scene.getSelectedElements(appState);
 
-    if (selectedElements.some((element) => !isLineElement(element))) {
+    if (selectedElements.some((element: ExcalidrawElement) => !isLineElement(element))) {
       return false;
     }
 
@@ -194,7 +195,7 @@ export const actionTogglePolygon = register({
     }
 
     const allPolygon = selectedElements.every(
-      (element) => isLineElement(element) && element.polygon
+      (element: ExcalidrawElement) => isLineElement(element) && element.polygon
     );
 
     const label = t(

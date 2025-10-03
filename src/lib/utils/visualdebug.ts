@@ -9,7 +9,7 @@ import {
 import { isBounds } from "@excalidraw/element";
 
 import type { Curve } from "@excalidraw/math";
-import type { LineSegment } from "@excalidraw/utils";
+import type { LineSegment } from "@excalidraw/utils/bbox";
 
 import type { Bounds } from "@excalidraw/element";
 

@@ -51,10 +51,10 @@ import type {
 import type { Action } from "./actions/types";
 import type { Spreadsheet } from "./charts";
 import type { ClipboardData } from "./clipboard";
-import type App from "./components/App";
+import type App from "../components/App";
 import type Library from "./data/library";
 import type { FileSystemHandle } from "./data/filesystem";
-import type { ContextMenuItems } from "./components/ContextMenu";
+import type { ContextMenuItems } from "../components/ContextMenu";
 import type { SnapLine } from "./snapping";
 import type { ImportedDataState } from "./data/types";
 

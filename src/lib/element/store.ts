@@ -8,7 +8,7 @@ import {
   toIterable,
 } from "@excalidraw/common";
 
-import type App from "@excalidraw/excalidraw/components/App";
+import type App from "../../components/App";
 
 import type { DTO, ValueOf } from "@excalidraw/common/utility-types";
 

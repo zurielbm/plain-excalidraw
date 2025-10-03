@@ -1,0 +1,36 @@
+/* Excalidraw CSS */
+
+/* Import all necessary styles */
+@import "../styles/app.scss";
+@import "../styles/styles.scss";
+@import "../styles/theme.scss";
+@import "../styles/globals.scss";
+@import "./fonts/fonts.css";
+
+/* Additional styles for Excalidraw */
+.excalidraw {
+  --color-primary: #6965db;
+  --color-primary-darker: #5854d6;
+  --color-primary-darkest: #4946b4;
+  --color-primary-light: #8582e1;
+  --color-primary-lighter: #a3a0e8;
+  --color-primary-lightest: #c2c0ef;
+  
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.excalidraw-wrapper {
+  height: 100%;
+  position: relative;
+}
+
+.excalidraw-app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}

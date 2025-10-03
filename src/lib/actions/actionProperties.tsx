@@ -160,7 +160,7 @@ export const changeProperty = (
     })
   );
 
-  return elements.map((element) => {
+  return elements.map((element: ExcalidrawElement) => {
     if (
       selectedElementIds.get(element.id) ||
       element.id === appState.editingTextElement?.id
@@ -195,7 +195,7 @@ export const getFormValue = function <T extends Primitive>(
       const targetElements =
         isRelevantElement === true
           ? selectedElements
-          : selectedElements.filter((el) => isRelevantElement(el));
+          : selectedElements.filter((el: ExcalidrawElement) => isRelevantElement(el));
 
       ret =
         reduceToCommonValue(targetElements, getAttribute) ??
@@ -373,14 +373,14 @@ export const actionChangeBackgroundColor = register({
 
     const selectedElements = app.scene.getSelectedElements(appState);
     const shouldEnablePolygon =
-      !isTransparent(value.currentItemBackgroundColor) &&
-      selectedElements.every(
-        (el) => isLineElement(el) && canBecomePolygon(el.points)
-      );
+    !isTransparent(value.currentItemBackgroundColor) &&
+    selectedElements.every(
+      (el: ExcalidrawElement) => isLineElement(el) && canBecomePolygon(el.points)
+    );
 
     if (shouldEnablePolygon) {
       const selectedElementsMap = arrayToMap(selectedElements);
-      nextElements = elements.map((el) => {
+      nextElements = elements.map((el: ExcalidrawElement) => {
         if (selectedElementsMap.has(el.id) && isLineElement(el)) {
           return newElementWith(el, {
             backgroundColor: value.currentItemBackgroundColor,
@@ -501,7 +501,7 @@ export const actionChangeFillStyle = register({
               const nextValue =
                 event.altKey &&
                 value === "hachure" &&
-                selectedElements.every((el) => el.fillStyle === "hachure")
+                selectedElements.every((el: ExcalidrawElement) => el.fillStyle === "hachure")
                   ? "zigzag"
                   : value;
 

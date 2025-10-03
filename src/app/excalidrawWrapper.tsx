@@ -10,9 +10,24 @@ const ExcalidrawWrapper: React.FC = () => {
   return (
     <>
       <App
-        appTitle={"Excalidraw with Nextjs Example"}
-        useCustom={(api: any, args?: any[]) => {}}
-        excalidrawLib={excalidrawLib}
+        UIOptions={{
+          canvasActions: {
+            export: false,
+            changeViewBackgroundColor: true,
+            clearCanvas: true,
+            loadScene: true,
+            saveToActiveFile: true,
+            toggleTheme: true,
+            saveAsImage: true
+          }
+        }}
+        detectScroll={false}
+        handleKeyboardGlobally={true}
+        isCollaborating={false}
+        aiEnabled={false}
+        excalidrawAPI={(api) => {
+          // You can use the API here if needed
+        }}
       >
         <Excalidraw />
       </App>

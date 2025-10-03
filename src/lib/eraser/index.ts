@@ -37,7 +37,7 @@ import { AnimatedTrail } from "../animated-trail";
 
 import type { AnimationFrameHandler } from "../animation-frame-handler";
 
-import type App from "../components/App";
+import type App from "../../components/App";
 
 export class EraserTrail extends AnimatedTrail {
   private elementsToErase: Set<ExcalidrawElement["id"]> = new Set();

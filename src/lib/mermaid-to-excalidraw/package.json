@@ -1,0 +1,8 @@
+{
+  "name": "@excalidraw/mermaid-to-excalidraw",
+  "version": "0.1.0",
+  "description": "Local implementation of mermaid-to-excalidraw for plain-excalidraw",
+  "main": "index.ts",
+  "types": "index.ts",
+  "private": true
+}
