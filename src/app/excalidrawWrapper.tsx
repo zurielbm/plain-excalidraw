@@ -4,7 +4,7 @@ import { Excalidraw } from "@excalidraw/excalidraw";
 
 import "@excalidraw/excalidraw/index.css";
 
-import App from "../../with-script-in-browser/components/ExampleApp";
+import App from "../components/App";
 
 const ExcalidrawWrapper: React.FC = () => {
   return (
