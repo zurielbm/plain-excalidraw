@@ -1,6 +1,7 @@
 import * as Popover from "@radix-ui/react-popover";
 import clsx from "clsx";
 import { useRef, useEffect } from "react";
+import type { CSSProperties } from "react";
 
 import {
   COLOR_OUTLINE_CONTRAST_THRESHOLD,
@@ -265,7 +266,11 @@ const ColorPickerTrigger = ({
           !color || !isColorDark(color, COLOR_OUTLINE_CONTRAST_THRESHOLD),
       })}
       aria-label={label}
-      style={color ? { "--swatch-color": color } : undefined}
+      style={
+        color
+          ? ({ "--swatch-color": color } as CSSProperties)
+          : undefined
+      }
       title={
         type === "elementStroke"
           ? t("labels.showStroke")

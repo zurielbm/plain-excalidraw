@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 
 import { useAtom } from "../../lib/editor-jotai";
 
@@ -52,7 +53,7 @@ export const CustomColorList = ({
             }}
             title={c}
             aria-label={label}
-            style={{ "--swatch-color": c }}
+            style={{ "--swatch-color": c } as CSSProperties}
             key={i}
           >
             <div className="color-picker__button-outline" />

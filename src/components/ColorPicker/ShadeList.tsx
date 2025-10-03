@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 
 import type { ColorPaletteCustom } from "@excalidraw/common";
 
@@ -60,7 +61,11 @@ export const ShadeList = ({ color, onChange, palette }: ShadeListProps) => {
               )}
               aria-label="Shade"
               title={`${colorName} - ${i + 1}`}
-              style={color ? { "--swatch-color": color } : undefined}
+              style={
+                color
+                  ? ({ "--swatch-color": color } as CSSProperties)
+                  : undefined
+              }
               onClick={() => {
                 onChange(color);
                 setActiveColorPickerSection("shades");

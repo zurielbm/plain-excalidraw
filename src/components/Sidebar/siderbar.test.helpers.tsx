@@ -1,12 +1,14 @@
 import React from "react";
 
-import { Excalidraw } from "../..";
+import { Excalidraw } from "../../lib";
 import {
   GlobalTestState,
   queryByTestId,
   render,
   withExcalidrawDimensions,
 } from "../../tests/test-utils";
+
+declare const expect: any;
 
 export const assertSidebarDockButton = async <T extends boolean>(
   hasDockButton: T,

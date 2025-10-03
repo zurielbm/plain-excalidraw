@@ -234,13 +234,13 @@ const StatsDragInput = <
 
             let originalElementsMap: ElementsMap | null = app.scene
               .getNonDeletedElements()
-              .reduce((acc: ElementsMap, element) => {
-                acc.set(element.id, deepCopyElement(element));
+              .reduce((acc: ElementsMap, element: ExcalidrawElement) => {
+                acc.set(element.id, deepCopyElement(element) as ExcalidrawElement);
                 return acc;
               }, new Map());
 
             let originalElements: readonly E[] | null = elements.map(
-              (element) => originalElementsMap!.get(element.id) as E
+              (element: E) => originalElementsMap!.get(element.id)! as E
             );
 
             const originalAppState: AppState = cloneJSON(appState);

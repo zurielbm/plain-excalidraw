@@ -27,7 +27,7 @@ import { t } from "../i18n";
 import { getSelectedElements, isSomeElementSelected } from "../scene";
 import { getExportSize } from "../scene/export";
 
-import "../components/ToolIcon.scss";
+import "../../components/ToolIcon.scss";
 
 import { register } from "./register";
 

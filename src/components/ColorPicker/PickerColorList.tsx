@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 
 import type { ColorPaletteCustom } from "@excalidraw/common";
 
@@ -77,7 +78,11 @@ const PickerColorList = ({
               color.startsWith("#") ? ` ${color}` : ""
             } — ${keybinding}`}
             aria-label={`${label} — ${keybinding}`}
-            style={color ? { "--swatch-color": color } : undefined}
+            style={
+              color
+                ? ({ "--swatch-color": color } as CSSProperties)
+                : undefined
+            }
             data-testid={`color-${key}`}
             key={key}
           >

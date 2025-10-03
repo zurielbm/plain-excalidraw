@@ -19,7 +19,7 @@ import type {
   InteractiveCanvasRenderConfig,
   RenderableElementsMap,
   RenderInteractiveSceneCallback,
-} from "../../scene/types";
+} from "../../lib/scene/types";
 import type { AppState, Device, InteractiveCanvasAppState } from "../../types";
 import type { DOMAttributes } from "react";
 
