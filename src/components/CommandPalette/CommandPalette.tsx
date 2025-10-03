@@ -64,7 +64,7 @@ import { Ellipsify } from "../Ellipsify";
 import {
   distributeLibraryItemsOnSquareGrid,
   libraryItemsAtom,
-} from "../../data/library";
+} from "../../lib/data/library";
 
 import {
   useLibraryCache,

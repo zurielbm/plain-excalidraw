@@ -105,6 +105,25 @@ import { atom, useAtom, useSetAtom } from "../../lib/editor-jotai";
 
 **Files Updated**: OverwriteConfirm, TTDDialog components, CommandPalette, main-menu components, welcome-screen components, footer components, Sidebar components, and more.
 
+### 8. Data Directory Import Corrections ✅
+
+**Problem**: Components were importing from `"../../data/"` and `"../data/"` but these are in `"../../lib/data/"` and `"../lib/data/"`
+
+**Solution**: Fixed data imports across components:
+
+```typescript
+// Fixed data imports
+import { EditorLocalStorage } from "../../lib/data/EditorLocalStorage";
+import { exportCanvas, loadFromBlob } from "../lib/data";
+import Library, {
+  distributeLibraryItemsOnSquareGrid,
+} from "../lib/data/library";
+import { restore, restoreElements } from "../lib/data/restore";
+import { prepareElementsForExport } from "../lib/data";
+```
+
+**Files Updated**: MermaidToExcalidraw, CommandPalette, App.tsx, ImageExportDialog, and others.
+
 ## Remaining Opportunities
 
 ### Path Alias Usage

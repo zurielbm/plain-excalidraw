@@ -19,7 +19,7 @@ import {
   actionChangeProjectName,
 } from "../actions/actionExport";
 import { probablySupportsClipboardBlob } from "../clipboard";
-import { prepareElementsForExport } from "../data";
+import { prepareElementsForExport } from "../lib/data";
 import { canvasToBlob } from "../data/blob";
 import { nativeFileSystemSupported } from "../data/filesystem";
 import { useCopyStatus } from "../hooks/useCopiedIndicator";
@@ -74,19 +74,19 @@ const ImageExportModal = ({
 }: ImageExportModalProps) => {
   const hasSelection = isSomeElementSelected(
     elementsSnapshot,
-    appStateSnapshot,
+    appStateSnapshot
   );
 
   const [projectName, setProjectName] = useState(name);
   const [exportSelectionOnly, setExportSelectionOnly] = useState(hasSelection);
   const [exportWithBackground, setExportWithBackground] = useState(
-    appStateSnapshot.exportBackground,
+    appStateSnapshot.exportBackground
   );
   const [exportDarkMode, setExportDarkMode] = useState(
-    appStateSnapshot.exportWithDarkMode,
+    appStateSnapshot.exportWithDarkMode
   );
   const [embedScene, setEmbedScene] = useState(
-    appStateSnapshot.exportEmbedScene,
+    appStateSnapshot.exportEmbedScene
   );
   const [exportScale, setExportScale] = useState(appStateSnapshot.exportScale);
 
@@ -111,7 +111,7 @@ const ImageExportModal = ({
   const { exportedElements, exportingFrame } = prepareElementsForExport(
     elementsSnapshot,
     appStateSnapshot,
-    exportSelectionOnly,
+    exportSelectionOnly
   );
 
   useEffect(() => {
@@ -190,7 +190,7 @@ const ImageExportModal = ({
                 actionManager.executeAction(
                   actionChangeProjectName,
                   "ui",
-                  event.target.value,
+                  event.target.value
                 );
               }}
             />
@@ -225,7 +225,7 @@ const ImageExportModal = ({
               actionManager.executeAction(
                 actionChangeExportBackground,
                 "ui",
-                checked,
+                checked
               );
             }}
           />
@@ -243,7 +243,7 @@ const ImageExportModal = ({
                 actionManager.executeAction(
                   actionExportWithDarkMode,
                   "ui",
-                  checked,
+                  checked
                 );
               }}
             />
@@ -262,7 +262,7 @@ const ImageExportModal = ({
               actionManager.executeAction(
                 actionChangeExportEmbedScene,
                 "ui",
-                checked,
+                checked
               );
             }}
           />
@@ -321,7 +321,7 @@ const ImageExportModal = ({
                   exportedElements,
                   {
                     exportingFrame,
-                  },
+                  }
                 );
                 onCopy();
               }}

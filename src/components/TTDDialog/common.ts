@@ -5,7 +5,7 @@ import type { MermaidToExcalidrawResult } from "@excalidraw/mermaid-to-excalidra
 
 import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 
-import { EditorLocalStorage } from "../../data/EditorLocalStorage";
+import { EditorLocalStorage } from "../../lib/data/EditorLocalStorage";
 import { canvasToBlob } from "../../data/blob";
 import { t } from "../../i18n";
 import { convertToExcalidrawElements, exportToCanvas } from "../../index";
@@ -38,7 +38,7 @@ export interface MermaidToExcalidrawLibProps {
   api: Promise<{
     parseMermaidToExcalidraw: (
       definition: string,
-      config?: MermaidConfig,
+      config?: MermaidConfig
     ) => Promise<MermaidToExcalidrawResult>;
   }>;
 }
@@ -81,7 +81,7 @@ export const convertMermaidToExcalidraw = async ({
       ret = await api.parseMermaidToExcalidraw(mermaidDefinition);
     } catch (err: any) {
       ret = await api.parseMermaidToExcalidraw(
-        mermaidDefinition.replace(/"/g, "'"),
+        mermaidDefinition.replace(/"/g, "'")
       );
     }
     const { elements, files } = ret;
@@ -127,7 +127,7 @@ export const convertMermaidToExcalidraw = async ({
 export const saveMermaidDataToStorage = (mermaidDefinition: string) => {
   EditorLocalStorage.set(
     EDITOR_LS_KEYS.MERMAID_TO_EXCALIDRAW,
-    mermaidDefinition,
+    mermaidDefinition
   );
 };
 
