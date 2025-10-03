@@ -774,19 +774,11 @@ export const toArray = <T>(
   return Array.isArray(values) ? values : Array.from(toIterable(values));
 };
 
-<<<<<<< HEAD
-export const isTestEnv = () => import.meta.env.MODE === ENV.TEST;
-
-export const isDevEnv = () => import.meta.env.MODE === ENV.DEVELOPMENT;
-
-export const isProdEnv = () => import.meta.env.MODE === ENV.PRODUCTION;
-=======
 export const isTestEnv = () => process.env.NODE_ENV === ENV.TEST;
 
 export const isDevEnv = () => process.env.NODE_ENV === ENV.DEVELOPMENT;
 
 export const isProdEnv = () => process.env.NODE_ENV === ENV.PRODUCTION;
->>>>>>> origin/ai/debug
 
 export const isServerEnv = () =>
   typeof process !== "undefined" && !!process?.env?.NODE_ENV;
@@ -1184,10 +1176,6 @@ export const normalizeEOL = (str: string) => {
 };
 
 // -----------------------------------------------------------------------------
-<<<<<<< HEAD
-// ------------------------- NEEDED FOR MATH------------------------------------
-=======
->>>>>>> origin/ai/debug
 type HasBrand<T> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   [K in keyof T]: K extends `~brand${infer _}` ? true : never;
