@@ -1613,13 +1613,13 @@ class App extends React.Component<AppProps, AppState> {
                     <ExcalidrawElementsContext.Provider
                       value={this.scene.getNonDeletedElements()}
                     >
-                      <ExcalidrawActionManagerContext.Provider
-                        value={this.actionManager}
-                      >
-                        <LayerUI
-                          canvas={this.canvas}
-                          appState={this.state}
-                          files={this.files}
+                                              <ExcalidrawActionManagerContext.Provider
+                                                value={this.actionManager}
+                                              >
+                                                <EditorJotaiProvider>
+                                                  <LayerUI
+                                                    canvas={this.canvas}
+                                                    appState={this.state}                          files={this.files}
                           setAppState={this.setAppState}
                           actionManager={this.actionManager}
                           elements={this.scene.getNonDeletedElements()}
@@ -1650,8 +1650,8 @@ class App extends React.Component<AppProps, AppState> {
                           }
                         >
                           {this.props.children}
-                        </LayerUI>
-
+                                                    </LayerUI>
+                                                  </EditorJotaiProvider>
                         <div className="excalidraw-textEditorContainer" />
                         <div className="excalidraw-contextMenuContainer" />
                         <div className="excalidraw-eye-dropper-container" />
