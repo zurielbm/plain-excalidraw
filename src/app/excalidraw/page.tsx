@@ -16,7 +16,9 @@ export default function Page() {
     <>
       <a href="/">Switch to App router</a>
       <h1 className="page-title">Pages Router</h1>
-      <Excalidraw />
+      <div style={{ height: "800px" }}>
+        <Excalidraw />
+      </div>
     </>
   );
 }
