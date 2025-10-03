@@ -44,6 +44,12 @@ export default function Home() {
         >
           Go to Excalidraw Page
         </Link>
+        <Link
+          href="/test-excalidraw"
+          className="text-xl text-blue-500 hover:underline"
+        >
+          Go to Test Excalidraw Page
+        </Link>
         
         </div>
       </div>
