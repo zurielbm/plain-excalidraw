@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 
 import { muteFSAbortError } from "@excalidraw/common";
 
-import { useUIAppState } from "../context/ui-appState";
+import { useUIAppState } from "../lib/context/ui-appState";
 import { fileOpen } from "../lib/data/filesystem";
 import { saveLibraryAsJSON } from "../lib/data/json";
 import { libraryItemsAtom } from "../lib/data/library";

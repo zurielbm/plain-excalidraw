@@ -19,7 +19,7 @@ import { CaptureUpdateAction } from "@excalidraw/element";
 import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 import { setCursorForShape } from "../cursor";
-import { frameToolIcon } from "../components/icons";
+import { frameToolIcon } from "../../components/icons";
 import { getSelectedElements } from "../scene";
 
 import { register } from "./register";

@@ -10,7 +10,7 @@ import { CaptureUpdateAction } from "@excalidraw/element";
 
 import type { ExcalidrawElement } from "@excalidraw/element/types";
 
-import { selectAllIcon } from "../components/icons";
+import { selectAllIcon } from "../../components/icons";
 
 import { register } from "./register";
 

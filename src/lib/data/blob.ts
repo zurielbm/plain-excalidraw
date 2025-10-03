@@ -102,7 +102,9 @@ export const getMimeType = (blob: Blob | string): string => {
   return "";
 };
 
-export const getFileHandleType = (handle: FileSystemHandle | null) => {
+export const getFileHandleType = (
+  handle: FileSystemHandle | FileSystemFileHandle | null,
+) => {
   if (!handle) {
     return null;
   }
@@ -116,7 +118,9 @@ export const isImageFileHandleType = (
   return type === "png" || type === "svg";
 };
 
-export const isImageFileHandle = (handle: FileSystemHandle | null) => {
+export const isImageFileHandle = (
+  handle: FileSystemHandle | FileSystemFileHandle | null,
+) => {
   const type = getFileHandleType(handle);
   return type === "png" || type === "svg";
 };
@@ -138,7 +142,7 @@ export const loadSceneOrLibraryFromBlob = async (
   localAppState: AppState | null,
   localElements: readonly ExcalidrawElement[] | null,
   /** FileSystemHandle. Defaults to `blob.handle` if defined, otherwise null. */
-  fileHandle?: FileSystemHandle | null,
+  fileHandle?: FileSystemHandle | FileSystemFileHandle | null,
 ) => {
   const contents = await parseFileContents(blob);
   let data;
@@ -200,7 +204,7 @@ export const loadFromBlob = async (
   localAppState: AppState | null,
   localElements: readonly ExcalidrawElement[] | null,
   /** FileSystemHandle. Defaults to `blob.handle` if defined, otherwise null. */
-  fileHandle?: FileSystemHandle | null,
+  fileHandle?: FileSystemHandle | FileSystemFileHandle | null,
 ) => {
   const ret = await loadSceneOrLibraryFromBlob(
     blob,

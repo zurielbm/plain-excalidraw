@@ -399,7 +399,7 @@ export interface AppState {
   offsetTop: number;
   offsetLeft: number;
 
-  fileHandle: FileSystemHandle | null;
+  fileHandle: FileSystemHandle | FileSystemFileHandle | null;
   collaborators: Map<SocketId, Collaborator>;
   stats: {
     open: boolean;

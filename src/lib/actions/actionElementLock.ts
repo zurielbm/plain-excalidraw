@@ -10,7 +10,7 @@ import { CaptureUpdateAction } from "@excalidraw/element";
 
 import type { ExcalidrawElement } from "@excalidraw/element/types";
 
-import { LockedIcon, UnlockedIcon } from "../components/icons";
+import { LockedIcon, UnlockedIcon } from "../../components/icons";
 
 import { getSelectedElements } from "../scene";
 
@@ -19,7 +19,7 @@ import { register } from "./register";
 import type { AppState } from "../types";
 
 const shouldLock = (elements: readonly ExcalidrawElement[]) =>
-  elements.every((el) => !el.locked);
+  elements.every((element: ExcalidrawElement) => !element.locked);
 
 export const actionToggleElementLock = register({
   name: "toggleElementLock",
@@ -42,7 +42,9 @@ export const actionToggleElementLock = register({
     const selectedElements = app.scene.getSelectedElements(appState);
     return (
       selectedElements.length > 0 &&
-      !selectedElements.some((element) => element.locked && element.frameId)
+      !selectedElements.some(
+        (element: ExcalidrawElement) => element.locked && element.frameId,
+      )
     );
   },
   perform: (elements, appState, _, app) => {
@@ -76,7 +78,7 @@ export const actionToggleElementLock = register({
       delete nextLockedMultiSelections[groupId];
     }
 
-    const nextElements = elements.map((element) => {
+    const nextElements = elements.map((element: ExcalidrawElement) => {
       if (!selectedElementsMap.has(element.id)) {
         return element;
       }
@@ -108,9 +110,14 @@ export const actionToggleElementLock = register({
     const nextElementsMap = arrayToMap(nextElements);
     const nextSelectedElementIds: AppState["selectedElementIds"] = nextLockState
       ? {}
-      : Object.fromEntries(selectedElements.map((el) => [el.id, true]));
+      : Object.fromEntries(
+          selectedElements.map((element: ExcalidrawElement) => [
+            element.id,
+            true,
+          ]),
+        );
     const unlockedSelectedElements = selectedElements.map(
-      (el) => nextElementsMap.get(el.id) || el,
+      (element: ExcalidrawElement) => nextElementsMap.get(element.id) || element,
     );
     const nextSelectedGroupIds = nextLockState
       ? {}
@@ -166,9 +173,11 @@ export const actionUnlockAllElements = register({
     );
   },
   perform: (elements, appState) => {
-    const lockedElements = elements.filter((el) => el.locked);
+    const lockedElements = elements.filter(
+      (element: ExcalidrawElement) => element.locked,
+    );
 
-    const nextElements = elements.map((element) => {
+    const nextElements = elements.map((element: ExcalidrawElement) => {
       if (element.locked) {
         // remove the temporary groupId if it exists
         const nextGroupIds = element.groupIds.filter(

@@ -37,7 +37,7 @@ import type {
 } from "@excalidraw/element/types";
 
 import { ToolButton } from "../../components/ToolButton";
-import { UngroupIcon, GroupIcon } from "../components/icons";
+import { UngroupIcon, GroupIcon } from "../../components/icons";
 
 import { t } from "../i18n";
 
@@ -256,8 +256,8 @@ export const actionUngroup = register({
 
     const selectedElementFrameIds = new Set(
       selectedElements
-        .filter((element) => element.frameId)
-        .map((element) => element.frameId!),
+        .filter((element: ExcalidrawElement) => element.frameId)
+        .map((element: ExcalidrawElement) => element.frameId!),
     );
 
     const targetFrames = getFrameLikeElements(elements).filter((frame) =>

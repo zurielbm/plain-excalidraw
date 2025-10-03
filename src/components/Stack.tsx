@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 
 import "./Stack.scss";
@@ -25,7 +26,7 @@ const RowStack = forwardRef(
           alignItems: align,
           justifyContent,
           ...style,
-        }}
+        } as CSSProperties}
         ref={ref}
       >
         {children}
@@ -47,7 +48,7 @@ const ColStack = forwardRef(
           justifyItems: align,
           justifyContent,
           ...style,
-        }}
+        } as CSSProperties}
         ref={ref}
       >
         {children}

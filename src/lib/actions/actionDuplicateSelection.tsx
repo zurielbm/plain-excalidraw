@@ -21,7 +21,7 @@ import { duplicateElements } from "@excalidraw/element";
 import { CaptureUpdateAction } from "@excalidraw/element";
 
 import { ToolButton } from "../../components/ToolButton";
-import { DuplicateIcon } from "../components/icons";
+import { DuplicateIcon } from "../../components/icons";
 
 import { t } from "../i18n";
 import { isSomeElementSelected } from "../scene";

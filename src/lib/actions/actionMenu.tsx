@@ -7,7 +7,7 @@ import { showSelectedShapeActions } from "@excalidraw/element";
 import { CaptureUpdateAction } from "@excalidraw/element";
 
 import { ToolButton } from "../../components/ToolButton";
-import { HamburgerMenuIcon, HelpIconThin, palette } from "../components/icons";
+import { HamburgerMenuIcon, HelpIconThin, palette } from "../../components/icons";
 import { t } from "../i18n";
 
 import { register } from "./register";

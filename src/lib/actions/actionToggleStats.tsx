@@ -2,7 +2,7 @@ import { CODES, KEYS } from "@excalidraw/common";
 
 import { CaptureUpdateAction } from "@excalidraw/element";
 
-import { abacusIcon } from "../components/icons";
+import { abacusIcon } from "../../components/icons";
 
 import { register } from "./register";
 

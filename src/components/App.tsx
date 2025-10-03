@@ -454,7 +454,7 @@ import type { ExcalidrawLibraryIds } from "../lib/data/types";
 import type {
   RenderInteractiveSceneCallback,
   ScrollBars,
-} from "../scene/types";
+} from "../lib/scene/types";
 
 import type { ClipboardData, PastedMixedContent } from "../lib/clipboard";
 import type { ExportedElements } from "../lib/data";
@@ -2337,11 +2337,8 @@ class App extends React.Component<AppProps, AppState> {
             return;
           }
           const fileHandle = launchParams.files[0];
-          const blob: Blob = await fileHandle.getFile();
-          this.loadFileToCanvas(
-            new File([blob], blob.name || "", { type: blob.type }),
-            fileHandle
-          );
+          const file = await fileHandle.getFile();
+          this.loadFileToCanvas(file, fileHandle);
         }
       );
     }
@@ -2429,7 +2426,7 @@ class App extends React.Component<AppProps, AppState> {
     this.clearImageShapeCache();
 
     // manually loading the font faces seems faster even in browsers that do fire the loadingdone event
-    this.fonts.loadSceneFonts().then((fontFaces) => {
+    this.fonts.loadSceneFonts().then((fontFaces: readonly FontFace[]) => {
       this.fonts.onLoaded(fontFaces);
     });
 
@@ -3398,9 +3395,11 @@ class App extends React.Component<AppProps, AppState> {
 
     // paste event may not fire FontFace loadingdone event in Safari, hence loading font faces manually
     if (isSafari) {
-      Fonts.loadElementsFonts(duplicatedElements).then((fontFaces) => {
-        this.fonts.onLoaded(fontFaces);
-      });
+      Fonts.loadElementsFonts(duplicatedElements).then(
+        (fontFaces: readonly FontFace[]) => {
+          this.fonts.onLoaded(fontFaces);
+        }
+      );
     }
 
     if (opts.files) {
@@ -3902,7 +3901,7 @@ class App extends React.Component<AppProps, AppState> {
       const response = await webShareTargetCache.match("shared-file");
       if (response) {
         const blob = await response.blob();
-        const file = new File([blob], blob.name || "", { type: blob.type });
+        const file = new File([blob], "shared-file", { type: blob.type });
         this.loadFileToCanvas(file, null);
         await webShareTargetCache.delete("shared-file");
         window.history.replaceState(null, APP_NAME, window.location.pathname);
@@ -10643,7 +10642,7 @@ class App extends React.Component<AppProps, AppState> {
 
   loadFileToCanvas = async (
     file: File,
-    fileHandle: FileSystemHandle | null
+    fileHandle: FileSystemHandle | FileSystemFileHandle | null
   ) => {
     file = await normalizeFile(file);
     try {

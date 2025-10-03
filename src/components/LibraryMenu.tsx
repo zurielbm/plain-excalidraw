@@ -24,7 +24,7 @@ import type {
 } from "@excalidraw/element/types";
 
 import { trackEvent } from "../lib/analytics";
-import { useUIAppState } from "../context/ui-appState";
+import { useUIAppState } from "../lib/context/ui-appState";
 import {
   distributeLibraryItemsOnSquareGrid,
   libraryItemsAtom,

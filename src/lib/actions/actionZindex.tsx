@@ -14,7 +14,7 @@ import {
   BringToFrontIcon,
   SendBackwardIcon,
   SendToBackIcon,
-} from "../components/icons";
+} from "../../components/icons";
 import { t } from "../i18n";
 
 import { register } from "./register";

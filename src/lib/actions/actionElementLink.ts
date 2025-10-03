@@ -7,7 +7,7 @@ import {
 import { CaptureUpdateAction } from "@excalidraw/element";
 
 import { copyTextToSystemClipboard } from "../clipboard";
-import { copyIcon, elementLinkIcon } from "../components/icons";
+import { copyIcon, elementLinkIcon } from "../../components/icons";
 import { t } from "../i18n";
 import { getSelectedElements } from "../scene";
 

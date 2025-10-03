@@ -5,7 +5,7 @@ import { EVENT, KEYS, rgbToHex } from "@excalidraw/common";
 
 import type { ExcalidrawElement } from "@excalidraw/element/types";
 
-import { useUIAppState } from "../context/ui-appState";
+import { useUIAppState } from "../lib/context/ui-appState";
 import { atom } from "../lib/editor-jotai";
 import { useCreatePortalContainer } from "../lib/hooks/useCreatePortalContainer";
 import { useOutsideClick } from "../lib/hooks/useOutsideClick";

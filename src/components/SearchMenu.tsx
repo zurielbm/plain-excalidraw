@@ -28,6 +28,7 @@ import { isTextElement, isFrameLikeElement } from "@excalidraw/element";
 import { getDefaultFrameName } from "@excalidraw/element/frame";
 
 import type {
+  ExcalidrawElement,
   ExcalidrawFrameLikeElement,
   ExcalidrawTextElement,
 } from "@excalidraw/element/types";
@@ -35,7 +36,7 @@ import type {
 import { atom, useAtom } from "../lib/editor-jotai";
 
 import { useStable } from "../lib/hooks/useStable";
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import { useApp, useExcalidrawSetAppState } from "./App";
 import { Button } from "./Button";
@@ -252,7 +253,7 @@ export const SearchMenu = () => {
           app.scrollToContent(matchAsElement, {
             animate: true,
             duration: 300,
-            ...zoomOptions,
+            ...(zoomOptions ?? {}),
             canvasOffsets: app.getEditorUIOffsets(),
           });
         }
@@ -796,16 +797,21 @@ const handleSearch = debounce(
     }
 
     const elements = app.scene.getNonDeletedElements();
-    const texts = elements.filter((el) =>
-      isTextElement(el)
-    ) as ExcalidrawTextElement[];
+    const texts = elements.filter(
+      (el: ExcalidrawElement): el is ExcalidrawTextElement =>
+        isTextElement(el),
+    );
 
-    const frames = elements.filter((el) =>
-      isFrameLikeElement(el)
-    ) as ExcalidrawFrameLikeElement[];
+    const frames = elements.filter(
+      (el: ExcalidrawElement): el is ExcalidrawFrameLikeElement =>
+        isFrameLikeElement(el),
+    );
 
-    texts.sort((a, b) => a.y - b.y);
-    frames.sort((a, b) => a.y - b.y);
+    texts.sort((a: ExcalidrawTextElement, b: ExcalidrawTextElement) => a.y - b.y);
+    frames.sort(
+      (a: ExcalidrawFrameLikeElement, b: ExcalidrawFrameLikeElement) =>
+        a.y - b.y,
+    );
 
     const textMatches: SearchMatchItem[] = [];
 
@@ -859,7 +865,9 @@ const handleSearch = debounce(
     }
 
     const visibleIds = new Set(
-      app.visibleElements.map((visibleElement) => visibleElement.id)
+      app.visibleElements.map(
+        (visibleElement: ExcalidrawElement) => visibleElement.id
+      )
     );
 
     // putting frame matches first

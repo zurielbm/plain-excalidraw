@@ -3,7 +3,7 @@ import React, { forwardRef, useState } from "react";
 
 import { isPromiseLike } from "@excalidraw/common";
 
-import { AbortError } from "../errors";
+import { AbortError } from "../lib/errors";
 
 import Spinner from "./Spinner";
 import { tablerCheckIcon } from "./icons";

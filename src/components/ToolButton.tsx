@@ -5,7 +5,7 @@ import { isPromiseLike } from "@excalidraw/common";
 
 import type { PointerType } from "@excalidraw/element/types";
 
-import { AbortError } from "../errors";
+import { AbortError } from "../lib/errors";
 
 import "./ToolIcon.scss";
 

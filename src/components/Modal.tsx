@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useRef } from "react";
+import type { CSSProperties } from "react";
 import { createPortal } from "react-dom";
 
 import { KEYS } from "@excalidraw/common";
@@ -57,7 +58,7 @@ export const Modal: React.FC<{
       />
       <div
         className="Modal__content"
-        style={{ "--max-width": `${props.maxWidth}px` }}
+        style={{ "--max-width": `${props.maxWidth}px` } as CSSProperties}
         tabIndex={0}
       >
         {props.children}

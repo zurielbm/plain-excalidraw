@@ -2,7 +2,7 @@ import { CODES, KEYS } from "@excalidraw/common";
 
 import { CaptureUpdateAction } from "@excalidraw/element";
 
-import { magnetIcon } from "../components/icons";
+import { magnetIcon } from "../../components/icons";
 
 import { register } from "./register";
 

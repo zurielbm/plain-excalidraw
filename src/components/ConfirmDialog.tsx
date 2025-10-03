@@ -1,7 +1,7 @@
 import { flushSync } from "react-dom";
 
 import { useSetAtom } from "../lib/editor-jotai";
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import { Dialog } from "./Dialog";
 import DialogActionButton from "./DialogActionButton";

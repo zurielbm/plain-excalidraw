@@ -36,6 +36,7 @@ import { newElement } from "@excalidraw/element";
 import { CaptureUpdateAction } from "@excalidraw/element";
 
 import type {
+  BoundElement,
   ExcalidrawElement,
   ExcalidrawLinearElement,
   ExcalidrawTextContainer,
@@ -57,12 +58,14 @@ export const actionUnbindText = register({
   predicate: (elements, appState, _, app) => {
     const selectedElements = app.scene.getSelectedElements(appState);
 
-    return selectedElements.some((element) => hasBoundTextElement(element));
+    return selectedElements.some((element: ExcalidrawElement) =>
+      hasBoundTextElement(element),
+    );
   },
   perform: (elements, appState, _, app) => {
     const selectedElements = app.scene.getSelectedElements(appState);
     const elementsMap = app.scene.getNonDeletedElementsMap();
-    selectedElements.forEach((element) => {
+    selectedElements.forEach((element: ExcalidrawElement) => {
       const boundTextElement = getBoundTextElement(element, elementsMap);
       if (boundTextElement) {
         const { width, height } = measureText(
@@ -89,7 +92,7 @@ export const actionUnbindText = register({
         });
         app.scene.mutateElement(element, {
           boundElements: element.boundElements?.filter(
-            (ele) => ele.id !== boundTextElement.id,
+            (bound: BoundElement) => bound.id !== boundTextElement.id,
           ),
           height: originalContainerHeight
             ? originalContainerHeight
@@ -225,7 +228,9 @@ export const actionWrapTextInContainer = register({
   trackEvent: { category: "element" },
   predicate: (elements, appState, _, app) => {
     const selectedElements = app.scene.getSelectedElements(appState);
-    const someTextElements = selectedElements.some((el) => isTextElement(el));
+    const someTextElements = selectedElements.some((element: ExcalidrawElement) =>
+      isTextElement(element),
+    );
     return selectedElements.length > 0 && someTextElements;
   },
   perform: (elements, appState, _, app) => {

@@ -13,7 +13,7 @@ import { t } from "../i18n";
 
 import { register } from "./register";
 
-import type { GoToCollaboratorComponentProps } from "../components/UserList";
+import type { GoToCollaboratorComponentProps } from "../../components/UserList";
 import type { Collaborator } from "../types";
 
 export const actionGoToCollaborator = register({

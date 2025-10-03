@@ -13,7 +13,7 @@ import {
 
 import { EditorLocalStorage } from "../lib/data/EditorLocalStorage";
 import { canvasToBlob, resizeImageFile } from "../lib/data/blob";
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import { Dialog } from "./Dialog";
 import DialogActionButton from "./DialogActionButton";
@@ -299,7 +299,11 @@ const PublishLibrary = ({
     formData.append("twitterHandle", libraryData.twitterHandle);
     formData.append("website", libraryData.website);
 
-    fetch(`${import.meta.env.VITE_APP_LIBRARY_BACKEND}/submit`, {
+    const libraryBackendUrl =
+      ((import.meta as unknown as { env?: Record<string, string> }).env?.
+        VITE_APP_LIBRARY_BACKEND ?? "");
+
+    fetch(`${libraryBackendUrl}/submit`, {
       method: "post",
       body: formData,
     })

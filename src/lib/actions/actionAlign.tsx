@@ -36,17 +36,16 @@ import type { AppClassProperties, AppState, UIAppState } from "../types";
 
 export const alignActionsPredicate = (
   appState: UIAppState,
-  app: AppClassProperties
+  app: AppClassProperties,
 ) => {
-  const selectedElements = app.scene.getSelectedElements(appState);
+  const selectedElements: readonly ExcalidrawElement[] =
+    app.scene.getSelectedElements(appState);
   return (
     getSelectedElementsByGroup(
       selectedElements,
       app.scene.getNonDeletedElementsMap(),
-      appState as Readonly<AppState>
-    ).length > 1 &&
-    // TODO enable aligning frames when implemented properly
-    !selectedElements.some((el) => isFrameLikeElement(el))
+      appState as Readonly<AppState>,
+    ).length > 1
   );
 };
 
@@ -54,24 +53,29 @@ const alignSelectedElements = (
   elements: readonly ExcalidrawElement[],
   appState: Readonly<AppState>,
   app: AppClassProperties,
-  alignment: Alignment
-) => {
-  const selectedElements = app.scene.getSelectedElements(appState);
+  alignment: Alignment,
+): readonly ExcalidrawElement[] => {
+  const selectedElements: readonly ExcalidrawElement[] =
+    app.scene.getSelectedElements(appState);
 
   const updatedElements = alignElements(
-    selectedElements,
+    [...selectedElements],
     alignment,
     app.scene,
-    appState
+    appState,
   );
 
   const updatedElementsMap = arrayToMap(updatedElements);
 
-  return updateFrameMembershipOfSelectedElements(
-    elements.map((element) => updatedElementsMap.get(element.id) || element),
-    appState,
-    app
+  const nextElements = Array.from(elements, (element: ExcalidrawElement) =>
+    updatedElementsMap.get(element.id) ?? element,
   );
+
+  return updateFrameMembershipOfSelectedElements(
+    nextElements,
+    appState,
+    app,
+  ) as readonly ExcalidrawElement[];
 };
 
 export const actionAlignTop = register({

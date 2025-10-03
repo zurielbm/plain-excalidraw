@@ -20,7 +20,7 @@ import { ToolButton } from "../../components/ToolButton";
 import {
   DistributeHorizontallyIcon,
   DistributeVerticallyIcon,
-} from "../components/icons";
+} from "../../components/icons";
 
 import { t } from "../i18n";
 
@@ -39,7 +39,9 @@ const enableActionGroup = (appState: AppState, app: AppClassProperties) => {
       appState as Readonly<AppState>,
     ).length > 2 &&
     // TODO enable distributing frames when implemented properly
-    !selectedElements.some((el) => isFrameLikeElement(el))
+    !selectedElements.some((element: ExcalidrawElement) =>
+      isFrameLikeElement(element),
+    )
   );
 };
 

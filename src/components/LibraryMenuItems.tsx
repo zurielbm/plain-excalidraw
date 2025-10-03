@@ -12,11 +12,11 @@ import { duplicateElements } from "@excalidraw/element";
 
 import clsx from "clsx";
 
-import { deburr } from "../deburr";
+import { deburr } from "../lib/deburr";
 
 import { useLibraryCache } from "../lib/hooks/useLibraryItemSvg";
 import { useScrollPosition } from "../lib/hooks/useScrollPosition";
-import { t } from "../i18n";
+import { t } from "../lib/i18n";
 
 import { LibraryMenuControlButtons } from "./LibraryMenuControlButtons";
 import { LibraryDropdownMenu } from "./LibraryMenuHeaderContent";

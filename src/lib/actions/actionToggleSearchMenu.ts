@@ -7,7 +7,7 @@ import {
 
 import { CaptureUpdateAction } from "@excalidraw/element";
 
-import { searchIcon } from "../components/icons";
+import { searchIcon } from "../../components/icons";
 
 import { register } from "./register";
 

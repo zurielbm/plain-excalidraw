@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
+import type { CSSProperties } from "react";
 
 import { t } from "../lib/i18n";
 
 import "./Range.scss";
 
 import type { AppClassProperties } from "../types";
+import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 export type RangeProps = {
   updateData: (value: number) => void;
   app: AppClassProperties;
   testId?: string;
+};
+
+type SliderStyle = CSSProperties & {
+  "--color-slider-track"?: string;
 };
 
 export const Range = ({ updateData, app, testId }: RangeProps) => {
@@ -18,17 +24,26 @@ export const Range = ({ updateData, app, testId }: RangeProps) => {
   const selectedElements = app.scene.getSelectedElements(app.state);
   let hasCommonOpacity = true;
   const firstElement = selectedElements.at(0);
-  const leastCommonOpacity = selectedElements.reduce((acc, element) => {
-    if (acc != null && acc !== element.opacity) {
-      hasCommonOpacity = false;
-    }
-    if (acc == null || acc > element.opacity) {
-      return element.opacity;
-    }
-    return acc;
-  }, firstElement?.opacity ?? null);
+  const leastCommonOpacity = selectedElements.reduce<number | null>(
+    (acc: number | null, element: ExcalidrawElement) => {
+      if (acc != null && acc !== element.opacity) {
+        hasCommonOpacity = false;
+      }
+      if (acc == null || acc > element.opacity) {
+        return element.opacity;
+      }
+      return acc;
+    },
+    firstElement?.opacity ?? null,
+  );
 
   const value = leastCommonOpacity ?? app.state.currentItemOpacity;
+
+  const sliderStyle: SliderStyle = {
+    "--color-slider-track": hasCommonOpacity
+      ? undefined
+      : "var(--button-bg)",
+  };
 
   useEffect(() => {
     if (rangeRef.current && valueRef.current) {
@@ -48,11 +63,7 @@ export const Range = ({ updateData, app, testId }: RangeProps) => {
       {t("labels.opacity")}
       <div className="range-wrapper">
         <input
-          style={{
-            ["--color-slider-track" as string]: hasCommonOpacity
-              ? undefined
-              : "var(--button-bg)",
-          }}
+          style={sliderStyle}
           ref={rangeRef}
           type="range"
           min="0"

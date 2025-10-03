@@ -5,7 +5,7 @@ import fallbackLangData from "../locales/en.json";
 
 import Trans from "./Trans";
 
-import type { TranslationKeys } from "../i18n";
+import type { TranslationKeys } from "../lib/i18n";
 
 describe("Test <Trans/>", () => {
   it("should translate the the strings correctly", () => {

@@ -5,7 +5,7 @@ import { showSelectedShapeActions } from "@excalidraw/element";
 import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
 
 import { isHandToolActive } from "../lib/appState";
-import { useTunnels } from "../context/tunnels";
+import { useTunnels } from "../lib/context/tunnels";
 import { t } from "../lib/i18n";
 import { calculateScrollCenter } from "../lib/scene";
 import { SCROLLBAR_WIDTH, SCROLLBAR_MARGIN } from "../lib/scene/scrollbars";

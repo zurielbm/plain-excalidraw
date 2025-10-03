@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useI18n } from "../i18n";
+import { useI18n } from "../lib/i18n";
 
-import type { TranslationKeys } from "../i18n";
+import type { TranslationKeys } from "../lib/i18n";
 
 // Used for splitting i18nKey into tokens in Trans component
 // Example:
